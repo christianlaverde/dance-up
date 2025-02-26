@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16
+    container_name: pg_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      # Command to check if MySQL is running and responsive
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d #{POSTGRES_DB}"]
+      # How often the health check runs
+      interval: 10s
+      # Number of failed checks before marking container as unhealthy
+      retries: 5
+      # Time to wait after container starts before running first health check
+      start_period: 10s
+      # Max time to wait for a response before marking check as failed
+      timeout: 5s
+
+volumes:
+  db_data:
