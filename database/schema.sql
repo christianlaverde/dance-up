@@ -2,6 +2,9 @@
 -- Master Database Schema
 -- =====================================================
 
+-- Create Database
+CREATE DATABASE dance_up;
+
 -- 1. Create ENUM Types (must be created before using them in tables)
 
 -- User roles: for all users (students, admins, etc.)
