@@ -4,9 +4,8 @@ import { getStudentByID, getStudents } from '../controllers/studentController.js
 
 const router = express.Router();
 
-router.get('/', getStudents);
 router.get('/:id', getStudentByID);
-
+router.get('/', getStudents);
 
 
 export default router;

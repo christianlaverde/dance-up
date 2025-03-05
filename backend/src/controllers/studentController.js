@@ -1,9 +1,13 @@
 import * as db from '../db/db.js';
+import { 
+  getAllStudents, 
+  getStudentByID as getStudentsByIDService 
+} from '../services/studentService.js';
 
 export const getStudents = async (req, res) => {
   try {
-    const result = await db.query(`SELECT * FROM users WHERE role = 'student'`);
-    res.status(200).json(result.rows);
+    const result = await getAllStudents();
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).send('Server Error')
   }
@@ -11,9 +15,9 @@ export const getStudents = async (req, res) => {
 
 export const getStudentByID = async (req, res) => {
   try {
-    console.log(req);
-    const result = await db.query(`SELECT * FROM users WHERE role = 'student' and id = ${req.params.id}`);
-    res.status(200).json(result.rows);
+    const { id } = req.params;
+    const result = await getStudentsByIDService(id);
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).send('Server Error')
   }
