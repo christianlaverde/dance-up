@@ -1,3 +1,4 @@
+import type { Request, Response } from 'express';
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
@@ -8,14 +9,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send("Hello, world!");
+});
+
+app.get('/', (req: Request, res: Response) => {
+
 });
 
 app.use('/users', userRoutes);
 app.use('/students', studentRoutes);
 
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: Function) => {
   console.error('Error caught:', err);
   // Verify that res.status is available before using it.
   if (res && typeof res.status === 'function') {

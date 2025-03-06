@@ -17,8 +17,8 @@ npm install
 
 ## Running Docker Containers
 1) Install [Docker Desktop](https://www.docker.com/get-started/)
-2) Copy `.env.example` as `.env` and replace `POSTGRES_USER` & 
-`POSTGRES_PASSWORD` values with your own values
+2) Copy `.env.example` as `.env` and replace `PGUSER` & 
+`PGPASSWORD` values with your own values
 3) Open terminal and build container
 
 ```bash

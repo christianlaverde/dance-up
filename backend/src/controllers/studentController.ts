@@ -1,10 +1,10 @@
-import * as db from '../db/db.js';
+import type { Request, Response } from 'express';
 import { 
   getAllStudents, 
   getStudentByID as getStudentsByIDService 
 } from '../services/studentService.js';
 
-export const getStudents = async (req, res) => {
+export const getStudents = async (req: Request, res: Response) => {
   try {
     const result = await getAllStudents();
     res.status(200).json(result);
@@ -13,9 +13,9 @@ export const getStudents = async (req, res) => {
   }
 };
 
-export const getStudentByID = async (req, res) => {
+export const getStudentByID = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = parseInt(req.params.id, 10);
     const result = await getStudentsByIDService(id);
     res.status(200).json(result);
   } catch (err) {
