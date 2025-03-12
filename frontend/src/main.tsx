@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from './pages/home/index.tsx'
 import Layout from './components/layout/index.tsx'
 import Contact from './pages/contact/index.tsx'
+import Students from './pages/students/index.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,7 +14,8 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route element={<Layout/>}>
           <Route index element={<Home/>} />
-          <Route path='/contact' element={<Contact/>} />
+          {/*<Route path='/contact' element={<Contact/>} />*/}
+          <Route path='/students' element={<Students/>} />
         </Route>
       </Routes>
     </BrowserRouter>
