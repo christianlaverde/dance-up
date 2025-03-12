@@ -13,10 +13,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send("Hello, world!");
 });
 
-app.get('/', (req: Request, res: Response) => {
-
-});
-
 app.use('/users', userRoutes);
 app.use('/students', studentRoutes);
 
