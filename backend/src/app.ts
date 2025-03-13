@@ -1,11 +1,13 @@
 import type { Request, Response } from 'express';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
