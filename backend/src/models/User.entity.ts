@@ -1,8 +1,8 @@
 interface User {
   id: number;
+  email: string;
   firstName: string;
   middleName: string;
   lastName: string;
-  email: string;
-  role: "admin" | "student";
+  role: "owner" | "member";
 };

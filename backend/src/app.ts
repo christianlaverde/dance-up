@@ -2,7 +2,6 @@ import type { Request, Response } from 'express';
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
-import studentRoutes from './routes/studentRoutes.js';
 
 const app = express();
 
@@ -14,7 +13,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/users', userRoutes);
-app.use('/students', studentRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
   console.error('Error caught:', err);
