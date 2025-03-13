@@ -1,29 +1,56 @@
--- ============================================
--- Test Data Insert Script for Updated Studio Manager Schema
--- ============================================
+-- Begin transaction to ensure all inserts succeed or fail together
+BEGIN;
 
--- 1. Insert 1 Admin Account
+-----------------------------
+-- 1. Insert Users
+-----------------------------
+-- Insert 2 owners and 8 members (total 10 users).
+-- Note: The SERIAL primary key will auto-assign ids.
 INSERT INTO users (email, password_hash, first_name, middle_name, last_name, role)
-VALUES ('admin@example.com', 'hashed_admin', 'Admin', NULL, 'User', 'admin');
+VALUES
+  -- Owners
+  ('owner1@example.com', 'hashed_password1', 'Alice', 'Owner', 'Smith', 'owner'),
+  ('owner2@example.com', 'hashed_password2', 'Bob', NULL, 'Johnson', 'owner'),
+  
+  -- Members
+  ('member1@example.com', 'hashed_password3', 'Charlie', NULL, 'Brown', 'member'),
+  ('member2@example.com', 'hashed_password4', 'Dana', NULL, 'White', 'member'),
+  ('member3@example.com', 'hashed_password5', 'Eli', NULL, 'Green', 'member'),
+  ('member4@example.com', 'hashed_password6', 'Fiona', NULL, 'Black', 'member'),
+  ('member5@example.com', 'hashed_password7', 'George', NULL, 'Blue', 'member'),
+  ('member6@example.com', 'hashed_password8', 'Hannah', NULL, 'Gray', 'member'),
+  ('member7@example.com', 'hashed_password9', 'Ivan', NULL, 'Red', 'member'),
+  ('member8@example.com', 'hashed_password10', 'Julia', NULL, 'Yellow', 'member');
 
--- 2. Insert 1 Instructor Account
--- Note: Our schema only supports 'student' and 'admin'; we designate the instructor by assigning them as instructor in sessions.
-INSERT INTO users (email, password_hash, first_name, middle_name, last_name, role)
-VALUES ('instructor@example.com', 'hashed_instructor', 'John', 'D.', 'Doe', 'student');
+-----------------------------
+-- 2. Insert Studios
+-----------------------------
+-- Assuming the first two inserted users (id=1 and id=2) are the owners.
+INSERT INTO studios (owner_id, studio_name, address)
+VALUES
+  (1, 'Studio One', '123 Main Street'),
+  (2, 'Studio Two', '456 Broadway');
 
--- 3. Insert 8 Student Accounts
-INSERT INTO users (email, password_hash, first_name, middle_name, last_name, role)
-VALUES 
-  ('student1@example.com', 'hashed_pwd1', 'Alice', 'M.', 'Johnson', 'student'),
-  ('student2@example.com', 'hashed_pwd2', 'Bob', NULL, 'Smith', 'student'),
-  ('student3@example.com', 'hashed_pwd3', 'Carol', 'A.', 'Davis', 'student'),
-  ('student4@example.com', 'hashed_pwd4', 'David', NULL, 'Wilson', 'student'),
-  ('student5@example.com', 'hashed_pwd5', 'Eva', NULL, 'Brown', 'student'),
-  ('student6@example.com', 'hashed_pwd6', 'Frank', 'B.', 'Jones', 'student'),
-  ('student7@example.com', 'hashed_pwd7', 'Grace', NULL, 'Miller', 'student'),
-  ('student8@example.com', 'hashed_pwd8', 'Henry', 'C.', 'Taylor', 'student');
+-----------------------------
+-- 3. Associate Members with Studios
+-----------------------------
+-- In this example:
+--   * 5 members will be linked to Studio One.
+--   * 3 members will be linked to Studio Two.
+-- Since owners have ids 1 and 2, members will have ids 3 through 10.
+INSERT INTO studio_members (studio_id, user_id)
+VALUES
+  -- Studio One gets 5 members: users with id 3, 4, 5, 6, 7
+  (1, 3),
+  (1, 4),
+  (1, 5),
+  (1, 6),
+  (1, 7),
+  
+  -- Studio Two gets 3 members: users with id 8, 9, 10
+  (2, 8),
+  (2, 9),
+  (2, 10);
 
--- IDs summary:
--- Admin: id=1
--- Instructor: id=2
--- Students: id=3 to 10
+-- Commit the transaction
+COMMIT;
