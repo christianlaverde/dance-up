@@ -8,7 +8,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json(users);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server Error')
+    res.status(500).json({message: 'Server Error'});
   }
 };
 
@@ -25,7 +25,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server Error')
+    res.status(500).json({message: 'Server Error'});
   }
 };
 
@@ -42,6 +42,16 @@ export const getUserByEmail = async (req: Request, res: Response): Promise<void>
 
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server Error');
+    res.status(500).json({message: 'Server Error'});
+  }
+}
+
+export const createUser = async (req: Request, res: Response): Promise<void> => {
+  console.log('GET /users/register');
+  try {
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message: 'Server Error'});
   }
 }
