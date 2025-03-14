@@ -12,7 +12,7 @@ export default function NavigationBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <NavLink className="nav-link" to="/">Home</NavLink>
-                    {/* <NavLink className="nav-link" to="/contact">Contact</NavLink> */}
+                    <NavLink className="nav-link" to="/contact">Contact</NavLink>
                     {/* <NavLink className="nav-link" to="/contact">Pricing</NavLink> */}
                     <NavLink className="nav-link" to="/students">Students</NavLink>
                 </Nav>

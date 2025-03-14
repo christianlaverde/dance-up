@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import Jumbotron from "../../components/jumbotron"
 
-const API_URL = 'http://localhost:5555/students'
+console.log(window.location.hostname);
+const API_URL = 'http://localhost:3000/users'
 
 const StudentsTable = () => {
     // Store fetched data
@@ -51,6 +51,8 @@ const StudentsTable = () => {
                             ))}
                         </tr>
                     ))}
+                </tbody>
+                <tbody>
                 </tbody>
             </table>
         </div>
