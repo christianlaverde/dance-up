@@ -4,7 +4,7 @@ import { User } from '../models/User.entity.js'
 
 // Get All Students
 export const getAllUsers = async (): Promise<User[]> => {
-  const queryText = "SELECT id, email, first_name, last_name, role FROM users";
+  const queryText = `SELECT id, email, first_name, last_name, role FROM users`;
   const query: QueryConfig = {
     text: queryText,
   };
@@ -14,7 +14,7 @@ export const getAllUsers = async (): Promise<User[]> => {
 
 // Get Student By ID
 export const getUserById = async (id: number): Promise<User | null> => {
-  const queryText = "SELECT id, email, first_name, last_name, role FROM users WHERE id = $1";
+  const queryText = `SELECT id, email, first_name, last_name, role FROM users WHERE id = $1`;
   const query: QueryConfig = {
     text: queryText,
     values: [id],
@@ -25,7 +25,7 @@ export const getUserById = async (id: number): Promise<User | null> => {
 
 // Get Student By Email
 export const getUserByEmail = async (email: string): Promise<User | null> => {
-  const queryText = "SELECT id, email, first_name, last_name, role FROM users WHERE email = $1";
+  const queryText = `SELECT id, email, first_name, last_name, role FROM users WHERE email = $1`;
   const query: QueryConfig = {
     text: queryText,
     values: [email],

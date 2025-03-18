@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import userRoutes from './routes/userRoutes.js';
+import userRoutes from './routes/user.routes.js';
 
 const app = express();
 
