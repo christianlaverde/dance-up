@@ -13,7 +13,7 @@ services:
       - db_data:/var/lib/mysql
       - ./database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     healthcheck:
-      # Command to check if MySQL is running and responsive
+      # Command to check if PG is running and responsive
       test: ["CMD-SHELL", "pg_isready -U ${PGUSER} -d ${PGDATABASE}"]
       # How often the health check runs
       interval: 10s
