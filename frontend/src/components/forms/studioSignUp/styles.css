@@ -1,0 +1,10 @@
+.custom-container {
+    margin: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-paper {
+    min-width: 50vw;
+}
