@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import * as UserService from '../services/user.service.js';
+import * as UserService from '../services/userService.js';
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   console.log('GET /users');
@@ -15,7 +15,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   console.log('GET /users/:id');
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const user = await UserService.getUserById(id);
     if (user) {
       res.status(200).json(user);
