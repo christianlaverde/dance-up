@@ -166,7 +166,7 @@ function ResponsiveAppBar() {
               <Typography
               variant="button"
               component="a"
-              href="/signin"
+              href="/dashboard/signin"
               sx={{
                 color: 'white',
                 textDecoration: 'none',
