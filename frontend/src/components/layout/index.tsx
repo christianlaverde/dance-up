@@ -1,17 +1,17 @@
 import { Outlet } from "react-router"
 import Footer from "../footer"
 import Header from "../header"
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { customTheme } from "../theme/theme";
+import { ThemeProvider } from "@mui/material";
 
 export default function Layout() {
     return (
-        <div>
-            <Header />
-            <main>
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
-    )
+      <ThemeProvider theme={customTheme}>
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+      </ThemeProvider>
+    );
 }
