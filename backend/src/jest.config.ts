@@ -1,11 +1,18 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
+  verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleFileExtensions: ['js', 'ts'],
-  testMatch: ['**/?(*.)+(spec|test).ts'],
+  extensionsToTreatAsEsm: ['.ts'],
   globals: {
     'ts-jest': {
-      tsconfig: 'tsconfig.json',
+      useESM: true,
     },
   },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 };
+
+export default config;
