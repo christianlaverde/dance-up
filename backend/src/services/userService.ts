@@ -37,6 +37,6 @@ export const createUser = async (
   last_name: string, 
   role: string,
 ): Promise<User> => {
-  const newUser = userModel.createUser(email, password_hash, first_name, middle_name, last_name, role);
+  const newUser = userModel.insertUser(email, password_hash, first_name, middle_name, last_name, role);
   return newUser;
 };

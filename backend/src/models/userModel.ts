@@ -39,7 +39,7 @@ export class UserModel {
   };
 
   // Insert new User
-  async createUser(
+  async insertUser(
     email: string, 
     password_hash: string,
     first_name: string, 
