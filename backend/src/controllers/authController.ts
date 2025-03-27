@@ -2,7 +2,7 @@ import passport from 'passport';
 import bcrypt from 'bcrypt';
 import type { Request, Response, NextFunction } from 'express';
 import { User } from '../models/User.entity.js';
-import { createUser, getUserByEmail } from '../services/userService.js';
+import { createUser, getUserByEmail } from '../services/UserService.js';
 
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

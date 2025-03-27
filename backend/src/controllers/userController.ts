@@ -1,10 +1,16 @@
 import type { Request, Response } from 'express';
-import * as UserService from '../services/userService.js';
+//import * as UserService from '../services/UserService.js';
+import { UserModel } from '../models/UserModel.js';
+import { UserService } from '../services/UserService.js';
+import * as db from '../db/db.js';
 import logger from "../utils/logger.js";
+
+const userModel = new UserModel(db);
+const userService = new UserService(userModel);
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
-    const users = await UserService.getAllUsers();
+    const users = await userService.getAllUsers();
     res.status(200).json(users);
   } catch (err) {
     logger.error(err);
@@ -15,7 +21,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const user = await UserService.getUserById(id);
+    const user = await userService.getUserById(id);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -31,7 +37,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
 export const getUserByEmail = async (req: Request, res: Response): Promise<void> => {
   try {
     const email = req.params.email;
-    const user = await UserService.getUserByEmail(email);
+    const user = await userService.getUserByEmail(email);
     if (user) {
       res.status(200).json(user);
     } else {
