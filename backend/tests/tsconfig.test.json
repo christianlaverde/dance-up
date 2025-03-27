@@ -4,5 +4,5 @@
     "module": "NodeNext",
     "types": ["jest", "node"]
   },
-  "include": ["./**/*.ts"]
+  "include": ["./tests/**/*.ts"]
 }
