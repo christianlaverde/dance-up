@@ -9,7 +9,6 @@ import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import { pinoHttp } from 'pino-http';
 
 // -------------------------
 // Internal Module Imports
@@ -21,6 +20,7 @@ import { UserController } from './controllers/UserController.js';
 import { AuthController } from './controllers/AuthController.js';
 
 import logger from './utils/logger.js';
+import { httpLogger } from './utils/logger.js';
 
 import { configurePassport } from './config/passportConfig.js';
 import { createLocalStrategy } from './strategies/localStrategy.js';
@@ -71,7 +71,7 @@ app.use(
 // Initialize Passport and Pino HTTP logger
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(pinoHttp({ logger }));
+app.use(httpLogger);
 
 // -------------------------
 // Route Definitions
@@ -91,6 +91,7 @@ app.use('/users', userRouter);
 // Global Error Handling
 // -------------------------
 app.use((err: Error, req: Request, res: Response, next: Function) => {
+  logger.error(err);
   req.log.error({ err }, 'Unhandled error');
   res.status(500).json({ error: 'Internal Server Error' });
 });
