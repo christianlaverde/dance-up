@@ -1,5 +1,6 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { getUserByEmail } from "../services/userService.js";
+import logger from '../utils/logger.js';
 import bcrypt from 'bcrypt';
 
 const options = {
@@ -12,7 +13,9 @@ export const localStrategy = new LocalStrategy(
   options,
   async (email: string, password: string, done: Function) => {
     try {
-      console.log('in localStrategy');
+      logger.info('Using Passport LocalStrategy');
+
+      // Verify user exists by finding them by email
       const user = await getUserByEmail(email);
       // After finding user, compare password to stored password
       const isMatch = await bcrypt.compare(password, user.password_hash);

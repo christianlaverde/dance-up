@@ -1,4 +1,5 @@
 import passport from "passport";
+import logger from '../utils/logger.js';
 import { localStrategy } from "../strategies/localStrategy.js";
 import { User } from "../models/User.entity.js";
 import { getUserById } from "../services/userService.js";
@@ -6,14 +7,15 @@ import { getUserById } from "../services/userService.js";
 passport.use(localStrategy);
 
 passport.serializeUser((user: User, done) => {
-  console.log('Serializing user:', user);
+  logger.info('Serializing User: ', user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
-  console.log('in deserializeUser');
+  logger.info('Deserializing User');
   try {
     const user: User | null = await getUserById(id);
+    logger.info('Deserialized User: ', user);
     done(null, user);
   } catch (err) {
     done(err);
