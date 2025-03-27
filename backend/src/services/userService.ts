@@ -1,37 +1,31 @@
-import type { QueryConfig } from 'pg';
+import { UserModel } from "../models/UserModel.js";
+import { User } from "../models/User.entity.js";
 import * as db from '../db/db.js';
-import { User } from '../models/User.entity.js'
+
+const userModel = new UserModel(db);
 
 // Get All Students
 export const getAllUsers = async (): Promise<User[]> => {
-  const queryText = `SELECT id, email, password_hash, first_name, last_name, role FROM users`;
-  const query: QueryConfig = {
-    text: queryText,
-  };
-  const result = await db.query(query);
-  return result.rows;
+  const users = await userModel.getAllUsers();
+  return users;
 };
 
 // Get Student By ID
-export const getUserById = async (id: string): Promise<User | null> => {
-  const queryText = `SELECT id, email, password_hash, first_name, last_name, role FROM users WHERE id = $1`;
-  const query: QueryConfig = {
-    text: queryText,
-    values: [id],
+export const getUserById = async (id: string): Promise<User> => {
+  const user = await userModel.getUserById(id);
+  if (!user) {
+    throw new Error('User Not Found');
   }
-  const result = await db.query(query);
-  return result.rows[0];
+  return user;
 };
 
 // Get Student By Email
-export const getUserByEmail = async (email: string): Promise<User | null> => {
-  const queryText = `SELECT id, email, password_hash, first_name, last_name, role FROM users WHERE email = $1`;
-  const query: QueryConfig = {
-    text: queryText,
-    values: [email],
+export const getUserByEmail = async (email: string): Promise<User> => {
+  const user = await userModel.getUserByEmail(email);
+  if (!user) {
+    throw new Error('User Not Found');
   }
-  const result = await db.query(query);
-  return result.rows[0];
+  return user
 };
 
 // Create new User
@@ -42,18 +36,7 @@ export const createUser = async (
   middle_name: string, 
   last_name: string, 
   role: string,
-): Promise<User | null> => {
-    const queryText = `
-      INSERT INTO users (email, password_hash, first_name, middle_name, last_name, role)
-      VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING id, email, password_hash, first_name, middle_name, last_name, role
-    `;
-    const query: QueryConfig = {
-      text: queryText,
-      values: [
-        email, password_hash, first_name, middle_name, last_name, role
-      ]
-    };
-    const result = await db.query(query);
-    return result.rows[0];
+): Promise<User> => {
+  const newUser = userModel.createUser(email, password_hash, first_name, middle_name, last_name, role);
+  return newUser;
 };

@@ -14,13 +14,9 @@ export const localStrategy = new LocalStrategy(
   async (email: string, password: string, done: Function) => {
     try {
       logger.info('Using Passport LocalStrategy');
+
       // Verify user exists by finding them by email
       const user = await getUserByEmail(email);
-      if (!user) {
-        // No user found, authentication failed
-        // False as 2nd param indicates no user was authenticated
-        return done(null, false, {message: 'Incorrect email or password.'});
-      }
       // After finding user, compare password to stored password
       const isMatch = await bcrypt.compare(password, user.password_hash);
       if (!isMatch) {
@@ -28,7 +24,10 @@ export const localStrategy = new LocalStrategy(
       }
       // User Authenticated
       return done(null, user);
-    } catch (err) {
+    } catch (err: any) {
+      if (err.message === 'User Not Found') {
+        return done(null, false, {message: 'Incorrect email or password.'});
+      }
       return done(err);
     }
   }
