@@ -1,5 +1,5 @@
 import { Strategy as LocalStrategy } from "passport-local";
-import { getUserByEmail } from "../services/userService.js";
+import { getUserByEmail } from "../services/UserService.js";
 import logger from '../utils/logger.js';
 import bcrypt from 'bcrypt';
 

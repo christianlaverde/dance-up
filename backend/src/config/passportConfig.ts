@@ -2,7 +2,7 @@ import passport from "passport";
 import logger from '../utils/logger.js';
 import { localStrategy } from "../strategies/localStrategy.js";
 import { User } from "../models/User.entity.js";
-import { getUserById } from "../services/userService.js";
+import { getUserById } from "../services/UserService.js";
 
 passport.use(localStrategy);
 
