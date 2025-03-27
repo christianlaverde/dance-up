@@ -3,15 +3,6 @@ import { UserModel } from '../../src/models/UserModel.js';
 import { QueryConfig } from 'pg';
 import { User } from '../../src/models/User.entity.js';
 
-const mockQuery = async (query: QueryConfig): Promise<{ rows: any[] }> => {
-  return { rows: [] }
-}
-
-const userModel = new UserModel({
-  query: mockQuery,
-})
-
-
 describe("User Model", () => {
   // Clear mocks before each test
   beforeEach(() => {
