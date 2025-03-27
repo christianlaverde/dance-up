@@ -7,7 +7,7 @@
  */
 
 import type { QueryConfig } from 'pg';
-import type { Database } from '../db/index.js';
+import type { Database } from '../@types/db.js';
 import type { User } from './User.entity.js';
 
 export class UserModel {
