@@ -17,9 +17,13 @@ export function createStudioRouter(studioController: StudioController): Router {
   // Purpose: Retrieve all studios.
   router.get('/', studioController.getStudios);
 
-  // Route: GET /:id/members
-  // Purpose: Retrieve all studio members of a studio given a studio id
-  router.get('/:id/members', studioController.getStudioMembers);
+  // Route: GET /:studioId/members
+  // Purpose: Retrieve all studio members of a studio given a studio id.
+  router.get('/:studioId/members', studioController.getStudioMembers);
+
+  // Route: POST /:studioId/members
+  // Purpose: Add an existing user to a studio given a studio id.
+  router.post('/:studioId/members', studioController.addStudioMember);
 
   return router;
 }

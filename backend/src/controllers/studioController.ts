@@ -55,12 +55,44 @@ export class StudioController {
    */
   getStudioMembers = async (req: Request, res: Response): Promise<void> => {
     try {
-      const id = req.params.id;
-      const studioMembers = await this.studioService.getAllStudioMembers(id);
+      const studioId = req.params.studioId;
+      const studioMembers = await this.studioService.getAllStudioMembers(studioId);
       if (studioMembers) {
         res.status(200).json(studioMembers);
       } else {
         res.status(404).json({ message: 'Studio Members not found' });
+      }
+    } catch (err) {
+      logger.error(err);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  };
+
+  /**
+   * Handler for retrieving all studio members from a studio given a studio id
+   * Handler for adding an existing user to a studio given a studio id
+   * If the user and studio exists and is added succesfully, sends a 200 response with the user data
+   * If not, sends a 404 response
+   *
+   * @param req - Express Request object with a parameters `studioId` and `userId`.
+   * @param res - Express Response object with a User
+   */
+  addStudioMember = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const studioId = req.params.studioId;
+      const { userId } = req.body;
+
+      if (!userId) {
+        res.status(400).json({ error: 'Missing userId in request body' });
+        return;
+      }
+
+      const addedMember = await this.studioService.addStudioMember(studioId, userId);
+
+      if (addedMember) {
+        res.status(200).json(addedMember);
+      } else {
+        res.status(404).json({ message: 'Member not added' });
       }
     } catch (err) {
       logger.error(err);

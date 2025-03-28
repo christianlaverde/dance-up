@@ -69,4 +69,23 @@ export class StudioModel {
     const result = await this.db.query(query);
     return result.rows;
   }
+
+  /**
+   * Adds an existing user to a studio given a user id and studio id.
+   * @param studioId - the id of the studio.
+   * @param userId - the id of the user.
+   * @returns A promise that resolves to the added user id.
+   */
+    async insertStudioMember(studioId: string, userId: string): Promise<{user_id: string}> {
+      const queryText = `
+        INSERT INTO studio_members (studio_id, user_id)
+        VALUES ($1, $2)
+        RETURNING user_id
+      `;
+      const query: QueryConfig = { text: queryText, values: [studioId, userId] };
+
+      // Execute the query and return the user id.
+      const result = await this.db.query(query);
+      return result.rows[0];
+    }
 }

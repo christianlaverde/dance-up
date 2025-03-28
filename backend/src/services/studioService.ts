@@ -47,4 +47,16 @@ export class StudioService {
       const studios = await this.studioModel.getAllStudioMembers(studioId);
       return studios;
     }
+
+   /**
+   * Retrieve all studio members from a studio given a studio id.
+   * Add an existing user to a studio given a studio id and return the newly added member
+   * @returns Promise that resolves to an array of .
+   */
+   async addStudioMember(studioId: string, userId: string): Promise<User> {
+        const retObj = await this.studioModel.insertStudioMember(studioId, userId);
+        const addedMemberId = retObj.user_id;
+        const addedMember = await this.userService.getUserById(addedMemberId);
+        return addedMember;
+      }
 }
