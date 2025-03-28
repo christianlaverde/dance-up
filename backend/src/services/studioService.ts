@@ -34,7 +34,7 @@ export class StudioService {
   }
 
    /**
-   * Retrieve all studios from the database.
+   * Retrieve all studio members from a studio given a studio id.
    * @returns Promise that resolves to an array of .
    */
     async getAllStudioMembers(studioId: string): Promise<User[]> {
