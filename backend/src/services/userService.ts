@@ -8,8 +8,8 @@
  * 
  */
 
-import { UserModel } from "../models/UserModel.js";
-import { User } from "../models/User.entity.js";
+import { UserModel } from "../models/userModel.js";
+import { User } from "../models/user.js";
 
 export class UserService {
   // Instance of UserModel used to interact with the database.

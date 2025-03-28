@@ -1,8 +1,8 @@
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 import type { Request, Response, NextFunction } from 'express';
-import { User } from '../models/User.entity.js';
-import { UserService } from '../services/UserService.js';
+import { User } from '../models/user.js';
+import { UserService } from '../services/userService.js';
 
 export class AuthController {
   constructor(private userService: UserService) {

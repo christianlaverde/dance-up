@@ -1,7 +1,7 @@
 import passport, { PassportStatic } from "passport";
 import logger from '../utils/logger.js';
-import { User } from "../models/User.entity.js";
-import { UserService } from "../services/UserService.js";
+import { User } from "../models/user.js";
+import { UserService } from "../services/userService.js";
 
 /**
  * Configures Passport with serialization and deserialization logic.
