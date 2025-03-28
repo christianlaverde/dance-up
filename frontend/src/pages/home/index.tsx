@@ -1,11 +1,9 @@
-import SignUp from "../../components/forms/signUp"
-import Jumbotron from "../../components/jumbotron"
+import Hero from "../../components/hero/hero"
 
 export default function Home () {
     return (
         <div>
-            <Jumbotron />
-            <SignUp />
+            <Hero />
         </div>
     )
 }
