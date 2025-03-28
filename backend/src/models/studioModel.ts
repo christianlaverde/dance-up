@@ -46,7 +46,7 @@ export class StudioModel {
    * Retrieves all studio members from the database given a studio id.
    * @returns A promise that resolves to an array of Studio objects.
    */
-  async getAllMembers(studioId: string): Promise<Studio[]> {
+  async getAllStudioMembers(studioId: string): Promise<Studio[]> {
     const queryText = `
       SELECT 
         u.id AS user_id,
