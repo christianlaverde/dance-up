@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import type { UserController } from '../controllers/UserController.js';
+import type { UserController } from '../controllers/userController.js';
 
 /**
  * Creates and configures an Express router for user-related endpoints.

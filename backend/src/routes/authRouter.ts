@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import type { AuthController } from '../controllers/AuthController.js';
+import type { AuthController } from '../controllers/authController.js';
 
 /**
  * Creates and configures an Express router for authentication endpoints.

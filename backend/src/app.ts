@@ -14,10 +14,10 @@ import session from 'express-session';
 // Internal Module Imports
 // -------------------------
 import { Database } from './db/db.js';
-import { UserModel } from './models/UserModel.js';
-import { UserService } from './services/UserService.js';
-import { UserController } from './controllers/UserController.js';
-import { AuthController } from './controllers/AuthController.js';
+import { UserModel } from './models/userModel.js';
+import { UserService } from './services/userService.js';
+import { UserController } from './controllers/userController.js';
+import { AuthController } from './controllers/authController.js';
 
 import logger from './utils/logger.js';
 import { httpLogger } from './utils/logger.js';

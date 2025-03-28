@@ -1,7 +1,7 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { UserModel } from '../../src/models/UserModel.js';
 import { QueryConfig } from 'pg';
-import { User } from '../../src/models/User.entity.js';
+import { User } from '../../src/models/user.js';
 
 describe("User Model", () => {
   // Clear mocks before each test

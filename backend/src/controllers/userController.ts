@@ -13,7 +13,7 @@
  */
 
 import type { Request, Response } from 'express';
-import { UserService } from '../services/UserService.js';
+import { UserService } from '../services/userService.js';
 import logger from "../utils/logger.js";
 
 export class UserController {
