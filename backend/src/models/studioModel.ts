@@ -9,6 +9,7 @@
 import type { QueryConfig } from 'pg';
 import type { Database } from '../@types/db.js';
 import type { Studio } from './studio.js';
+import type { User } from './user.js';
 
 export class StudioModel {
   // Database instance used for executing queries.
@@ -46,7 +47,7 @@ export class StudioModel {
    * Retrieves all studio members from the database given a studio id.
    * @returns A promise that resolves to an array of Studio objects.
    */
-  async getAllStudioMembers(studioId: string): Promise<Studio[]> {
+  async getAllStudioMembers(studioId: string): Promise<User[]> {
     const queryText = `
       SELECT 
         u.id AS user_id,
