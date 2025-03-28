@@ -17,6 +17,9 @@ import { Database } from './db/db.js';
 import { UserModel } from './models/userModel.js';
 import { UserService } from './services/userService.js';
 import { UserController } from './controllers/userController.js';
+import { StudioModel } from './models/studioModel.js';
+import { StudioService } from './services/studioService.js';
+import { StudioController } from './controllers/studioController.js';
 import { AuthController } from './controllers/authController.js';
 
 import logger from './utils/logger.js';
@@ -26,6 +29,7 @@ import { configurePassport } from './config/passportConfig.js';
 import { createLocalStrategy } from './strategies/localStrategy.js';
 
 import { createUserRouter } from './routes/userRouter.js';
+import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
 
 // -------------------------
@@ -35,6 +39,9 @@ const db = new Database();
 const userModel = new UserModel(db);
 const userService = new UserService(userModel);
 const userController = new UserController(userService);
+const studioModel = new StudioModel(db);
+const studioService = new StudioService(studioModel);
+const studioController = new StudioController(studioService);
 const authController = new AuthController(userService);
 
 // -------------------------
@@ -77,6 +84,7 @@ app.use(httpLogger);
 // Route Definitions
 // -------------------------
 const userRouter = createUserRouter(userController);
+const studioRouter = createStudioRouter(studioController);
 const authRouter = createAuthRouter(authController);
 
 
@@ -86,6 +94,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
+app.use('/studios', studioRouter);
 
 // -------------------------
 // Global Error Handling
