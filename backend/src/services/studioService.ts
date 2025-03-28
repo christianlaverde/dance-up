@@ -40,20 +40,11 @@ export class StudioService {
 
    /**
     * Retrieve all studio members from a studio given a studio id.
+    * @param studioId - the id of the studio
     * @returns Promise that resolves to an array of .
     */
   async getAllStudioMembers(studioId: string): Promise<User[]> {
       const studios = await this.studioModel.getAllStudioMembers(studioId);
       return studios;
     }
-
-   /**
-   * Retrieve all studio members from a studio given a studio id.
-   * @returns Promise that resolves to an array of .
-   */
-   async addStudioMember(studioId: string, userId: string): Promise<User> {
-        const addedMemberId = await this.studioModel.insertStudioMember(studioId, userId);
-        const addedMember = await this.userService.getUserById(addedMemberId);
-        return addedMember;
-      }
 }
