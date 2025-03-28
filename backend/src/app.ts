@@ -40,7 +40,7 @@ const userModel = new UserModel(db);
 const userService = new UserService(userModel);
 const userController = new UserController(userService);
 const studioModel = new StudioModel(db);
-const studioService = new StudioService(studioModel);
+const studioService = new StudioService(studioModel, userModel);
 const studioController = new StudioController(studioService);
 const authController = new AuthController(userService);
 
