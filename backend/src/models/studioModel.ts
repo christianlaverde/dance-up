@@ -76,7 +76,7 @@ export class StudioModel {
    * @param userId - the id of the user.
    * @returns A promise that resolves to the added user id.
    */
-    async addStudioMember(studioId: string, userId: string): Promise<string> {
+    async insertStudioMember(studioId: string, userId: string): Promise<string> {
       const queryText = `
         INSERT INTO studio_members (studio_id, user_id)
         VALUES ($1, $2)

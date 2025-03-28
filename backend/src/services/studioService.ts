@@ -10,22 +10,23 @@
 
 import type { StudioModel } from "../models/studioModel.js";
 import type { Studio } from "../models/studio.js";
-import type { UserModel } from "../models/userModel.js";
+import type { UserService } from "./userService.js";
 import type { User } from '../models/user.js';
+
 
 
 export class StudioService {
   // Instance of StudioModel used to interact with the database.
   private studioModel: StudioModel;
-  private userModel: UserModel;
+  private userService: UserService;
 
   /**
    * Constructor for StudioService.
    * @param studioModel - An instance of StudioModel for data access operations.
    */
-  constructor(studioModel: StudioModel, userModel: UserModel) {
+  constructor(studioModel: StudioModel, userService: UserService) {
     this.studioModel = studioModel;
-    this.userModel = userModel;
+    this.userService = userService;
   }
 
   /**
@@ -51,8 +52,8 @@ export class StudioService {
    * @returns Promise that resolves to an array of .
    */
    async addStudioMember(studioId: string, userId: string): Promise<User> {
-        const addedMemberId = await this.studioModel.addStudioMember(studioId, userId);
-        const addedMember = await this.userModel.getUserById(addedMemberId);
+        const addedMemberId = await this.studioModel.insertStudioMember(studioId, userId);
+        const addedMember = await this.userService.getUserById(addedMemberId);
         return addedMember;
       }
 }
