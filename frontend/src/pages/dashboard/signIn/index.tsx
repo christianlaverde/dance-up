@@ -4,26 +4,37 @@ import {
     type AuthProvider,
   } from '@toolpad/core/SignInPage';
 
-  const providers =[
-    { id: 'google', name: 'Google' },
-  ]
+  const providers = [{ id: 'credentials', name: 'Email and Password' }];
 
-  const signIn: (provider: AuthProvider) => void | Promise<AuthResponse> = async (
+  const signIn: (provider: AuthProvider, formData: FormData) => void = async (
     provider,
+    formData,
   ) => {
-    // preview-start
-    const promise = new Promise<AuthResponse>((resolve) => {
-      setTimeout(() => {
-        console.log(`Sign in with ${provider.id}`);
-        resolve({ error: 'This is a fake error' });
-      }, 500);
+    const promise = (async (resolve: (arg0: AuthResponse) => void) => {
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const data = (await response.json()) as AuthResponse;
+        resolve(data);
+      } else {
+        resolve({ error: 'Invalid credentials' });
+      }
     });
-    // preview-end
     return promise;
   };
 
 export default function SignIn() {
     return (
-        <SignInPage signIn={signIn} providers={providers} />
+        <SignInPage 
+          signIn={signIn} 
+          providers={providers} 
+          slotProps={{ emailField: { autoFocus: false }, form: { noValidate: true } }}/>
     )
 }
