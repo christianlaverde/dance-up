@@ -13,6 +13,7 @@ import AdminStudents from './pages/dashboard/students/index.tsx'
 import DashboardAdminLayout from './components/layout/dashboard/index.tsx'
 import Layout from './components/layout/publicLayout/index.tsx'
 import DashboardHome from './pages/dashboard/home/index.tsx'
+import ProtectedRoute from './utils/context/protectedRoutes.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -29,9 +30,9 @@ createRoot(document.getElementById('root')!).render(
 
       {/* Dashboard Layout */}
       <Route element={<DashboardAdminLayout />}>
-        <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="/dashboard/signin" element={<SignIn />} />
-        <Route path="/dashboard/students" element={<AdminStudents />} />
+        <Route path="/dashboard/" element={<ProtectedRoute><DashboardHome /></ProtectedRoute>} />
+        <Route path="/dashboard/students" element={<ProtectedRoute><AdminStudents /></ProtectedRoute>} />
       </Route>
       </Routes>
     </BrowserRouter>
