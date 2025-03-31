@@ -35,29 +35,23 @@ export class UserService {
   /**
    * Retrieve a single user by their unique identifier.
    * @param id - The unique ID of the user.
-   * @returns Promise that resolves to a User entity.
-   * @throws Error if no user is found with the given ID.
+   * @returns Promise that resolves to a User entity if found, or null if no user
+   *          exists with the given ID.
    */
   async getUserById(id: string): Promise<User> {
     const user = await this.userModel.getUserById(id);
-    if (!user) {
-      throw new Error('User Not Found');
-    }
-    return user;
+    return user || null;
   }
 
   /**
    * Retrieve a single user by their email address.
    * @param email - The email address of the user.
-   * @returns Promise that resolves to a User entity.
-   * @throws Error if no user is found with the given email.
+   * @returns Promise that resolves to a User entity if found, or null if no user
+   *          exists with the given email.
    */
   async getUserByEmail(email: string): Promise<User> {
     const user = await this.userModel.getUserByEmail(email);
-    if (!user) {
-      throw new Error('User Not Found');
-    }
-    return user;
+    return user || null;
   }
 
   /**
@@ -87,6 +81,6 @@ export class UserService {
       last_name,
       role,
     );
-    return newUser;
+    return newUser || null;
   }
 }
