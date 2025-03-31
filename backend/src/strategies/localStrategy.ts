@@ -43,21 +43,22 @@ export function createLocalStrategy(userService: UserService): LocalStrategy {
       // Retrieve the user using their email
       const user = await userService.getUserByEmail(email);
 
-      // Compare the provided password with the stored password hash
-      const isMatch = await bcrypt.compare(password, user.password_hash);
-      if (!isMatch) {
-        // Password mismatch: authentication failed
+      if (user) {
+        // Compare the provided password with the stored password hash
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+        if (!isMatch) {
+          // Password mismatch: authentication failed
+           return done(null, false, { message: 'Incorrect email or password.' });
+        }
+        // Authentication successful: return the user object
+        return done(null, user);
+      }
+      else {
+        // User not found: authentication failed
         return done(null, false, { message: 'Incorrect email or password.' });
       }
-
-      // Authentication successful: return the user object
-      return done(null, user);
     } catch (err: any) {
-      // If the error indicates that the user was not found, return a failure message.
-      if (err.message === 'User Not Found') {
-        return done(null, false, { message: 'Incorrect email or password.' });
-      }
-      // For any other error, pass the error to the done callback.
+      // If error is catched, pass the error to the done callback.
       return done(err);
     }
   };

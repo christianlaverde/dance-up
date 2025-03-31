@@ -56,7 +56,7 @@ export class AuthController {
       }
       // Hash password and create new user
       const password_hash = await bcrypt.hash(password, saltRounds);
-      const newUser: User = await this.userService.createUser(email, password_hash, first_name, middle_name, last_name, role);
+      const newUser: User | null = await this.userService.createUser(email, password_hash, first_name, middle_name, last_name, role);
   
       if (newUser) {
         await new Promise<void>((resolve, reject) => {
