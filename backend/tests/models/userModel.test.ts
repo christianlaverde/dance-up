@@ -117,7 +117,6 @@ describe("User Model", () => {
       });
      });
 
-
     describe('Sad Paths', () => {
       it('should return null when no user is found', async () => {
         // Arrange: Set Up Mock Data
@@ -230,8 +229,44 @@ describe("User Model", () => {
     });
 
     describe('Sad Paths', () => {
-    // Arrange: Set Up Mock Data
+      it('should propagate an error when db.query fails and throws an exception', async () => {
+        // Arrange: Set Up Mock Data
+        const mockEmail = 'user@example.com';
+        const mockPassword = 'hash';
+        const mockFName = 'Fname';
+        const mockMName = 'Mname';
+        const mockLName = 'LName';
+        const mockRole = UserRole.MEMBER;
+        const mockQuery = async () => {
+          throw new Error('Database Error');
+        }
+        userModel = new UserModel({ query: mockQuery });
 
+       // Act/Assert: Expect that error is thrown
+       await expect(userModel.insertUser(
+          mockEmail, mockPassword, mockFName, mockMName, mockLName, mockRole
+       )).rejects.toThrow('Database Error');
+      });
+
+      it('should return null when no user is returned after insertion', async () => {
+        // Arrange: Set Up Mock Data
+        const mockEmail = 'user@example.com';
+        const mockPassword = 'hash';
+        const mockFName = 'Fname';
+        const mockMName = 'Mname';
+        const mockLName = 'LName';
+        const mockRole = UserRole.MEMBER;
+        const { query } = createMockQuery([]);
+        userModel = new UserModel({ query });
+
+        // Act: Call function under test
+        const result = await userModel.insertUser(
+          mockEmail, mockPassword, mockFName, mockMName, mockLName, mockRole
+        );
+
+        // Assert: Expect that value returned is null
+        expect(result).toBeNull();
+      });
     });
   });
 });
