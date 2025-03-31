@@ -47,7 +47,7 @@ export class UserModel {
    * @param id - The unique identifier of the user.
    * @returns A promise that resolves to a User object.
    */
-  async getUserById(id: string): Promise<User> {
+  async getUserById(id: string): Promise<User | null> {
     const queryText = `
       SELECT id, email, password_hash, first_name, last_name, role
       FROM users
@@ -60,7 +60,7 @@ export class UserModel {
 
     // Execute the query and return the first matching user.
     const result = await this.db.query(query);
-    return result.rows[0];
+    return result.rows[0] || null;
   }
 
   /**
@@ -68,7 +68,7 @@ export class UserModel {
    * @param email - The email address of the user.
    * @returns A promise that resolves to a User object.
    */
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserByEmail(email: string): Promise<User | null> {
     const queryText = `
       SELECT id, email, password_hash, first_name, last_name, role
       FROM users
@@ -81,7 +81,7 @@ export class UserModel {
 
     // Execute the query and return the first matching user.
     const result = await this.db.query(query);
-    return result.rows[0];
+    return result.rows[0] || null;
   }
 
   /*==============================================
@@ -105,7 +105,7 @@ export class UserModel {
     middle_name: string,
     last_name: string,
     role: string,
-  ): Promise<User> {
+  ): Promise<User | null> {
     const queryText = `
       INSERT INTO users (email, password_hash, first_name, middle_name, last_name, role)
       VALUES ($1, $2, $3, $4, $5, $6)
@@ -118,6 +118,6 @@ export class UserModel {
 
     // Execute the query and return the newly inserted user.
     const result = await this.db.query(query);
-    return result.rows[0];
+    return result.rows[0] || null;
   }
 }

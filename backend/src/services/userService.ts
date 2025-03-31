@@ -38,7 +38,7 @@ export class UserService {
    * @returns Promise that resolves to a User entity if found, or null if no user
    *          exists with the given ID.
    */
-  async getUserById(id: string): Promise<User> {
+  async getUserById(id: string): Promise<User | null> {
     const user = await this.userModel.getUserById(id);
     return user || null;
   }
@@ -49,7 +49,7 @@ export class UserService {
    * @returns Promise that resolves to a User entity if found, or null if no user
    *          exists with the given email.
    */
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserByEmail(email: string): Promise<User | null> {
     const user = await this.userModel.getUserByEmail(email);
     return user || null;
   }
@@ -71,7 +71,7 @@ export class UserService {
     middle_name: string,
     last_name: string,
     role: string,
-  ): Promise<User> {
+  ): Promise<User | null> {
     // Delegates the task of inserting a new user to the UserModel.
     const newUser = await this.userModel.insertUser(
       email,
