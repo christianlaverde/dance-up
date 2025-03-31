@@ -10,7 +10,6 @@
 -- User roles: for all users (students, admins, etc.)
 CREATE TYPE user_role AS ENUM ('owner', 'member');
 
-
 -- 2. Create Users Table
 -- Stores all user records.
 CREATE TABLE users (
