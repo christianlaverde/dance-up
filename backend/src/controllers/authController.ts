@@ -9,7 +9,7 @@ export class AuthController {
     this.userService = userService;
   }
 
-  async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+  loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       // Wrap passport.authenticate in a promise
       const { user, info } = await new Promise<{ user: User | null, info?: any }>((resolve, reject) => {
@@ -43,7 +43,7 @@ export class AuthController {
     }
   }
   
-  async registerUser (req: Request, res: Response, next: NextFunction): Promise<void> {
+  registerUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { email, password, first_name, middle_name, last_name, role } = req.body;
     const saltRounds = 10;
   
@@ -56,7 +56,7 @@ export class AuthController {
       }
       // Hash password and create new user
       const password_hash = await bcrypt.hash(password, saltRounds);
-      const newUser: User | null = await this.userService.createUser(email, password_hash, first_name, middle_name, last_name, role);
+      const newUser: User = await this.userService.createUser(email, password_hash, first_name, middle_name, last_name, role);
   
       if (newUser) {
         await new Promise<void>((resolve, reject) => {
