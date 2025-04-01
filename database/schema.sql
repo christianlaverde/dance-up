@@ -58,7 +58,23 @@ CREATE TABLE studio_members (
       ON DELETE CASCADE
 );
 
--- 5. Create a Trigger to Auto-Update 'updated_at'
+-- 3. Create Classes Table
+-- Stores all class records.
+CREATE TABLE classes (
+  id SERIAL PRIMARY KEY,
+  studio_id INTEGER NOT NULL,
+  class_name VARCHAR(255) NOT NULL,
+  class_description TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_studio
+    FOREIGN KEY(studio_id) 
+      REFERENCES studios(id)
+      ON DELETE CASCADE
+);
+
+
+-- 6. Create a Trigger to Auto-Update 'updated_at'
 -- Ensures 'updated_at' is updated whenever a row is modified
 CREATE FUNCTION trigger_update_timestamp()
 RETURNS TRIGGER AS $$
