@@ -1,7 +1,7 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { UserModel } from '../../src/models/UserModel.js';
 import { QueryConfig } from 'pg';
-import { User, UserRole } from '../../src/models/user.js';
+import { User, UserRole } from '../../src/entities/user.js';
 import { expectUserShape } from '../helperFunctions.js';
 
 // Reusable Mock Query Helper, returns mock query and getCapturedQuery functions

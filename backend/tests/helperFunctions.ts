@@ -1,5 +1,5 @@
 import { expect } from "@jest/globals";
-import { UserRole } from "../src/models/user";
+import { UserRole } from "../src/entities/user";
 
 export function expectUserShape(user: any) {
   expect(user).toBeDefined();
