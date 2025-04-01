@@ -2,6 +2,7 @@ import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { UserModel } from '../../src/models/UserModel.js';
 import { QueryConfig } from 'pg';
 import { User, UserRole } from '../../src/models/user.js';
+import { expectUserShape } from '../helperFunctions.js';
 
 // Reusable Mock Query Helper, returns mock query and getCapturedQuery functions
 function createMockQuery(returnedRows: any[]) {
@@ -12,24 +13,6 @@ function createMockQuery(returnedRows: any[]) {
   }
 
   return { query, getCapturedQuery: () => capturedQuery };
-}
-
-// Helper function to check the shape of a User object
-function expectUserShape(user: any) {
-  expect(user).toBeDefined();
-  expect(user).toEqual(
-    expect.objectContaining({
-      id: expect.any(String),
-      email: expect.any(String),
-      password_hash: expect.any(String),
-      first_name: expect.any(String),
-      middle_name: expect.any(String),
-      last_name: expect.any(String),
-      role: expect.any(String),
-    })
-  );
-  // Ensure user.role is of UserRole enum
-  expect(Object.values(UserRole)).toContain(user.role);
 }
 
 describe("User Model", () => {
@@ -86,6 +69,17 @@ describe("User Model", () => {
         // Assert: Verify that the query is defined.
         expect(capturedQuery).toBeDefined();
       });
+
+      it('should propagate an error when db.query fails and throws an exception', async () => {
+        // Arrange: Set Up Mock Data
+        const mockQuery = async () => {
+          throw new Error('Database Error');
+        }
+        userModel = new UserModel({ query: mockQuery });
+
+       // Act/Assert: Expect that error is thrown
+       await expect(userModel.getAllUsers()).rejects.toThrow('Database Error');
+      });
     })
   });
 
@@ -132,6 +126,17 @@ describe("User Model", () => {
         expect(result).toBeNull();
         // Assert: Verify that the query is defined.
         expect(capturedQuery).toBeDefined();
+      });
+
+      it('should propagate an error when db.query fails and throws an exception', async () => {
+        // Arrange: Set Up Mock Data
+        const mockQuery = async () => {
+          throw new Error('Database Error');
+        }
+        userModel = new UserModel({ query: mockQuery });
+
+       // Act/Assert: Expect that error is thrown
+       await expect(userModel.getUserById('1')).rejects.toThrow('Database Error');
       });
     });
   });
@@ -180,8 +185,18 @@ describe("User Model", () => {
         expect(result).toBeNull();
         // Assert: Verify that the query is defined.
         expect(capturedQuery).toBeDefined();
-      })
+      });
 
+      it('should propagate an error when db.query fails and throws an exception', async () => {
+        // Arrange: Set Up Mock Data
+        const mockQuery = async () => {
+          throw new Error('Database Error');
+        }
+        userModel = new UserModel({ query: mockQuery });
+
+       // Act/Assert: Expect that error is thrown
+       await expect(userModel.getUserByEmail('user1@example.com')).rejects.toThrow('Database Error');
+      });
     });
   });
 
