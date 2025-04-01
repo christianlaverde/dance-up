@@ -1,4 +1,5 @@
 import { expect } from "@jest/globals";
+import { QueryConfig } from 'pg';
 import { UserRole } from "../src/entities/user";
 
 export function expectUserShape(user: any) {
@@ -16,4 +17,14 @@ export function expectUserShape(user: any) {
   );
   // Ensure user.role is of UserRole enum
   expect(Object.values(UserRole)).toContain(user.role);
+}
+// Reusable Mock Query Helper, returns mock query and getCapturedQuery functions
+export function createMockQuery(returnedRows: any[]) {
+  let capturedQuery: QueryConfig | undefined;
+  const query = async (query: QueryConfig): Promise<{ rows: any[] }> => {
+    capturedQuery = query;
+    return { rows: returnedRows };
+  }
+
+  return { query, getCapturedQuery: () => capturedQuery };
 }

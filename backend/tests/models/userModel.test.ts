@@ -2,18 +2,8 @@ import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { UserModel } from '../../src/models/UserModel.js';
 import { QueryConfig } from 'pg';
 import { User, UserRole } from '../../src/entities/user.js';
-import { expectUserShape } from '../helperFunctions.js';
+import { expectUserShape, createMockQuery } from '../helperFunctions.js';
 
-// Reusable Mock Query Helper, returns mock query and getCapturedQuery functions
-function createMockQuery(returnedRows: any[]) {
-  let capturedQuery: QueryConfig | undefined;
-  const query = async (query: QueryConfig): Promise<{ rows: any[] }> => {
-    capturedQuery = query;
-    return { rows: returnedRows };
-  }
-
-  return { query, getCapturedQuery: () => capturedQuery };
-}
 
 describe("User Model", () => {
   // Initialize Mock Data
