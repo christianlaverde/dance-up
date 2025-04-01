@@ -22,4 +22,19 @@ export class ClassModel {
     this.db = db;
   }
 
+  /**
+   * Retrieves all users from the database.
+   * @returns A promise that resolves to an array of User objects.
+   */
+  async getAllClasses(): Promise<Class[]> {
+    const queryText = `
+      SELECT id, studio_id, class_name, class_description
+      FROM users
+    `;
+    const query: QueryConfig = { text: queryText };
+
+    // Execute the query and return the list of users.
+    const result = await this.db.query(query);
+    return result.rows;
+  }
 }
