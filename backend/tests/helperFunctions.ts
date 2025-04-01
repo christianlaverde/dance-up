@@ -18,6 +18,19 @@ export function expectUserShape(user: any) {
   // Ensure user.role is of UserRole enum
   expect(Object.values(UserRole)).toContain(user.role);
 }
+
+export function expectStudioShape(studio: any) {
+  expect(studio).toBeDefined();
+  expect(studio).toEqual(
+    expect.objectContaining({
+      id: expect.any(String),
+      owner_id: expect.any(String),
+      studio_name: expect.any(String),
+      address: expect.any(String)
+    })
+  );
+}
+
 // Reusable Mock Query Helper, returns mock query and getCapturedQuery functions
 export function createMockQuery(returnedRows: any[]) {
   let capturedQuery: QueryConfig | undefined;
