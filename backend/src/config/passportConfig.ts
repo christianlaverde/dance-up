@@ -18,7 +18,7 @@ export function configurePassport(userService: UserService): PassportStatic {
   // This keeps the session data small and secure.
   passport.serializeUser((user: User, done) => {
     logger.info('Serializing User: ', user);
-    done(null, user.id);
+    done(null, user.getId());
   });
 
   // Deserialize the user instance based on the unique identifier stored in the session.

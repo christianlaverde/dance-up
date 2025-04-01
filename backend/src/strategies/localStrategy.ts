@@ -45,7 +45,7 @@ export function createLocalStrategy(userService: UserService): LocalStrategy {
 
       if (user) {
         // Compare the provided password with the stored password hash
-        const isMatch = await bcrypt.compare(password, user.password_hash);
+        const isMatch = await bcrypt.compare(password, user.getPasswordHash());
         if (!isMatch) {
           // Password mismatch: authentication failed
            return done(null, false, { message: 'Incorrect email or password.' });
