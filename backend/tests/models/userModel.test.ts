@@ -8,7 +8,6 @@ import { expectUserShape, createMockQuery } from '../helperFunctions.js';
 describe("User Model", () => {
   // Initialize Mock Data
   let userModel: UserModel;
-  let getCapturedQuery: () => QueryConfig | undefined;
 
   // Clear mocks before each test
   beforeEach(() => {

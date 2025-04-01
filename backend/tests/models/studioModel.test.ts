@@ -8,7 +8,6 @@ import { expectStudioShape, expectUserShape, createMockQuery } from '../helperFu
 describe('Studio Model', () => {
   // Initialize Mock Data
   let studioModel: StudioModel;
-  let getCapturedQuery: () => QueryConfig | undefined;
 
   // Clear mocks before each test
   beforeEach(() => {
