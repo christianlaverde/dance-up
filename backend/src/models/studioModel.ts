@@ -8,8 +8,8 @@
 
 import type { QueryConfig } from 'pg';
 import type { Database } from '../@types/db.js';
-import type { Studio } from './studio.js';
-import type { User } from './user.js';
+import type { Studio } from '../entities/studio.js';
+import type { User } from '../entities/user.js';
 
 export class StudioModel {
   // Database instance used for executing queries.

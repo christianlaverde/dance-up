@@ -9,9 +9,9 @@
  */
 
 import type { StudioModel } from "../models/studioModel.js";
-import type { Studio } from "../models/studio.js";
+import type { Studio } from "../entities/studio.js";
 import type { UserService } from "./userService.js";
-import type { User } from '../models/user.js';
+import type { User } from '../entities/user.js';
 
 
 
