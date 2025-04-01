@@ -70,7 +70,7 @@ npm run test
 npm run build
 ```
 
-3) Run Application
+3) Run Application Backend Server
 ```bash
 # Will run backend server on localhost:3000 and reset when re-compiled
 # See path/to/dance-up/backend/package.json
