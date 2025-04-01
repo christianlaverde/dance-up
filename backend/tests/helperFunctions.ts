@@ -57,7 +57,8 @@ export function expectClassShape(cls: any): void {
     expect.objectContaining({
       id: expect.any(String),
       studio_id: expect.any(String),
-      name: expect.any(String)
+      class_name: expect.any(String),
+      class_description: expect.any(String)
     })
   );
 }
