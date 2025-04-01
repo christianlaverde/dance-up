@@ -3,7 +3,7 @@ import { pinoHttp } from 'pino-http';
 
 // Create a base logger for general-purpose logging
 const baseLogger = pino({
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || 'debug',
   transport: {
     target: 'pino-pretty',
     options: {
@@ -37,20 +37,3 @@ export const httpLogger = pinoHttp({
 
 // Export the base logger so that it can be used elsewhere in your codebase
 export default baseLogger;
-/*
-import pino from 'pino';
-
-const logger = pino.pino({
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-      translateTime: 'SYS:standard',
-      ignore: 'pid,hostname',
-    },
-    level: 'info',
-  }
-});
-
-export default logger;
-*/
