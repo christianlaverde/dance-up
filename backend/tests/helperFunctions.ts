@@ -19,7 +19,7 @@ export function expectUserShape(user: any): void {
       first_name: expect.any(String),
       middle_name: expect.any(String),
       last_name: expect.any(String),
-      role: expect.any(String),
+      role: expect.any(String)
     })
   );
   // Ensure user.role is of UserRole enum
