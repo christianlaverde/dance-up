@@ -19,10 +19,8 @@ describe("User Model", () => {
       it('should return an array of users', async () => {
         // Arrange: Set Up Mock Data
         const mockData: User[] = [
-          {id: '1', email: 'user1@example.com', password_hash: 'hash1', 
-            first_name: 'FName1', middle_name: 'MName1', last_name: 'LName1', role: UserRole.OWNER},
-          {id: '2', email: 'user2@example.com', password_hash: 'hash2', 
-            first_name: 'FName2', middle_name: 'MName2', last_name: 'LName2', role: UserRole.MEMBER},
+          new User('1', 'user1@example.com', 'hash1', 'Fname1', 'Lname1', UserRole.OWNER, 'Mname1'),
+          new User('2', 'user2@example.com', 'hash2', 'Fname2', 'Lname2', UserRole.MEMBER, 'Mname2')
         ];
         const { query, getCapturedQuery } = createMockQuery(mockData);
         userModel = new UserModel({ query });
@@ -77,8 +75,7 @@ describe("User Model", () => {
       it('should return one user by id', async () => {
         // Arrange: Set Up Mock Data
         const mockData: User[] = [
-          {id: '1', email: 'user1@example.com', password_hash: 'hash1', 
-            first_name: 'FName1', middle_name: 'MName1', last_name: 'LName1', role: UserRole.MEMBER},
+            new User('1', 'user1@example.com', 'hash1', 'Fname1', 'Lname1', UserRole.OWNER, 'Mname1')
         ];
         const { query, getCapturedQuery } = createMockQuery(mockData);
         userModel = new UserModel({ query });
@@ -135,8 +132,7 @@ describe("User Model", () => {
       it('should return one user by email', async () => {
         // Arrange: Set Up Mock Data
         const mockData: User[] = [
-          {id: '1', email: 'user1@example.com', password_hash: 'hash1', 
-            first_name: 'FName1', middle_name: 'MName1', last_name: 'LName1', role: UserRole.MEMBER},
+          new User('1', 'user1@example.com', 'hash1', 'Fname1', 'Lname1', UserRole.OWNER, 'Mname1')
         ];
         const { query, getCapturedQuery } = createMockQuery(mockData);
         userModel = new UserModel({ query });
@@ -200,15 +196,9 @@ describe("User Model", () => {
         const mockLName = 'LName';
         const mockRole = UserRole.MEMBER;
   
-        const expectedUser: User = {
-          id: '1',
-          email: mockEmail,
-          password_hash: mockPassword,
-          first_name: mockFName,
-          middle_name: mockMName,
-          last_name: mockLName,
-          role: mockRole
-        };
+        const expectedUser: User = new User(
+          '1', 'user1@example.com', 'hash1', 'Fname1', 'Lname1', UserRole.OWNER, 'Mname1'
+        )
         const { query, getCapturedQuery } = createMockQuery([expectedUser]);
         userModel = new UserModel({ query });
 
