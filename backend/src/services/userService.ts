@@ -10,6 +10,7 @@
 
 import { UserModel } from "../models/userModel.js";
 import { User } from "../entities/user.js";
+import logger from '../utils/logger.js';
 
 export class UserService {
   // Instance of UserModel used to interact with the database.
@@ -28,7 +29,9 @@ export class UserService {
    * @returns Promise that resolves to an array of User entities.
    */
   async getAllUsers(): Promise<User[]> {
+    logger.debug('UserService.getAllUsers called');
     const users = await this.userModel.getAllUsers();
+    logger.debug({ count: users.length }, 'UserService.getAllUsers completed');
     return users;
   }
 
@@ -39,7 +42,13 @@ export class UserService {
    *          exists with the given ID.
    */
   async getUserById(id: string): Promise<User | null> {
+    logger.debug('UserService.getUserById called');
     const user = await this.userModel.getUserById(id);
+    if (user) {
+      logger.debug({ id }, 'UserService.getUserById found user');
+    } else {
+      logger.warn({ id }, 'UserService.getUserById did not find a user');
+    }
     return user || null;
   }
 
@@ -50,7 +59,13 @@ export class UserService {
    *          exists with the given email.
    */
   async getUserByEmail(email: string): Promise<User | null> {
+    logger.debug('UserService.getUserByEmail called');
     const user = await this.userModel.getUserByEmail(email);
+    if (user) {
+      logger.debug({ email }, 'UserService.getUserByEmail found user');
+    } else {
+      logger.warn({ email }, 'UserService.getUserByEmail did not find a user');
+    }
     return user || null;
   }
 
@@ -72,6 +87,7 @@ export class UserService {
     last_name: string,
     role: string,
   ): Promise<User | null> {
+    logger.debug('UserService.createUser called');
     // Delegates the task of inserting a new user to the UserModel.
     const newUser = await this.userModel.insertUser(
       email,
@@ -81,6 +97,11 @@ export class UserService {
       last_name,
       role,
     );
+    if (newUser) {
+      logger.debug({ email }, 'UserService.createUser successfully created user');
+    } else {
+      logger.warn({ email }, 'UserService.createUser failed to create user');
+    }
     return newUser || null;
   }
 }
