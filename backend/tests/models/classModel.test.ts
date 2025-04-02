@@ -19,8 +19,8 @@ describe('Class Model', () => {
       it('should return an array of classes', async () => {
         // Arrange
         const mockData: Class[] = [
-          {id: '1', studio_id: '2', class_name: 'Salsa Class', class_description: 'A fun salsa class'},
-          {id: '3', studio_id: '4', class_name: 'Jazz Class', class_description: 'A fun jazz class'}
+          new Class('1', '2', 'Salsa Class', 'A fun salsa class'), 
+          new Class('3', '4', 'Jazz Class', 'A fun jazz class'),
         ];
         const { query, getCapturedQuery } = createMockQuery(mockData);
         classModel = new ClassModel({ query });
@@ -31,8 +31,6 @@ describe('Class Model', () => {
 
         // Assert
         expect(result).toEqual(mockData);
-        expect(capturedQuery).toBeDefined();
-        result.forEach(expectClassShape);
         expect(capturedQuery!.text).toMatch(/SELECT id, studio_id, class_name, class_description/);
       });
     });

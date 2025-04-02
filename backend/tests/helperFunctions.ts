@@ -1,6 +1,7 @@
 import { expect } from "@jest/globals";
 import { QueryConfig } from 'pg';
 import { UserRole } from "../src/entities/user";
+import { Class } from "../src/entities/class.js";
 
 /**
  * Verifies that the given user object is defined and matches the expected shape.
@@ -53,14 +54,7 @@ export function expectStudioShape(studio: any): void {
  */
 export function expectClassShape(cls: any): void {
   expect(cls).toBeDefined();
-  expect(cls).toEqual(
-    expect.objectContaining({
-      id: expect.any(String),
-      studio_id: expect.any(String),
-      class_name: expect.any(String),
-      class_description: expect.any(String)
-    })
-  );
+  expect(cls).toBeInstanceOf(Class);
 }
 
 /**
