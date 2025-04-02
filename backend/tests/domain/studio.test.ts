@@ -1,18 +1,12 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
-import { Studio } from '../../src/entities/studio.js';
-import { Class } from '../../src/entities/class';
+import { Studio } from '../../src/domain/studio.js';
+import { Class } from '../../src/domain/class.js';
 
 describe('Studio Entity', () => {
-  let studio: Studio;
-
-  beforeEach(() => {
-    const STUDIO_NAME = 'VB Dance Studio';
-    studio = new Studio(STUDIO_NAME);
-  })
-
   it('should add a class', async () => {
     // Arrange 
     const cls = new Class('Salsa Class', 'A fun salsa class');
+    const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
     // Act
     studio.addClass(cls);
@@ -27,6 +21,7 @@ describe('Studio Entity', () => {
     const class1 = new Class('Salsa Class', 'A fun salsa class');
     const class2 = new Class('Jazz Class', 'A fun jazz class');
     const mockClasses: Class[] = [class1, class2];
+    const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
     studio.addClass(class1);
     studio.addClass(class2);
