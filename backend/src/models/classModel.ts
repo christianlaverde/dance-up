@@ -8,7 +8,7 @@
 
 import type { QueryConfig } from 'pg';
 import type { Database } from '../@types/db.js';
-import type { Class } from '../entities/class.js';
+import type { Class } from '../domain/class.js';
 
 export class ClassModel {
   // Database instance used for executing queries.

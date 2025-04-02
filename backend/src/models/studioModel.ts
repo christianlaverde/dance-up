@@ -8,7 +8,7 @@
 
 import type { QueryConfig } from 'pg';
 import type { Database } from '../@types/db.js';
-import type { Studio } from '../entities/studio.js';
+import type { Studio } from '../domain/studio.js';
 import type { User } from '../entities/user.js';
 
 export class StudioModel {
@@ -31,17 +31,33 @@ export class StudioModel {
    * Retrieves all studios from the database.
    * @returns A promise that resolves to an array of Studio objects.
    */
-    async getAllStudios(): Promise<Studio[]> {
-      const queryText = `
-        SELECT id, owner_id, studio_name, address
-        FROM studios
-      `;
-      const query: QueryConfig = { text: queryText };
-  
-      // Execute the query and return the list of studios.
-      const result = await this.db.query(query);
-      return result.rows;
-    }
+  async getAllStudios(): Promise<Studio[]> {
+    const queryText = `
+      SELECT id, owner_id, studio_name, address
+      FROM studios
+    `;
+    const query: QueryConfig = { text: queryText };
+
+    // Execute the query and return the list of studios.
+    const result = await this.db.query(query);
+    return result.rows;
+  }
+
+  async getStudioById(id: string): Promise<Studio | null> {
+    const queryText = `
+    SELECT id, owner_id, studio_name, address
+    FROM studios
+    WHERE id = $1
+    `;
+    const query: QueryConfig = {
+      text: queryText,
+      values: [id],
+    };
+
+    // Execute the query and return the studio of given id
+    const result = await this.db.query(query);
+    return result.rows[0] || null;
+  }
 
   /**
    * Retrieves all studio members from the database given a studio id.

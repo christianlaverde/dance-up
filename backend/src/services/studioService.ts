@@ -9,8 +9,8 @@
  */
 
 import type { StudioModel } from "../models/studioModel.js";
-import type { Studio } from "../entities/studio.js";
-import type { UserService } from "./userService.js";
+import type { Studio } from "../domain/studio.js";
+//import type { UserService } from "./userService.js";
 import type { User } from '../entities/user.js';
 
 
@@ -18,15 +18,16 @@ import type { User } from '../entities/user.js';
 export class StudioService {
   // Instance of StudioModel used to interact with the database.
   private studioModel: StudioModel;
-  private userService: UserService;
+  //private userService: UserService;
 
   /**
    * Constructor for StudioService.
    * @param studioModel - An instance of StudioModel for data access operations.
    */
-  constructor(studioModel: StudioModel, userService: UserService) {
+  //constructor(studioModel: StudioModel, userService: UserService) {
+  constructor(studioModel: StudioModel) {
     this.studioModel = studioModel;
-    this.userService = userService;
+    //this.userService = userService;
   }
 
   /**
@@ -36,6 +37,11 @@ export class StudioService {
   async getAllStudios(): Promise<Studio[]> {
     const studios = await this.studioModel.getAllStudios();
     return studios;
+  }
+
+  async getStudioById(id: string): Promise<Studio | null> {
+    const studio = await this.studioModel.getStudioById(id);
+    return studio || null;
   }
 
   /**
