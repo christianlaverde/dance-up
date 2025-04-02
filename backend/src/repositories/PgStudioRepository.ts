@@ -1,4 +1,3 @@
-//import pg, { Pool } from 'pg';
 import pg from 'pg';
 import { Studio } from '../domain/studio.js';
 import { IStudioRepository } from "./IStudioRepository.js";
