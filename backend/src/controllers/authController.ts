@@ -42,7 +42,7 @@ export class AuthController {
       return next(err);
     }
   }
-  
+
   registerUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { email, password, first_name, middle_name, last_name, role } = req.body;
     const saltRounds = 10;
@@ -79,5 +79,4 @@ export class AuthController {
       return next(err);
     }
   }
-
 }
