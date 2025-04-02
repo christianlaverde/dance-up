@@ -11,4 +11,12 @@ export class Studio {
   addClass(cls: Class) {
     this.classes.push(cls);
   }
+
+  getClasses() {
+    return this.classes;
+  }
+
+  getStudioName() {
+    return this.studioName;
+  }
 }
