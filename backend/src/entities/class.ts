@@ -3,7 +3,7 @@ export class Class {
   private classDescription: string;
 
   constructor(
-    id: string, studioId: string, className: string, classDescription: string
+    className: string, classDescription: string
   ) {
     this.className = className;
     this.classDescription = classDescription;
