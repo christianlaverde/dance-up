@@ -35,6 +35,7 @@ import { createAuthRouter } from './routes/authRouter.js';
 // -------------------------
 // Dependency Initialization
 // -------------------------
+/*
 const db = new Database();
 const userModel = new UserModel(db);
 const userService = new UserService(userModel);
@@ -43,12 +44,15 @@ const studioModel = new StudioModel(db);
 const studioService = new StudioService(studioModel, userService);
 const studioController = new StudioController(studioService);
 const authController = new AuthController(userService);
+*/
 
 // -------------------------
 // Passport Configuration
 // -------------------------
+/*
 const passport = configurePassport(userService);
 passport.use(createLocalStrategy(userService));
+*/
 
 // -------------------------
 // Express Application Setup
@@ -63,6 +67,7 @@ app.use(cors());
 // -------------------------
 // Session Configuration
 // -------------------------
+/*
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET environment variable must be set');
@@ -74,27 +79,33 @@ app.use(
     saveUninitialized: false,
   })
 );
+*/
 
 // Initialize Passport and Pino HTTP logger
+/*
 app.use(passport.initialize());
 app.use(passport.session());
+*/
 app.use(httpLogger);
 
 // -------------------------
 // Route Definitions
 // -------------------------
+/*
 const userRouter = createUserRouter(userController);
 const studioRouter = createStudioRouter(studioController);
 const authRouter = createAuthRouter(authController);
-
+*/
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Hello, world!");
 });
 
+/*
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/studios', studioRouter);
+*/
 
 // -------------------------
 // Global Error Handling
