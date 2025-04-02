@@ -18,6 +18,10 @@ export class Studio {
     this.classes.push(cls);
   }
 
+  getClasses() {
+    return this.classes;
+  }
+
   getId() {
     return this.id;
   }
