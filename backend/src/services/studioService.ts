@@ -38,13 +38,13 @@ export class StudioService {
     return studios;
   }
 
-   /**
-    * Retrieve all studio members from a studio given a studio id.
-    * @param studioId - the id of the studio
-    * @returns Promise that resolves to an array of .
-    */
+  /**
+  * Retrieve all studio members from a studio given a studio id.
+  * @param studioId - the id of the studio
+  * @returns Promise that resolves to an array of .
+  */
   async getAllStudioMembers(studioId: string): Promise<User[]> {
-      const studios = await this.studioModel.getAllStudioMembers(studioId);
-      return studios;
-    }
+    const studios = await this.studioModel.getAllStudioMembers(studioId);
+    return studios;
+  }
 }
