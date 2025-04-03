@@ -17,7 +17,6 @@ import { Database } from './db/db.js';
 import { UserModel } from './models/userModel.js';
 import { UserService } from './services/userService.js';
 import { UserController } from './controllers/userController.js';
-import { StudioModel } from './models/studioModel.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
 import { AuthController } from './controllers/authController.js';
@@ -31,6 +30,8 @@ import { createLocalStrategy } from './strategies/localStrategy.js';
 import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
+import { PgStudioRepository } from './repositories/PgStudioRepository.js';
+import { PgClassRepository } from './repositories/PgClassRepository.js';
 
 // -------------------------
 // Dependency Initialization
@@ -53,6 +54,12 @@ const authController = new AuthController(userService);
 const passport = configurePassport(userService);
 passport.use(createLocalStrategy(userService));
 */
+
+const classRepo = new PgClassRepository();
+const classes = await classRepo.getAllClasses();
+const cls = await classRepo.getClassById('3');
+console.log('classes: ', classes);
+console.log('class: ', cls)
 
 // -------------------------
 // Express Application Setup
