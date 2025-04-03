@@ -54,3 +54,18 @@ VALUES
 
 -- Commit the transaction
 COMMIT;
+
+-----------------------------
+-- 2. Insert Classes
+-----------------------------
+-- Assuming the first two inserted users (id=1 and id=2) are the owners.
+INSERT INTO classes (studio_id, class_name, class_description)
+VALUES
+  (1, 'Beginner Salsa', 'A fun salsa class for beginners'),
+  (1, 'Intermediate Salsa', 'A fun salsa class for intermediates'),
+  (1, 'Advanced Salsa', 'A tough salsa class for experts'),
+  (2, 'Jazz', 'A fun jazz class'),
+  (2, 'Ballet', 'A fun ballet class');
+
+-- Commit the transaction
+COMMIT;
