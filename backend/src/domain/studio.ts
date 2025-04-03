@@ -22,6 +22,10 @@ export class Studio {
     return this.classes;
   }
 
+  setClasses(classes: Class[]) {
+    this.classes = this.classes;
+  }
+
   getId() {
     return this.id;
   }
