@@ -5,7 +5,7 @@ import { Class } from '../../src/domain/class.js';
 describe('Studio Entity', () => {
   it('should add a class', async () => {
     // Arrange 
-    const cls = new Class('Salsa Class', 'A fun salsa class');
+    const cls = new Class('1', '1', 'Salsa Class', 'A fun salsa class');
     const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
     // Act
@@ -18,8 +18,8 @@ describe('Studio Entity', () => {
 
   it('should return a collection of classes', async () => {
     // Arrange
-    const cls1 = new Class('Salsa Class', 'A fun salsa class');
-    const cls2 = new Class('Jazz Class', 'A fun jazz class');
+    const cls1 = new Class('1', '1', 'Salsa Class', 'A fun salsa class');
+    const cls2 = new Class('2', '1', 'Jazz Class', 'A fun jazz class');
     const mockClasses: Class[] = [cls1, cls2];
     const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
