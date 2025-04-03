@@ -18,13 +18,13 @@ describe('Studio Entity', () => {
 
   it('should return a collection of classes', async () => {
     // Arrange
-    const class1 = new Class('Salsa Class', 'A fun salsa class');
-    const class2 = new Class('Jazz Class', 'A fun jazz class');
-    const mockClasses: Class[] = [class1, class2];
+    const cls1 = new Class('Salsa Class', 'A fun salsa class');
+    const cls2 = new Class('Jazz Class', 'A fun jazz class');
+    const mockClasses: Class[] = [cls1, cls2];
     const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
-    studio.addClass(class1);
-    studio.addClass(class2);
+    studio.addClass(cls1);
+    studio.addClass(cls2);
 
     // Act
     const classes = studio.getClasses();
