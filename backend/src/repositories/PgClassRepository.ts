@@ -24,7 +24,24 @@ export class PgClassRepository implements IClassRepository {
     );
   }
 
-  async getClassById(id: string): Promise<Class | null> {
+  async getClassesByStudioId(studioId: string): Promise<Class[]> {
+    const queryText =`
+      SELECT id, studio_id, class_name, class_description
+      FROM classes
+      WHERE studio_id = $1;
+    `;
+    const query = {
+      text: queryText,
+      values: [studioId]
+    };
+
+    const result = await this.pool.query(query);
+    return result.rows.map(
+      (row) => new Class(row.id, row.studio_id, row.class_name, row.class_description)
+    );
+  }
+
+  async getClassById(classId: string): Promise<Class | null> {
     const queryText = `
     SELECT id, studio_id, class_name, class_description
     FROM classes
@@ -32,7 +49,7 @@ export class PgClassRepository implements IClassRepository {
     `;
     const query = {
       text: queryText,
-      values: [id],
+      values: [classId],
     };
 
     const result = await this.pool.query(query);
