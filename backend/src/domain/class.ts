@@ -12,4 +12,20 @@ export class Class {
     this.className = className;
     this.classDescription = classDescription;
   }
+
+  getId() {
+    return this.id;
+  }
+
+  getStudioId() {
+    return this.studioId;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getClassDescription() {
+    return this.classDescription;
+  }
 }
