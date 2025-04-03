@@ -5,13 +5,14 @@ export class Studio {
   private ownerId: string;
   private studioName: string;
   private address: string;
-  private classes: Class[] = [];
+  private classes: Class[];
 
   constructor(id: string, ownerId: string, studioName: string, address: string) {
     this.id = id;
     this.ownerId = ownerId;
     this.studioName = studioName;
     this.address = address;
+    this.classes = [];
   }
 
   addClass(cls: Class) {
@@ -23,7 +24,7 @@ export class Studio {
   }
 
   setClasses(classes: Class[]) {
-    this.classes = this.classes;
+    this.classes = classes;
   }
 
   getId() {
