@@ -53,6 +53,7 @@ export class StudioController {
    * @param req - Express Request object with a parameter `id`.
    * @param res - Express Response object.
    */
+  /*
   getStudioMembers = async (req: Request, res: Response): Promise<void> => {
     try {
       const id = req.params.id;
@@ -67,4 +68,5 @@ export class StudioController {
       res.status(500).json({ message: 'Server Error' });
     }
   };
+  */
 }
