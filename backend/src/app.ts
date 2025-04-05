@@ -86,7 +86,10 @@ const studioRouter = createStudioRouter(studioController);
 //const authRouter = createAuthRouter(authController);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send("Hello, world!");
+  const resp = {
+    status: "success"
+  }
+  res.send(resp);
 });
 
 /*
