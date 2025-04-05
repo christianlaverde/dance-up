@@ -16,7 +16,7 @@ export class StudioService {
   }
 
   /**
-   * Retrieve all studios from the StudioRepository with classes array initialized
+   * Retrieve all studios from StudioRepository with classes array initialized
    * @returns Promise that resolves to an array of Studio entities.
    */
   async getAllStudiosWithClasses(): Promise<Studio[]> {
@@ -29,7 +29,10 @@ export class StudioService {
     return studios;
   }
 
-
+  /**
+   * Retrieve a studio from StudioRepository by id with classes array initialized
+   * @returns Promise that resolves to a Studio entity with classes array initialized
+   */
   async getStudioWithClassesById(studioId: string): Promise<Studio | null> {
     const studio = await this.studioRepository.getStudioById(studioId);
     if (studio) {
