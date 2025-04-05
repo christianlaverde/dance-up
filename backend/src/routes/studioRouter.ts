@@ -15,7 +15,7 @@ export function createStudioRouter(studioController: StudioController): Router {
 
   // Route: GET / 
   // Purpose: Retrieve all studios.
-  router.get('/', studioController.getStudios);
+  router.get('/', studioController.getAllStudiosWithClasses);
 
   // Route: GET /:id/members
   // Purpose: Retrieve all studio members of a studio given a studio id
