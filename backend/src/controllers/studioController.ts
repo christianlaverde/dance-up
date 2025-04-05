@@ -55,9 +55,27 @@ export class StudioController {
     }
   }
 
+  /**
+   * Handler for retrieving a studio by id with classes array initialized
+   */
+  getStudioWithClassesById = async (req: Request, res: Response): Promise<void> => {
+    const studioId = req.params.id;
+    const resp: any = {};
+    try {
+      const studio = await this.studioService.getStudioWithClassesById(studioId);
+      resp.status = 'success';
+      if (!studio) {
+        resp.message = 'Studio not found';
+        res.status(404).json(resp);
+        return;
+      }
+      resp.studio = studio;
+      res.status(200).json(resp);
     } catch (err) {
       logger.error(err);
-      res.status(500).json({ message: 'Server Error' });
+      resp.message = 'Server Error';
+      resp.status = 'failure';
+      res.status(500).json(resp);
     }
   }
 
