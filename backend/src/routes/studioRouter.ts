@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import type { StudioController } from '../controllers/studioController.js';
+import { StudioController } from '../controllers/studioController.js';
 
 /**
  * Creates and configures an Express router for studio-related endpoints.
@@ -16,6 +16,7 @@ export function createStudioRouter(studioController: StudioController): Router {
   // Route: GET / 
   // Purpose: Retrieve all studios.
   router.get('/', studioController.getAllStudiosWithClasses);
+  router.get('/:id', studioController.getStudioWithClassesById);
 
   // Route: GET /:id/members
   // Purpose: Retrieve all studio members of a studio given a studio id
