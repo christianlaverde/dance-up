@@ -3,28 +3,35 @@
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Language and Environment */
-    "target": "ESNext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2020",
+    "lib": ["ES2020"],
 
     /* Modules */
-    "module": "NodeNext",                                /* Specify what module code is generated. */
-    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
-    "moduleResolution": "nodenext",                      /* Specify how TypeScript looks up a file from a given module specifier. */
-    "typeRoots": ["./node_modules/@types"],              /* Specify multiple folders that act like './node_modules/@types'. */
-    "types": ["node", "express"],                        /* Specify type package names to be included without being referenced in a source file. */
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "express", "jest"],
 
-    /* Emit */
-    "outDir": "./dist",                                  /* Specify an output folder for all emitted files. */
-
-    /* Interop Constraints */
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    /* Interop and ESM support */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
 
-    /* Type Checking */
-    "strict": true,                                      /* Enable all strict type-checking options. */
+    /* Paths */
+    "baseUrl": "./src",
 
-    /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    /* Type Checking */
+    "strict": true,
+
+    /* Declaration and Emit */
+    "skipLibCheck": true,
+    "resolveJsonModule": true,         // Allows importing JSON files
+    "declaration": true,              // Emit `.d.ts` files if building a library
+    "declarationMap": true,           // Useful if consuming d.ts files elsewhere
+    "sourceMap": true,
   },
   "include": ["./src/**/*"],                             /* Include all files in the src directory */
   "exclude": [                                           /* Exclusions */
