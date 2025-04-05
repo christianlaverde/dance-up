@@ -29,7 +29,7 @@ export class StudioController {
   }
 
   /**
-   * Handler for retrieving all studios.
+   * Handler for retrieving all studios with class arrays initialized
    * Sends a 200 response with the list of studios or a 500 error if something goes wrong.
    *
    * @param req - Express Request object.
@@ -38,7 +38,23 @@ export class StudioController {
   getAllStudiosWithClasses = async (req: Request, res: Response): Promise<void> => {
     try {
       const studios = await this.studioService.getAllStudiosWithClasses();
-      res.status(200).json(studios);
+      const totalStudioCount = studios.length;
+      const resp = {
+        data: studios,
+        totalCount: totalStudioCount,
+        status: 'success'
+      }
+      res.status(200).json(resp);
+    } catch (err) {
+      logger.error(err);
+      const resp = {
+        message: 'Server Error',
+        status: 'failure'
+      }
+      res.status(500).json(resp);
+    }
+  }
+
     } catch (err) {
       logger.error(err);
       res.status(500).json({ message: 'Server Error' });
