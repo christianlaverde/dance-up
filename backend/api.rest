@@ -1,0 +1,5 @@
+### GET /
+GET http://localhost:3000/
+
+### GET /studios
+GET http://localhost:3000/studios
