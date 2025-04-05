@@ -13,10 +13,8 @@ import session from 'express-session';
 // -------------------------
 // Internal Module Imports
 // -------------------------
-import { Database } from './db/db.js';
-import { UserModel } from './models/userModel.js';
-import { UserService } from './services/userService.js';
-import { UserController } from './controllers/userController.js';
+import { PgStudioRepository } from './repositories/PgStudioRepository.js';
+import { PgClassRepository } from './repositories/PgClassRepository.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
 import { AuthController } from './controllers/authController.js';
@@ -30,22 +28,14 @@ import { createLocalStrategy } from './strategies/localStrategy.js';
 import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
-import { PgStudioRepository } from './repositories/PgStudioRepository.js';
-import { PgClassRepository } from './repositories/PgClassRepository.js';
 
 // -------------------------
 // Dependency Initialization
 // -------------------------
-/*
-const db = new Database();
-const userModel = new UserModel(db);
-const userService = new UserService(userModel);
-const userController = new UserController(userService);
-const studioModel = new StudioModel(db);
-const studioService = new StudioService(studioModel, userService);
+const studioRepository = new PgStudioRepository();
+const classRepository = new PgClassRepository();
+const studioService = new StudioService(studioRepository, classRepository);
 const studioController = new StudioController(studioService);
-const authController = new AuthController(userService);
-*/
 
 // -------------------------
 // Passport Configuration
@@ -54,12 +44,6 @@ const authController = new AuthController(userService);
 const passport = configurePassport(userService);
 passport.use(createLocalStrategy(userService));
 */
-
-const classRepo = new PgClassRepository();
-const classes = await classRepo.getAllClasses();
-const cls = await classRepo.getClassById('3');
-console.log('classes: ', classes);
-console.log('class: ', cls)
 
 // -------------------------
 // Express Application Setup
@@ -98,11 +82,8 @@ app.use(httpLogger);
 // -------------------------
 // Route Definitions
 // -------------------------
-/*
-const userRouter = createUserRouter(userController);
 const studioRouter = createStudioRouter(studioController);
-const authRouter = createAuthRouter(authController);
-*/
+//const authRouter = createAuthRouter(authController);
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Hello, world!");
@@ -111,8 +92,8 @@ app.get('/', (req: Request, res: Response) => {
 /*
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
-app.use('/studios', studioRouter);
 */
+app.use('/studios', studioRouter);
 
 // -------------------------
 // Global Error Handling
