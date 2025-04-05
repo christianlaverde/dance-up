@@ -35,9 +35,9 @@ export class StudioController {
    * @param req - Express Request object.
    * @param res - Express Response object.
    */
-  getStudios = async (req: Request, res: Response): Promise<void> => {
+  getAllStudiosWithClasses = async (req: Request, res: Response): Promise<void> => {
     try {
-      const studios = await this.studioService.getAllStudios();
+      const studios = await this.studioService.getAllStudiosWithClasses();
       res.status(200).json(studios);
     } catch (err) {
       logger.error(err);
