@@ -3,7 +3,6 @@
  */
 
 import type { Studio } from "../domain/studio.js";
-import type { Class } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/IStudioRepository.js";
 import { IClassRepository } from "../repositories/IClassRepository.js";
 
@@ -17,10 +16,10 @@ export class StudioService {
   }
 
   /**
-   * Retrieve all studios from the database.
+   * Retrieve all studios from the StudioRepository with classes array initialized
    * @returns Promise that resolves to an array of Studio entities.
    */
-  async getAllStudios(): Promise<Studio[]> {
+  async getAllStudiosWithClasses(): Promise<Studio[]> {
     const studios = await this.studioRepository.getAllStudios();
     await Promise.all(studios.map(async (studio) => {
       const studioId = studio.getId();
@@ -30,12 +29,16 @@ export class StudioService {
     return studios;
   }
 
-/*
-  async getStudioById(id: string): Promise<Studio | null> {
-    const studio = await this.studioModel.getStudioById(id);
+
+  async getStudioWithClassesById(studioId: string): Promise<Studio | null> {
+    const studio = await this.studioRepository.getStudioById(studioId);
+    if (studio) {
+      const classes = await this.classRepository.getClassesByStudioId(studioId);
+      studio.setClasses(classes);
+    }
     return studio || null;
   }
-*/
+
   /**
   * Retrieve all studio members from a studio given a studio id.
   * @param studioId - the id of the studio
