@@ -1,6 +1,7 @@
 import pg from 'pg';
 import { Class } from 'domain/class.js';
 import { IClassRepository } from "repositories/IClassRepository.js";
+import { CreateClassDto } from 'dto/CreateClassDto.js';
 
 const { Pool } = pg;
 
@@ -61,16 +62,22 @@ export class PgClassRepository implements IClassRepository {
     return new Class(row.id, row.studio_id, row.class_name, row.class_description);
   }
 
-  async saveClass(cls: Class): Promise<void> {
+  async createClass(createClassDto: CreateClassDto): Promise<Class> {
     const queryText = `
-      INSERT INTO classes (id, studio_id, class_name, class_description)
-      VALUES ($1, $2, $3, $4)
+    INSERT INTO classes (studio_id, class_name, class_description)
+    VALUES ($1, $2, $3, $4)
+    RETURNING id, studio_id, class_name, class_description
     `;
     const query = {
       text: queryText,
-      values: [cls.getId(), cls.getStudioId(), cls.getClassName(), cls.getClassDescription()]
+      values: [
+        createClassDto.studioId,
+        createClassDto.className,
+        createClassDto.classDescription
+      ]
     };
-
-    await this.pool.query(query);
+    const result = await this.pool.query(query);
+    const row = result.rows[0];
+    return new Class(row.id, row.studio_id, row.class_name, row.class_description);
   }
 }
