@@ -1,4 +1,4 @@
-import { Class } from "../domain/class.js"
+import { Class } from "domain/class.js"
 
 export interface IClassRepository {
   getAllClasses(): Promise<Class[]>;

@@ -1,6 +1,6 @@
 import pg from 'pg';
-import { Studio } from '../domain/studio.js';
-import { IStudioRepository } from "./IStudioRepository.js";
+import { Studio } from 'domain/studio.js';
+import { IStudioRepository } from "repositories/IStudioRepository.js";
 
 const { Pool } = pg;
 

@@ -1,6 +1,6 @@
 import pg from 'pg';
-import { Class } from '../domain/class.js';
-import { IClassRepository } from "./IClassRepository.js";
+import { Class } from 'domain/class.js';
+import { IClassRepository } from "repositories/IClassRepository.js";
 
 const { Pool } = pg;
 
