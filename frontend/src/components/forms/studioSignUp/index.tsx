@@ -15,6 +15,8 @@ Typography,
 } from '@mui/material';
 
 import './styles.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const danceGenres = [
 'Ballet',
@@ -32,11 +34,13 @@ const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    address: '',
     city: '',
     state: '',
     studioName: '',
     zipCode: '',
     gender: '',
+    classes: [],
     danceGenres: [] as string[],
 });
 
@@ -49,9 +53,16 @@ const handleSelectChange = (e: React.ChangeEvent<{ value: unknown }>) => {
     setFormData({ ...formData, danceGenres: e.target.value as string[] });
 };
 
-const handleSubmit = (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
+    try {
+        const response = await axios.post('http://localhost:3000/danceStudios', formData);
+        console.log('Form submitted successfully:', response.data);
+        // const navigate = useNavigate();
+        // navigate('/'); // Redirect to the home page
+    } catch (error) {
+        console.error('Error submitting form:', error);
+    }
 };
 
 return (
