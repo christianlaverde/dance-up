@@ -1,9 +1,11 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Studio } from '../../src/domain/studio.js';
 import { Class } from '../../src/domain/class';
+import { CreateClassDto } from "../../src/dto/CreateClassDto.js";
 import { IStudioRepository } from '../../src/repositories/IStudioRepository.js';
 import { IClassRepository } from '../../src/repositories/IClassRepository.js';
 import { StudioService } from '../../src/services/studioService.js';
+import { create } from 'domain';
 
 describe('Studio Service', () => {
   let studioRepositoryMock: jest.Mocked<IStudioRepository>;
@@ -19,14 +21,14 @@ describe('Studio Service', () => {
       getAllClasses: jest.fn(),
       getClassesByStudioId: jest.fn(),
       getClassById: jest.fn(),
-      saveClass: jest.fn()
+      createClass: jest.fn()
     }
   });
 
   it('should return a collection of all studios with classes', async () => {
     // Arrange
     // Create sample studios
-    const studio1 = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
+    const studio1 = new Studio('1', '1', 'VG Dance Studio', '123 Main St.');
     const studio2 = new Studio('2', '2', 'YA Dance Studio', '456 Dreary Ln.');
     // Mock StudioRepository to return sample studios
     studioRepositoryMock.getAllStudios.mockResolvedValue([studio1, studio2]);
@@ -61,7 +63,7 @@ describe('Studio Service', () => {
   it('should return a studio with classes', async () => {
     // Arrange
     // Create sample studio
-    const expectedStudio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
+    const expectedStudio = new Studio('1', '1', 'VG Dance Studio', '123 Main St.');
     // Mock StudioRepository to return sample studio
     studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
       if (studioId === '1') return expectedStudio;
@@ -86,5 +88,42 @@ describe('Studio Service', () => {
 
     // Assert
     expect(studio).toEqual(expectedStudio)
+  });
+
+  it('should create and add a class to a studio', async () => {
+    // Arrange 
+    // Create sample studio
+    const studio = new Studio('1', '1', 'VG Dance Studio', '123 Main St.');
+    // Mock StudioRepository to return sample studio
+    studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
+      if (studioId === '1') return studio;
+      return null;
+    });
+    // Create sample classes and add to studio
+    const class1 = new Class('1', '1', 'Beginner Salsa', 'A good time');
+    studio.addClass(class1);
+    // Create new CreateClassDto
+    const classToAddDto: CreateClassDto = {
+      studioId: '1',
+      className: 'Advanced Salsa',
+      classDescription: 'A long time'
+    };
+    studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
+      if (studioId === '1') return studio;
+      return null;
+    });
+    classRepositoryMock.createClass.mockImplementation(async (createClassDto: CreateClassDto) => {
+      return new Class('1', createClassDto.studioId, createClassDto.className, createClassDto.classDescription);
+    });
+
+    // Create StudioService
+    const studioService = new StudioService(studioRepositoryMock, classRepositoryMock);
+
+    // Act
+    const createdClass = await studioService.createStudioClass(studio.getId(), classToAddDto);
+
+    // Assert
+    const classes = studio.getClasses();
+    expect(classes).toContain(createdClass);
   });
 })
