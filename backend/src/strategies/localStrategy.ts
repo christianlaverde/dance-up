@@ -1,7 +1,7 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from 'bcrypt';
-import logger from 'utils/logger.js';
-import { UserService } from "services/userService.js";
+import logger from '../utils/logger.js';
+import { UserService } from "../services/userService.js";
 
 /**
  * Factory function to create and configure a Passport LocalStrategy.

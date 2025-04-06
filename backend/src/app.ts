@@ -13,21 +13,21 @@ import session from 'express-session';
 // -------------------------
 // Internal Module Imports
 // -------------------------
-import { PgStudioRepository } from 'repositories/PgStudioRepository.js';
-import { PgClassRepository } from 'repositories/PgClassRepository.js';
-import { StudioService } from 'services/studioService.js';
-import { StudioController } from 'controllers/studioController.js';
-import { AuthController } from 'controllers/authController.js';
+import { PgStudioRepository } from './repositories/PgStudioRepository.js';
+import { PgClassRepository } from './repositories/PgClassRepository.js';
+import { StudioService } from './services/studioService.js';
+import { StudioController } from './controllers/studioController.js';
+import { AuthController } from './controllers/authController.js';
 
-import logger from 'utils/logger.js';
-import { httpLogger } from 'utils/logger.js';
+import logger from './utils/logger.js';
+import { httpLogger } from './utils/logger.js';
 
-import { configurePassport } from 'config/passportConfig.js';
-import { createLocalStrategy } from 'strategies/localStrategy.js';
+import { configurePassport } from './config/passportConfig.js';
+import { createLocalStrategy } from './strategies/localStrategy.js';
 
-import { createUserRouter } from 'routes/userRouter.js';
-import { createStudioRouter } from 'routes/studioRouter.js';
-import { createAuthRouter } from 'routes/authRouter.js';
+import { createUserRouter } from './routes/userRouter.js';
+import { createStudioRouter } from './routes/studioRouter.js';
+import { createAuthRouter } from './routes/authRouter.js';
 
 // -------------------------
 // Dependency Initialization

@@ -7,9 +7,9 @@
  * - Starts the HTTP server on the configured port.
  */
 
-import app from 'app.js';                // Import the Express application instance
+import app from './app.js';              // Import the Express application instance
 import dotenv from 'dotenv';             // Load environment variables from a .env file
-import logger from 'utils/logger.js';    // Custom logger for logging server events
+import logger from './utils/logger.js';  // Custom logger for logging server events
 
 // Load environment variables into process.env
 dotenv.config();

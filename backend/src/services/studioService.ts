@@ -2,11 +2,11 @@
  * StudioService
  */
 
-import type { Studio } from "domain/studio.js";
-import { Class } from "domain/class.js";
-import { IStudioRepository } from "repositories/IStudioRepository.js";
-import { IClassRepository } from "repositories/IClassRepository.js";
-import { CreateClassDto } from "dto/CreateClassDto.js";
+import type { Studio } from "../domain/studio.js";
+import { Class } from "../domain/class.js";
+import { IStudioRepository } from "../repositories/IStudioRepository.js";
+import { IClassRepository } from "../repositories/IClassRepository.js";
+import { CreateClassDto } from "../dto/CreateClassDto.js";
 
 export class StudioService {
   private studioRepository: IStudioRepository;

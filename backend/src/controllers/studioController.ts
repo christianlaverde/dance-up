@@ -13,8 +13,8 @@
  */
 
 import type { Request, Response } from 'express';
-import { StudioService } from 'services/studioService.js';
-import logger from "utils/logger.js";
+import { StudioService } from '../services/studioService.js';
+import logger from "../utils/logger.js";
 
 export class StudioController {
   // Instance of StudioService injected via the constructor.

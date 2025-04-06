@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { StudioController } from 'controllers/studioController.js';
+import { StudioController } from '../controllers/studioController.js';
 
 /**
  * Creates and configures an Express router for studio-related endpoints.

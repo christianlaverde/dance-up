@@ -1,4 +1,4 @@
-import { Studio } from "domain/studio.js"
+import { Studio } from "../domain/studio.js"
 
 export interface IStudioRepository {
   getAllStudios(): Promise<Studio[]>;

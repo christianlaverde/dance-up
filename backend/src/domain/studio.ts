@@ -1,4 +1,4 @@
-import { Class } from "domain/class.js";
+import { Class } from "./class.js";
 
 export class Studio {
   private id: string;
