@@ -1,0 +1,237 @@
+{
+  "danceStudios": [
+    {
+      "id": "1",
+      "studioName": "Elite Dance Academy",
+      "address": "123 Main St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90001",
+      "firstName": "Sophia",
+      "lastName": "Williams",
+      "danceGenre": "Ballet",
+      "email": "sophia.williams@elitedance.com",
+      "classes": [
+        {
+          "id": "4821",
+          "studioId": "1",
+          "title": "Ballet Basics",
+          "time": "10:00 AM",
+          "genre": "Ballet",
+          "description": "An introductory class to the fundamentals of ballet."
+        },
+        {
+          "id": "1934",
+          "studioId": "1",
+          "title": "Hip Hop Groove",
+          "time": "1:00 PM",
+          "genre": "Hip Hop",
+          "description": "Learn the basics of hip hop dance with fun grooves."
+        },
+        {
+          "id": "8472",
+          "studioId": "1",
+          "title": "Jazz Funk",
+          "time": "3:00 PM",
+          "genre": "Jazz",
+          "description": "A high-energy class combining jazz and funk styles."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "studioName": "Rhythm & Moves",
+      "address": "456 Elm St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001",
+      "firstName": "Liam",
+      "lastName": "Johnson",
+      "danceGenre": "Contemporary",
+      "email": "liam.johnson@rhythmandmoves.com",
+      "classes": [
+        {
+          "id": "5623",
+          "studioId": "2",
+          "title": "Contemporary Flow",
+          "time": "9:00 AM",
+          "genre": "Contemporary",
+          "description": "Explore fluid movements and expressive contemporary dance."
+        },
+        {
+          "id": "3748",
+          "studioId": "2",
+          "title": "Tap Dance",
+          "time": "11:00 AM",
+          "genre": "Tap",
+          "description": "Learn rhythmic tap dance techniques and choreography."
+        },
+        {
+          "id": "1294",
+          "studioId": "2",
+          "title": "Salsa Basics",
+          "time": "2:00 PM",
+          "genre": "Salsa",
+          "description": "Get started with the basic steps and rhythms of salsa."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "studioName": "Dance Fusion",
+      "address": "789 Oak St",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60601",
+      "firstName": "Emma",
+      "lastName": "Brown",
+      "danceGenre": "Zumba",
+      "email": "emma.brown@dancefusion.com",
+      "classes": [
+        {
+          "id": "9834",
+          "studioId": "3",
+          "title": "Zumba Fitness",
+          "time": "8:00 AM",
+          "genre": "Zumba",
+          "description": "A fun and energetic fitness class with Zumba dance moves."
+        },
+        {
+          "id": "4721",
+          "studioId": "3",
+          "title": "Ballroom Basics",
+          "time": "12:00 PM",
+          "genre": "Ballroom",
+          "description": "Learn the foundational steps of ballroom dancing."
+        },
+        {
+          "id": "6582",
+          "studioId": "3",
+          "title": "Lyrical Dance",
+          "time": "4:00 PM",
+          "genre": "Lyrical",
+          "description": "Express emotions through lyrical dance techniques."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "studioName": "Step Up Studio",
+      "address": "321 Pine St",
+      "city": "Houston",
+      "state": "TX",
+      "zip": "77001",
+      "firstName": "Olivia",
+      "lastName": "Davis",
+      "danceGenre": "Breakdance",
+      "email": "olivia.davis@stepupstudio.com",
+      "classes": [
+        {
+          "id": "2947",
+          "studioId": "4",
+          "title": "Breakdance",
+          "time": "10:30 AM",
+          "genre": "Breakdance",
+          "description": "Master the basics of breakdancing with dynamic moves."
+        },
+        {
+          "id": "8374",
+          "studioId": "4",
+          "title": "Swing Dance",
+          "time": "1:30 PM",
+          "genre": "Swing",
+          "description": "Learn the lively and fun steps of swing dancing."
+        },
+        {
+          "id": "5612",
+          "studioId": "4",
+          "title": "Modern Dance",
+          "time": "3:30 PM",
+          "genre": "Modern",
+          "description": "Explore creative and contemporary modern dance styles."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "studioName": "Groove Central",
+      "address": "654 Maple St",
+      "city": "Miami",
+      "state": "FL",
+      "zip": "33101",
+      "firstName": "Noah",
+      "lastName": "Martinez",
+      "danceGenre": "Latin",
+      "email": "noah.martinez@groovecentral.com",
+      "classes": [
+        {
+          "id": "4829",
+          "studioId": "5",
+          "title": "Latin Dance",
+          "time": "9:30 AM",
+          "genre": "Latin",
+          "description": "Experience the vibrant rhythms of Latin dance."
+        },
+        {
+          "id": "1938",
+          "studioId": "5",
+          "title": "Freestyle Hip Hop",
+          "time": "12:30 PM",
+          "genre": "Hip Hop",
+          "description": "Unleash your creativity with freestyle hip hop moves."
+        },
+        {
+          "id": "8473",
+          "studioId": "5",
+          "title": "Afrobeat Dance",
+          "time": "2:30 PM",
+          "genre": "Afrobeat",
+          "description": "Dance to the energetic beats of Afrobeat music."
+        }
+      ]
+    },
+    {
+      "id": "9c3d",
+      "firstName": "mike",
+      "lastName": "test",
+      "email": "test@test.com",
+      "address": "",
+      "city": "okc",
+      "state": "ok",
+      "studioName": "i got moves",
+      "zipCode": "77777",
+      "gender": "",
+      "danceGenres": [
+        "Contemporary",
+        "Tap"
+      ]
+    },
+    {
+      "id": "ea23",
+      "firstName": "mike",
+      "lastName": "james",
+      "email": "gogo@gmail.com",
+      "address": "",
+      "city": "houston",
+      "state": "tx",
+      "studioName": "go go dancers",
+      "zipCode": "91210",
+      "gender": "",
+      "classes": [],
+      "danceGenres": [
+        "Hip-Hop"
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "cc7d",
+      "firstName": "mike",
+      "middleName": "test",
+      "lastName": "james",
+      "paymentInfo": "broke boy",
+      "studioId": "1",
+      "classId": "4821"
+    }
+  ]
+}
