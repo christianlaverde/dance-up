@@ -2,8 +2,8 @@ import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Studio } from '../../src/domain/studio.js';
 import { Class } from '../../src/domain/class';
 import { CreateClassDto } from "../../src/dto/CreateClassDto.js";
-import { IStudioRepository } from '../../src/repositories/IStudioRepository.js';
-import { IClassRepository } from '../../src/repositories/IClassRepository.js';
+import { IStudioRepository } from '../../src/repositories/iStudioRepository.js';
+import { IClassRepository } from '../../src/repositories/iClassRepository.js';
 import { StudioService } from '../../src/services/studioService.js';
 import { create } from 'domain';
 
@@ -99,12 +99,8 @@ describe('Studio Service', () => {
       if (studioId === '1') return studio;
       return null;
     });
-    // Create sample classes and add to studio
-    const class1 = new Class('1', '1', 'Beginner Salsa', 'A good time');
-    studio.addClass(class1);
     // Create new CreateClassDto
     const classToAddDto: CreateClassDto = {
-      studioId: '1',
       className: 'Advanced Salsa',
       classDescription: 'A long time'
     };
@@ -113,7 +109,7 @@ describe('Studio Service', () => {
       return null;
     });
     classRepositoryMock.createClass.mockImplementation(async (createClassDto: CreateClassDto) => {
-      return new Class('1', createClassDto.studioId, createClassDto.className, createClassDto.classDescription);
+      return new Class('1', studio.getId(), createClassDto.className, createClassDto.classDescription);
     });
 
     // Create StudioService

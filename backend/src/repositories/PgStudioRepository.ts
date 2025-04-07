@@ -1,6 +1,7 @@
 import pg from 'pg';
 import { Studio } from '../domain/studio.js';
-import { IStudioRepository } from "./IStudioRepository.js";
+import { Class } from '../domain/class.js';
+import { IStudioRepository } from "./iStudioRepository.js";
 
 const { Pool } = pg;
 
@@ -17,11 +18,32 @@ export class PgStudioRepository implements IStudioRepository {
       FROM studios
     `;
     const query = { text: queryText };
-
     const result = await this.pool.query(query);
     return result.rows.map(
       (row) => new Studio(row.id, row.owner_id, row.studio_name, row.address)
     );
+  }
+
+  async getAllStudiosWithClasses(): Promise<Studio[]> {
+    const studios = await this.getAllStudios();
+    const queryText =`
+      SELECT id, studio_id, class_name, class_description
+      FROM classes
+      WHERE studio_id = $1;
+    `;
+    await Promise.all(studios.map(async (studio) => {
+      const studioId = studio.getId();
+      const query = {
+        text: queryText,
+        values: [studioId]
+      };
+      const result = await this.pool.query(query);
+      result.rows.forEach((row) => {
+        const cls = new Class(row.id, row.studio_id, row.class_name, row.class_description);
+        studio.addClass(cls);
+      });
+    }));
+    return studios;
   }
 
   async getStudioById(id: string): Promise<Studio | null> {
@@ -43,6 +65,12 @@ export class PgStudioRepository implements IStudioRepository {
     const row = result.rows[0];
     return new Studio(row.id, row.owner_id, row.studio_name, row.addClass);
   }
+
+  /*
+  async getStudioWithClassesById(studioId: string): Promise<Studio> {
+    
+  }
+  */
 
   async saveStudio(studio: Studio): Promise<void> {
     const queryText = `

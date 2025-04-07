@@ -2,11 +2,12 @@
  * StudioService
  */
 
-import type { Studio } from "../domain/studio.js";
+import { Studio } from "../domain/studio.js";
 import { Class } from "../domain/class.js";
-import { IStudioRepository } from "../repositories/IStudioRepository.js";
-import { IClassRepository } from "../repositories/IClassRepository.js";
+import { IStudioRepository } from "../repositories/iStudioRepository.js";
+import { IClassRepository } from "../repositories/iClassRepository.js";
 import { CreateClassDto } from "../dto/CreateClassDto.js";
+
 
 export class StudioService {
   private studioRepository: IStudioRepository;
@@ -22,13 +23,16 @@ export class StudioService {
    * @returns Promise that resolves to an array of Studio entities.
    */
   async getAllStudiosWithClasses(): Promise<Studio[]> {
+    /*
     const studios = await this.studioRepository.getAllStudios();
     await Promise.all(studios.map(async (studio) => {
       const studioId = studio.getId();
       const classes = await this.classRepository.getClassesByStudioId(studioId);
       studio.setClasses(classes);
     }));
-    return studios;
+    */
+   const studios = await this.studioRepository.getAllStudiosWithClasses();
+   return studios;
   }
 
   /**
