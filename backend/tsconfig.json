@@ -20,9 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
 
-    /* Paths */
-    "baseUrl": "./src",
-
     /* Type Checking */
     "strict": true,
 
