@@ -1,16 +1,18 @@
+import { DateTime } from 'luxon';
+
 export class Class {
   private id: string;
   private studioId: string;
-  private className: string;
-  private classDescription: string;
+  private name: string;
+  private description: string;
 
   constructor(
-    id: string, studioId: string, className: string, classDescription: string
+    classId: string, studioId: string, className: string, classDescription: string
   ) {
-    this.id = id;
+    this.id = classId;
     this.studioId = studioId;
-    this.className = className;
-    this.classDescription = classDescription;
+    this.name = className;
+    this.description = classDescription;
   }
 
   getId() {
@@ -22,10 +24,10 @@ export class Class {
   }
 
   getClassName() {
-    return this.className;
+    return this.name;
   }
 
   getClassDescription() {
-    return this.classDescription;
+    return this.description;
   }
 }
