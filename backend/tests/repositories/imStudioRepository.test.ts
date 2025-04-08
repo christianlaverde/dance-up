@@ -1,29 +1,10 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Studio } from '../../src/domain/studio.js';
-import { Class } from '../../src/domain/class';
-import { CreateClassDto } from "../../src/dto/CreateClassDto.js";
+
+
 import { imStudioRepository } from '../../src/repositories/imStudioRepository.js';
-import { StudioService } from '../../src/services/studioService.js';
-import { isMarkedAsUntransferable } from 'worker_threads';
 
 describe('In-Memory Studio Repository', () => {
-  let studioRepositoryMock: jest.Mocked<IStudioRepository>;
-  let classRepositoryMock: jest.Mocked<IClassRepository>;
-
-  beforeEach(() => {
-    studioRepositoryMock = {
-      getAllStudios: jest.fn(),
-      getStudioById: jest.fn(),
-      saveStudio: jest.fn()
-    }
-    classRepositoryMock = {
-      getAllClasses: jest.fn(),
-      getClassesByStudioId: jest.fn(),
-      getClassById: jest.fn(),
-      createClass: jest.fn()
-    }
-  });
-
   it('should create a Studio and persist it', async() => {
     // Arrange
     const repo = new imStudioRepository();
