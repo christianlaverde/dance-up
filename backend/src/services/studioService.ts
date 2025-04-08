@@ -23,16 +23,13 @@ export class StudioService {
    * @returns Promise that resolves to an array of Studio entities.
    */
   async getAllStudiosWithClasses(): Promise<Studio[]> {
-    /*
     const studios = await this.studioRepository.getAllStudios();
     await Promise.all(studios.map(async (studio) => {
       const studioId = studio.getId();
       const classes = await this.classRepository.getClassesByStudioId(studioId);
       studio.setClasses(classes);
     }));
-    */
-   const studios = await this.studioRepository.getAllStudiosWithClasses();
-   return studios;
+    return studios;
   }
 
   /**
