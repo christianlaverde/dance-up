@@ -1,6 +1,6 @@
 export interface ClassDto {
-  classId: string;
-  studioId: string;
-  className: string;
-  classDescription: string;
+  id: string;
+  name: string;
+  description: string;
+  day: number;
 }
