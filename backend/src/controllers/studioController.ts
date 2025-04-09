@@ -99,8 +99,8 @@ export class StudioController {
 
   createStudioClass = async (req: Request, res: Response): Promise<void> => {
     // TODO: validate DTO & studioId
-    const studioId = req.body.studioId;
-    const newClassDto: CreateClassDto = req.body.classDto;
+    const studioId = req.params.id;
+    const newClassDto: CreateClassDto = req.body;
     try {
       const studio = await this.studioService.getStudioById(studioId);
       if (!studio) {
