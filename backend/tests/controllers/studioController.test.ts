@@ -118,10 +118,8 @@ describe('Studio Controller', () => {
       studioServiceMock.createStudioClass.mockResolvedValue(expectedClass);
       // Mock req/res objs
       const req = {
-        body: {
-          studioId: studio.getId(),
-          classDto: classDto
-        }
+        params: { id: studio.getId() },
+        body: classDto
       } as any;
       const res = {
         status: jest.fn().mockReturnThis(),
