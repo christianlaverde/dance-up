@@ -13,10 +13,17 @@ import { StudioController } from '../controllers/studioController.js';
 export function createStudioRouter(studioController: StudioController): Router {
   const router = express.Router();
 
-  // Route: GET / 
+  // Route: GET /studios 
   // Purpose: Retrieve all studios.
   router.get('/', studioController.getAllStudiosWithClasses);
+  // Route: GET /studios/:id
+  // Purpose: Retrieve studio by id
   router.get('/:id', studioController.getStudioWithClassesById);
+
+  // Route: POST /studios
+  // Purpose: Create a new studio
+  router.post('/', studioController.createStudio);
+  
 
   // Route: GET /:id/members
   // Purpose: Retrieve all studio members of a studio given a studio id
