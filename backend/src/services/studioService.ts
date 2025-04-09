@@ -31,7 +31,7 @@ export class StudioService {
    */
   async getStudioById(studioId: string): Promise<Studio | null> {
    const studio = await this.studioRepository.getStudioById(studioId);
-   return studio || null;
+   return studio ?? null;
   }
 
   async createStudioClass(studioId: string, createClassDto: CreateClassDto): Promise<Class | null> {
