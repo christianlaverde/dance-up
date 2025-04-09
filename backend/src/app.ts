@@ -14,6 +14,7 @@ import session from 'express-session';
 // Internal Module Imports
 // -------------------------
 import { PgStudioRepository } from './repositories/pgStudioRepository.js';
+import { InMemoryStudioRepository } from './repositories/inMemoryStudioRepository.js';
 import { PgClassRepository } from './repositories/pgClassRepository.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
@@ -28,14 +29,31 @@ import { createLocalStrategy } from './strategies/localStrategy.js';
 import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
+import { InMemoryIdGenerator } from './utils/InMemoryIdGenerator.js';
 
 // -------------------------
 // Dependency Initialization
 // -------------------------
-const studioRepository = new PgStudioRepository();
-const classRepository = new PgClassRepository();
-const studioService = new StudioService(studioRepository, classRepository);
+//const studioRepository = new PgStudioRepository();
+//const classRepository = new PgClassRepository();
+//const studioService = new StudioService(studioRepository, classRepository);
+const studioRepository = new InMemoryStudioRepository();
+const idGen = new InMemoryIdGenerator();
+const studioService = new StudioService(studioRepository, idGen);
 const studioController = new StudioController(studioService);
+
+studioService.createStudio({
+  ownerId: '23',
+  name: 'VG Dance Studio',
+  address: '123 Main St.'
+});
+studioService.createStudio({
+  ownerId: '23',
+  name: 'YA Dance Studio',
+  address: '456 Dreary Ln.'
+});
+
+
 
 // -------------------------
 // Passport Configuration
