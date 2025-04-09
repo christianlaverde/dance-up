@@ -16,6 +16,7 @@ import type { Request, Response } from 'express';
 import { StudioService } from '../services/studioService.js';
 import logger from "../utils/logger.js";
 import { CreateStudioDto } from '../dto/CreateStudioDto.js';
+import { CreateClassDto } from '../dto/CreateClassDto.js';
 
 export class StudioController {
   // Instance of StudioService injected via the constructor.
@@ -78,16 +79,43 @@ export class StudioController {
   }
 
   createStudio = async (req: Request, res: Response): Promise<void> => {
+    // TODO: validate DTO
     const newStudioDto: CreateStudioDto = req.body;
     try {
       const newStudio = await this.studioService.createStudio(newStudioDto);
       if (!newStudio) {
         const resp = { status: 'failure', message: 'Studio could not be created' };
         res.status(500).json(resp);
+        return;
       }
       const resp = { status: 'success', studio: newStudio };
       res.status(201).json(resp);
+    } catch (err) {
+      logger.error(err);
+      const resp = { status: 'failure', message: 'Server Error' };
+      res.status(500).json(resp);
+    }
+  }
 
+  createStudioClass = async (req: Request, res: Response): Promise<void> => {
+    // TODO: validate DTO & studioId
+    const studioId = req.body.studioId;
+    const newClassDto: CreateClassDto = req.body.classDto;
+    try {
+      const studio = await this.studioService.getStudioById(studioId);
+      if (!studio) {
+        const resp = { status: 'failure', message: 'Studio not found' };
+        res.status(404).json(resp);
+        return;
+      }
+      const newClass = await this.studioService.createStudioClass(studio.getId(), newClassDto);
+      if (!newClass) {
+        const resp = { status: 'failure', message: 'Class could not be created' };
+        res.status(500).json(resp);
+        return;
+      }
+      const resp = { status: 'success', data: { studioId: studio.getId(), class: newClass } };
+      res.status(201).json(resp);
     } catch (err) {
       logger.error(err);
       const resp = { status: 'failure', message: 'Server Error' };
