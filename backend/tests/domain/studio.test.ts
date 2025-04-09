@@ -1,12 +1,12 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Studio } from '../../src/domain/studio.js';
-import { Class } from '../../src/domain/class.js';
+import { Class, DAY_OF_WEEK} from '../../src/domain/class.js';
 
 describe('Studio Entity', () => {
   it('should add a class', async () => {
     // Arrange 
-    const cls = new Class('1', '1', 'Salsa Class', 'A fun salsa class');
-    const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
+    const cls = new Class('class-1', 'Salsa Class', 'A fun salsa class', DAY_OF_WEEK.MONDAY);
+    const studio = new Studio('studio-1', '1', 'VB Dance Studio', '123 Main St.');
 
     // Act
     studio.addClass(cls);
@@ -18,8 +18,8 @@ describe('Studio Entity', () => {
 
   it('should return a collection of classes', async () => {
     // Arrange
-    const cls1 = new Class('1', '1', 'Salsa Class', 'A fun salsa class');
-    const cls2 = new Class('2', '1', 'Jazz Class', 'A fun jazz class');
+    const cls1 = new Class('class-1', 'Salsa Class', 'A fun salsa class');
+    const cls2 = new Class('class-2', 'Jazz Class', 'A fun jazz class', DAY_OF_WEEK.WEDNESDAY);
     const mockClasses: Class[] = [cls1, cls2];
     const studio = new Studio('1', '1', 'VB Dance Studio', '123 Main St.');
 
