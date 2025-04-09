@@ -1,9 +1,0 @@
-### GET /
-GET http://localhost:3000/
-
-### GET /studios
-GET http://localhost:3000/studios
-
-### GET /studios/:id
-GET http://localhost:3000/studios/studio-0
-
