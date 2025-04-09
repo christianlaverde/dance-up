@@ -23,6 +23,7 @@ export function createStudioRouter(studioController: StudioController): Router {
   // Route: POST /studios
   // Purpose: Create a new studio
   router.post('/', studioController.createStudio);
+  router.post('/:id/classes', studioController.createStudioClass);
   
 
   // Route: GET /:id/members
