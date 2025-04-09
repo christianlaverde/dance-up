@@ -3,8 +3,10 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import App from './App';
 import Layout from './layouts/dashboard';
-import DashboardPage from './pages';
 import SchedulePage from './pages/schedule/schedule';
+import HomePage from './pages';
+import StudentsPage from './pages/students/students';
+import StudentDetails from './pages/students/details/studentDetails';
 
 
 const router = createBrowserRouter([
@@ -17,22 +19,31 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            Component: DashboardPage,
+            Component: HomePage,
           },
           {
             path: '/schedule/',
             Component: SchedulePage,
-            
+          },
+          {
+            path: '/students',
+            Component: React.lazy(() => import('./pages/students/students')),
+            errorElement: <div>Failed to load students page</div>,
+          },
+          {
+            path: '/students/details',
+            Component: React.lazy(() => import('./pages/students/details/studentDetails')),
+            errorElement: <div>Failed to load student details page</div>,
           },
           {
             path: 'schedule/addclass',
             Component: React.lazy(() => import('./pages/schedule/addClass/addClass')),
             errorElement: <div>Failed to load add class page</div>,
-            loader: async () => {
-              // Simulate a network request
-              await new Promise((resolve) => setTimeout(resolve, 1000));
-              return null;
-            }
+          },
+          {
+            path: 'schedule/editClass',
+            Component: React.lazy(() => import('./pages/schedule/editClass/editClass')),
+            errorElement: <div>Failed to load add class page</div>,
           }
         ],
       },
