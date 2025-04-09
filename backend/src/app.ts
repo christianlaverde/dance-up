@@ -13,9 +13,7 @@ import session from 'express-session';
 // -------------------------
 // Internal Module Imports
 // -------------------------
-import { PgStudioRepository } from './repositories/pgStudioRepository.js';
 import { InMemoryStudioRepository } from './repositories/inMemoryStudioRepository.js';
-import { PgClassRepository } from './repositories/pgClassRepository.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
 import { AuthController } from './controllers/authController.js';

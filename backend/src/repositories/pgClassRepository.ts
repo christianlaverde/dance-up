@@ -21,7 +21,7 @@ export class PgClassRepository implements IClassRepository {
 
     const result = await this.pool.query(query);
     return result.rows.map(
-      (row) => new Class(row.id, row.studio_id, row.class_name, row.class_description)
+      (row) => new Class(row.id, row.studio_id, row.class_name, row.class_description, 0)
     );
   }
 
@@ -38,7 +38,7 @@ export class PgClassRepository implements IClassRepository {
 
     const result = await this.pool.query(query);
     return result.rows.map(
-      (row) => new Class(row.id, row.studio_id, row.class_name, row.class_description)
+      (row) => new Class(row.id, row.studio_id, row.class_name, row.class_description, 0)
     );
   }
 
@@ -59,7 +59,7 @@ export class PgClassRepository implements IClassRepository {
     }
 
     const row = result.rows[0];
-    return new Class(row.id, row.studio_id, row.class_name, row.class_description);
+    return new Class(row.id, row.studio_id, row.class_name, row.class_description, 0);
   }
 
   async createClass(createClassDto: CreateClassDto): Promise<Class> {
@@ -78,6 +78,6 @@ export class PgClassRepository implements IClassRepository {
     };
     const result = await this.pool.query(query);
     const row = result.rows[0];
-    return new Class(row.id, row.studio_id, row.class_name, row.class_description);
+    return new Class(row.id, row.studio_id, row.class_name, row.class_description, 0);
   }
 }

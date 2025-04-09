@@ -30,10 +30,12 @@
     "declarationMap": true,           // Useful if consuming d.ts files elsewhere
     "sourceMap": true,
   },
-  "include": ["./src/**/*"],                             /* Include all files in the src directory */
+  "include": ["src/**/*"],                             /* Include all files in the src directory */
   "exclude": [                                           /* Exclusions */
     "node_modules", 
     "dist", 
-    "./tests/**/*",
-  ]                    
+    "tests/**/*",
+    "src/repositories/pgStudioRepository.ts",
+    "src/repositories/pgClassRepository.ts"
+  ]
 }

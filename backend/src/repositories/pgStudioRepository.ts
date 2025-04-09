@@ -39,7 +39,7 @@ export class PgStudioRepository implements IStudioRepository {
       };
       const result = await this.pool.query(query);
       result.rows.forEach((row) => {
-        const cls = new Class(row.id, row.studio_id, row.class_name, row.class_description);
+        const cls = new Class(row.id, row.studio_id, row.class_name, row.class_description, 0);
         studio.addClass(cls);
       });
     }));
