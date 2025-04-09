@@ -14,11 +14,11 @@ export class InMemoryStudioRepository implements IStudioRepository {
   }
 
   async getStudioById(id: string): Promise<Studio | null> {
-    return this.studios.get(id) || null;
+    return this.studios.get(id) ?? null;
   }
 
   async saveStudio(studio: Studio): Promise<void> {
     if (!studio.getId()) throw new Error('Studio ID must be set');
-    this.studios.set(studio.getId()!, studio);
+    this.studios.set(studio.getId(), studio);
   }
 }
