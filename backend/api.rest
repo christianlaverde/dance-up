@@ -5,5 +5,5 @@ GET http://localhost:3000/
 GET http://localhost:3000/studios
 
 ### GET /studios/:id
-GET http://localhost:3000/studios/1
+GET http://localhost:3000/studios/studio-0
 
