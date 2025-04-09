@@ -7,7 +7,10 @@
     "build": "tsc --watch",
     "start": "node ./dist/server.js",
     "dev": "nodemon ./dist/server.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll",
+    "typecheck": "tsc --noEmit",
+    "typecheck:test": "tsc --project tests/tsconfig.test.json --noEmit",
+    "test:strict": "npm run typecheck:test && npm run test"
   },
   "keywords": [],
   "author": "",
