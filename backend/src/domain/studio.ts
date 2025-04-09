@@ -1,19 +1,16 @@
 import { Class } from "./class.js";
 
 export class Studio {
-  private id: string;
-  private ownerId: string;
-  private studioName: string;
-  private address: string;
   private classes: Class[];
 
-  constructor(id: string, ownerId: string, studioName: string, address: string) {
-    this.id = id;
-    this.ownerId = ownerId;
-    this.studioName = studioName;
-    this.address = address;
+  constructor(
+    private id: string | null,
+    private ownerId: string,
+    private name: string,
+    private address: string,
+  ) { 
     this.classes = [];
-  }
+  };
 
   addClass(cls: Class) {
     this.classes.push(cls);
@@ -28,6 +25,7 @@ export class Studio {
   }
 
   getId() {
+    if (!this.id) throw new Error('Studio ID not set.');
     return this.id;
   }
 
@@ -35,8 +33,8 @@ export class Studio {
     return this.ownerId;
   }
 
-  getStudioName() {
-    return this.studioName;
+  getName() {
+    return this.name;
   }
 
   getAddress() {
