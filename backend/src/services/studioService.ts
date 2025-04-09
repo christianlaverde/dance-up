@@ -36,7 +36,6 @@ export class StudioService {
 
   async createStudioClass(studioId: string, createClassDto: CreateClassDto): Promise<Class | null> {
     if (!studioId) throw new Error('Cannot add class to unsaved studio.');
-
     const studio = await this.studioRepository.getStudioById(studioId);
     if (studio) {
       const newClass = new Class(createClassDto.id, createClassDto.name, createClassDto.description, createClassDto.day);
