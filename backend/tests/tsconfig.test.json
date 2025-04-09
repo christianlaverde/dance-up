@@ -4,5 +4,5 @@
     "module": "NodeNext",
     "types": ["jest", "node"],
   },
-  "include": ["../src", "./**/*.ts"]  
+  "include": ["../src", "./**/*.ts"]
 }
