@@ -37,7 +37,7 @@ export class StudioController {
    */
   getAllStudiosWithClasses = async (req: Request, res: Response): Promise<void> => {
     try {
-      const studios = await this.studioService.getAllStudiosWithClasses();
+      const studios = await this.studioService.getAllStudios();
       const totalStudioCount = studios.length;
       const resp = {
         data: studios,
@@ -62,7 +62,7 @@ export class StudioController {
     const studioId = req.params.id;
     const resp: any = {};
     try {
-      const studio = await this.studioService.getStudioWithClassesById(studioId);
+      const studio = await this.studioService.getStudioById(studioId);
       resp.status = 'success';
       if (!studio) {
         resp.message = 'Studio not found';
