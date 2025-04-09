@@ -5,65 +5,54 @@
 import { Studio } from "../domain/studio.js";
 import { Class } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/iStudioRepository.js";
-import { IClassRepository } from "../repositories/iClassRepository.js";
 import { CreateClassDto } from "../dto/CreateClassDto.js";
+import { CreateStudioDto } from "../dto/CreateStudioDto.js";
+import { IdGenerator } from "../repositories/idGenerator.js";
 
 
 export class StudioService {
-  private studioRepository: IStudioRepository;
-  private classRepository: IClassRepository;
-
-  constructor(studioRepository: IStudioRepository, classRepository: IClassRepository) {
-    this.studioRepository = studioRepository;
-    this.classRepository = classRepository;
-  }
+  constructor(
+    private readonly studioRepository: IStudioRepository,
+    private readonly idGen?: IdGenerator
+  ) { }
 
   /**
    * Retrieve all studios from StudioRepository with classes array initialized
    * @returns Promise that resolves to an array of Studio entities.
    */
-  async getAllStudiosWithClasses(): Promise<Studio[]> {
-    const studios = await this.studioRepository.getAllStudios();
-    await Promise.all(studios.map(async (studio) => {
-      const studioId = studio.getId();
-      const classes = await this.classRepository.getClassesByStudioId(studioId);
-      studio.setClasses(classes);
-    }));
-    return studios;
+  async getAllStudios(): Promise<Studio[]> {
+   const studios = await this.studioRepository.getAllStudios();
+   return studios;
   }
 
   /**
    * Retrieve a studio from StudioRepository by id with classes array initialized
    * @returns Promise that resolves to a Studio entity with classes array initialized
    */
-  async getStudioWithClassesById(studioId: string): Promise<Studio | null> {
-    const studio = await this.studioRepository.getStudioById(studioId);
-    if (studio) {
-      const classes = await this.classRepository.getClassesByStudioId(studioId);
-      studio.setClasses(classes);
-    }
-    return studio || null;
+  async getStudioById(studioId: string): Promise<Studio | null> {
+   const studio = await this.studioRepository.getStudioById(studioId);
+   return studio || null;
   }
 
   async createStudioClass(studioId: string, createClassDto: CreateClassDto): Promise<Class | null> {
+    if (!studioId) throw new Error('Cannot add class to unsaved studio.');
+
     const studio = await this.studioRepository.getStudioById(studioId);
     if (studio) {
-      const createdClass = await this.classRepository.createClass(createClassDto);
-      studio.addClass(createdClass);
-      return createdClass;
+      const newClass = new Class(createClassDto.id, createClassDto.name, createClassDto.description, createClassDto.day);
+      studio.addClass(newClass);
+      await this.studioRepository.saveStudio(studio);
+      return newClass;
     }
     return null;
   }
 
-  /**
-  * Retrieve all studio members from a studio given a studio id.
-  * @param studioId - the id of the studio
-  * @returns Promise that resolves to an array of .
-  */
-/*
-  async getAllStudioMembers(studioId: string): Promise<User[]> {
-    const studios = await this.studioModel.getAllStudioMembers(studioId);
-    return studios;
+  async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
+    const id = this.idGen?.generate() ?? null;
+    const studio = new Studio(
+      id, createStudioDto.ownerId, createStudioDto.name, createStudioDto.address
+    );
+    await this.studioRepository.saveStudio(studio);
+    return studio;
   }
-*/
 }
