@@ -10,19 +10,13 @@ export enum DAY_OF_WEEK {
 }
 
 export class Class {
-  private id: string;
-  private name: string;
-  private description: string;
-  private day: DAY_OF_WEEK;
 
-  constructor(
-    classId: string, className: string, classDescription: string, day: DAY_OF_WEEK
-  ) {
-    this.id = classId;
-    this.name = className;
-    this.description = classDescription;
-    this.day = day;
-  }
+   constructor(
+    private id: string,
+    private name: string,
+    private description: string,
+    private day: DAY_OF_WEEK
+   ) { };
 
   getId() {
     return this.id;
