@@ -15,6 +15,16 @@ export enum RECURRENCE_FREQUENCY {
   MONTHLY = 'monthly'
 }
 
+// Type Guard for DAY_OF_WEEK
+export function isDayOfWeek(value: any): value is DAY_OF_WEEK {
+  return Object.values(DAY_OF_WEEK).includes(value);
+}
+
+// Type Guard for RECURRENCE_FREQUENCY
+export function isRecurrenceFrequency(value: any): value is RECURRENCE_FREQUENCY {
+  return Object.values(RECURRENCE_FREQUENCY).includes(value);
+}
+
 export class Class {
 
    constructor(
