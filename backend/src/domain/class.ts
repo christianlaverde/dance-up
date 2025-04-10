@@ -166,6 +166,16 @@ export class RecurrencePatternVO {
   }
 }
 
+// Type Guard for Value Objects
+export function isTimeSlotVO(value: any): value is TimeSlotVO {
+  return value instanceof TimeSlotVO;
+}
+
+export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO {
+  return value instanceof RecurrencePatternVO;
+}
+
+
 export class Class {
 
    constructor(
