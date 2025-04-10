@@ -28,6 +28,26 @@ export function isRecurrenceFrequency(value: any): value is RECURRENCE_FREQUENCY
 }
 
 /**
+ * Value Object: ClassName
+ * Ensures name is valid and properly formatted
+ */
+export class ClassName {
+  readonly value: string;
+
+  constructor(name: string) {
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+      throw new Error('Invalid ClassName: must be a non-empty string');
+    }
+    this.value = name.trim();
+    Object.freeze(this);
+  }
+
+  toString(): string {
+    return this.value;
+  }
+}
+
+/**
  * Value Object: TimeSlot
  * Self-validating immutable object for time slot representation
  */
@@ -174,12 +194,16 @@ export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO 
   return value instanceof RecurrencePatternVO;
 }
 
+export function isClassName(value: any): value is ClassName {
+  return value instanceof ClassName;
+}
+
 /**
  * Class Entity and related interfaces
  */
 export interface ClassOptions {
   id: string;
-  name: string;
+  name: string | ClassName;
   timeSlot: TimeSlotVO | {
     day: DAY_OF_WEEK,
     startHour: number,
@@ -196,23 +220,20 @@ export interface ClassOptions {
 
 export class Class {
   private readonly id: string;
-  private readonly name: string;
+  private name: ClassName;
   private description: string;
   private timeSlot: TimeSlotVO;
   private recurrence?: RecurrencePatternVO;
 
   constructor(options: ClassOptions) {
+    // Convert primitive types to Value Objects if needed
+    this.name = isClassName(options.name) ? options.name : new ClassName(options.name);
+
     // Validate primitives
     if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
       throw new Error('Invalid class id: must be a non-empty string');
     }
-
-    if (!options.name || typeof options.name !== 'string' || options.name.trim() === '') {
-      throw new Error('Invalid class id: must be a non-empty string');
-    }
-
     this.id = options.id;
-    this.name = options.name;
 
     // Validate description type if it's provided
     if (options.description !== undefined && typeof options.description !== 'string') {
@@ -238,6 +259,10 @@ export class Class {
   }
 
   getName(): string {
+    return this.name.toString();
+  }
+
+  getNameObject(): ClassName {
     return this.name;
   }
 
