@@ -1,5 +1,4 @@
-import { Duration } from "luxon";
-
+import { DateTime, Duration } from "luxon";
 
 export enum DAY_OF_WEEK {
   // ISO8601 Standard
@@ -270,6 +269,4 @@ export class Class {
   }): void {
     this.timeSlot = isTimeSlotVO(timeSlot) ? timeSlot : new TimeSlotVO(timeSlot);
   }
-
-
 }
