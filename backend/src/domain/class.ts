@@ -9,6 +9,12 @@ export enum DAY_OF_WEEK {
   SUNDAY = 7
 }
 
+export enum RECURRENCE_FREQUENCY {
+  WEEKLY = 'weekly',
+  BIWEEKLY = 'biweekly',
+  MONTHLY = 'monthly'
+}
+
 export class Class {
 
    constructor(
