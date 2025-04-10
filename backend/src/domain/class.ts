@@ -175,6 +175,25 @@ export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO 
   return value instanceof RecurrencePatternVO;
 }
 
+/**
+ * Class Entity and related interfaces
+ */
+export interface ClassProps {
+  id: string;
+  name: string;
+  description?: string;
+  timeSlot: TimeSlotVO | {
+    day: DAY_OF_WEEK,
+    startHour: number,
+    startMinute: number,
+    durationMinutes: number
+  };
+  recurrence?: RecurrencePatternVO | {
+    startDate: DateTime,
+    endDate?: DateTime,
+    frequency: RECURRENCE_FREQUENCY
+  };
+}
 
 export class Class {
 
