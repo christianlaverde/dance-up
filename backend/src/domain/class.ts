@@ -178,16 +178,16 @@ export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO 
 /**
  * Class Entity and related interfaces
  */
-export interface ClassProps {
+export interface ClassOptions {
   id: string;
   name: string;
-  description?: string;
   timeSlot: TimeSlotVO | {
     day: DAY_OF_WEEK,
     startHour: number,
     startMinute: number,
     durationMinutes: number
   };
+  description?: string;
   recurrence?: RecurrencePatternVO | {
     startDate: DateTime,
     endDate?: DateTime,
@@ -196,29 +196,80 @@ export interface ClassProps {
 }
 
 export class Class {
+  private readonly id: string;
+  private readonly name: string;
+  private description: string;
+  private timeSlot: TimeSlotVO;
+  private recurrence?: RecurrencePatternVO;
 
-   constructor(
-    private id: string,
-    private name: string,
-    private description: string,
-    private day: DAY_OF_WEEK
-   ) {
+  constructor(options: ClassOptions) {
+    // Validate primitives
+    if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
+      throw new Error('Invalid class id: must be a non-empty string');
+    }
 
-   };
+    if (!options.name || typeof options.name !== 'string' || options.name.trim() === '') {
+      throw new Error('Invalid class id: must be a non-empty string');
+    }
 
-  getId() {
+    this.id = options.id;
+    this.name = options.name;
+
+    // Validate description type if it's provided
+    if (options.description !== undefined && typeof options.description !== 'string') {
+      throw new Error('Invalid class description: must be a string');
+    }
+    // Set description (optional) with default empty string
+    this.description = options.description !== undefined ? options.description : '';
+
+    // Convert TimeSlot to TimeSlotVO if needed
+    this.timeSlot = isTimeSlotVO(options.timeSlot) ? options.timeSlot : new TimeSlotVO(options.timeSlot);
+
+    // Convert RecurrencePattern to RecurrencePatternVO if needed
+    if (options.recurrence) {
+      this.recurrence = isRecurrencePatternVO(options.recurrence) ?
+        options.recurrence : new RecurrencePatternVO(options.recurrence);
+    }
+
+  }
+
+  // Getters
+  getId(): string {
     return this.id;
   }
 
-  getName() {
+  getName(): string {
     return this.name;
   }
 
-  getDescription() {
+  getDescription(): string {
     return this.description;
   }
 
-  getDay() {
-    return this.day;
+  getTimeSlot(): TimeSlotVO {
+    return this.timeSlot;
   }
+
+  getRecurrencePattern(): RecurrencePatternVO | undefined {
+    return this.recurrence;
+  }
+
+  // Set/Update
+  updateDescription(description: string): void {
+    if (typeof description !== 'string') {
+      throw new Error('Invalid description: must be a string');
+    }
+    this.description = description;
+  }
+
+  updateTimeSlot(timeSlot: TimeSlotVO | {
+    day: DAY_OF_WEEK,
+    startHour: number,
+    startMinute: number,
+    durationMinutes: number
+  }): void {
+    this.timeSlot = isTimeSlotVO(timeSlot) ? timeSlot : new TimeSlotVO(timeSlot);
+  }
+
+
 }
