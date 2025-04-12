@@ -17,6 +17,7 @@ import { StudioService } from '../services/studioService.js';
 import logger from "../utils/logger.js";
 import { CreateStudioDto } from '../dto/CreateStudioDto.js';
 import { CreateClassDto } from '../dto/CreateClassDto.js';
+import { ClassOptions } from '../domain/class.js';
 
 export class StudioController {
   // Instance of StudioService injected via the constructor.
@@ -98,9 +99,9 @@ export class StudioController {
   }
 
   createStudioClass = async (req: Request, res: Response): Promise<void> => {
-    // TODO: validate DTO & studioId
+    // TODO: validate studioId
     const studioId = req.params.id;
-    const newClassDto: CreateClassDto = req.body;
+    const classOptions: ClassOptions = req.body;
     try {
       const studio = await this.studioService.getStudioById(studioId);
       if (!studio) {
@@ -108,7 +109,7 @@ export class StudioController {
         res.status(404).json(resp);
         return;
       }
-      const newClass = await this.studioService.createStudioClass(studio.getId(), newClassDto);
+      const newClass = await this.studioService.createStudioClass(studio.getId(), classOptions);
       if (!newClass) {
         const resp = { status: 'failure', message: 'Class could not be created' };
         res.status(500).json(resp);
