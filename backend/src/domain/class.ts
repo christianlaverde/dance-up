@@ -36,7 +36,7 @@ export class ClassName {
 
   constructor(name: string) {
     if (!name || typeof name !== 'string' || name.trim() === '') {
-      throw new Error('Invalid ClassName: must be a non-empty string');
+      throw new Error('Invalid Class name: must be a non-empty string');
     }
     this.value = name.trim();
     Object.freeze(this);
@@ -231,13 +231,13 @@ export class Class {
 
     // Validate primitives
     if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
-      throw new Error('Invalid class id: must be a non-empty string');
+      throw new Error('Invalid Class id: must be a non-empty string');
     }
     this.id = options.id;
 
     // Validate description type if it's provided
     if (options.description !== undefined && typeof options.description !== 'string') {
-      throw new Error('Invalid class description: must be a string');
+      throw new Error('Invalid Class description: must be a string');
     }
     // Set description (optional) with default empty string
     this.description = options.description !== undefined ? options.description : '';
@@ -250,7 +250,6 @@ export class Class {
       this.recurrence = isRecurrencePatternVO(options.recurrence) ?
         options.recurrence : new RecurrencePatternVO(options.recurrence);
     }
-
   }
 
   // Getters
@@ -281,7 +280,7 @@ export class Class {
   // Set/Update
   updateDescription(description: string): void {
     if (typeof description !== 'string') {
-      throw new Error('Invalid description: must be a string');
+      throw new Error('Invalid Class description: must be a string');
     }
     this.description = description;
   }

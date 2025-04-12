@@ -79,7 +79,7 @@ describe('Class Entity', () => {
       };
 
       // Act / Assert
-      expect(() => new Class(classOpts)).toThrow('Invalid class id: must be a non-empty string');
+      expect(() => new Class(classOpts)).toThrow('Invalid Class id: must be a non-empty string');
     });
 
     it('should throw an error on class creation (invalid name)', () => {
@@ -96,7 +96,7 @@ describe('Class Entity', () => {
       };
 
       // Act / Assert
-      expect(() => new Class(classOpts)).toThrow('Invalid ClassName: must be a non-empty string');
+      expect(() => new Class(classOpts)).toThrow('Invalid Class name: must be a non-empty string');
     });
 
     it('should throw an error on class creation (invalid description)', () => {
@@ -114,7 +114,7 @@ describe('Class Entity', () => {
       };
 
       // Act / Assert
-      expect(() => new Class(classOpts)).toThrow('Invalid class description: must be a string');
+      expect(() => new Class(classOpts)).toThrow('Invalid Class description: must be a string');
     });
 
     it('should throw an error on class creation (invalid timeSlot)', () => {
