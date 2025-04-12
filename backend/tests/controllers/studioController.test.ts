@@ -24,8 +24,18 @@ describe('Studio Controller', () => {
 
     it('should return all studios with a 200', async () => {
       // Arrange
-      const studio1 = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
-      const studio2 = new Studio('studio-2', 'owner-2', 'YA Dance Studio', '456 Dreary Ln.');
+      const studio1 = new Studio({
+        id: 'studio-1', 
+        ownerId: 'owner-1', 
+        name: 'VG Dance Studio', 
+        address: '123 Main St.'
+      });
+      const studio2 = new Studio({
+        id: 'studio-2', 
+        ownerId: 'owner-2', 
+        name: 'YA Dance Studio', 
+        address: '456 Dreary Ln.'
+      });
       // Mock StudioService.getAllStudios
       studioServiceMock.getAllStudios.mockResolvedValue([studio1, studio2]);
       // Mock req/res objs
@@ -51,7 +61,12 @@ describe('Studio Controller', () => {
   
     it('should return a studio by id with a 200', async () => {
       // Arrange
-      const studio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
+      const studio = new Studio({
+        id: 'studio-1', 
+        ownerId: 'owner-1', 
+        name: 'VG Dance Studio', 
+        address: '123 Main St.'
+      });
       // Mock StudioService.getStudioById
       studioServiceMock.getStudioById.mockResolvedValue(studio);
       // Mock req/res objs
@@ -90,7 +105,12 @@ describe('Studio Controller', () => {
         json: jest.fn()
       } as any;
       // Create expectedStudio and mock studioService.createStudio return value
-      const expectedStudio = new Studio('studio-1', studioDto.ownerId, studioDto.name, studioDto.address);
+      const expectedStudio = new Studio({
+        id: 'studio-1', 
+        ownerId: studioDto.ownerId, 
+        name: studioDto.name, 
+        address: studioDto.address
+      });
       studioServiceMock.createStudio.mockResolvedValue(expectedStudio);
       // Create expectedJson
       const expectedJson = {
@@ -109,7 +129,12 @@ describe('Studio Controller', () => {
     it('should return newly created class data with a 201', async () => {
       // Arrange
       // Set up studio and StudioService.getStudioById
-      const studio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
+      const studio = new Studio({
+        id: 'studio-1', 
+        ownerId: 'owner-1', 
+        name: 'VG Dance Studio', 
+        address: '123 Main St.'
+      });
       studioServiceMock.getStudioById.mockResolvedValue(studio);
       // Create new CreateClassDto and expected Class obj
       const classOpts: ClassOptions = { 

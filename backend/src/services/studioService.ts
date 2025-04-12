@@ -47,9 +47,8 @@ export class StudioService {
 
   async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
     const id = this.idGen?.generate() ?? null;
-    const studio = new Studio(
-      id, createStudioDto.ownerId, createStudioDto.name, createStudioDto.address
-    );
+    const studioOpts = {id: id, ...createStudioDto}
+    const studio = new Studio(studioOpts);
     await this.studioRepository.saveStudio(studio);
     return studio;
   }

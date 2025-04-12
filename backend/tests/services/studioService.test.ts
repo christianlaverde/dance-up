@@ -22,8 +22,18 @@ describe('Studio Service', () => {
   it('should return a collection of all studios', async () => {
     // Arrange
     // Create sample studios
-    const studio1 = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
-    const studio2 = new Studio('studio-2', 'owner-2', 'YA Dance Studio', '456 Dreary Ln.');
+    const studio1 = new Studio({
+      id: 'studio-1', 
+      ownerId: 'owner-1', 
+      name: 'VG Dance Studio', 
+      address: '123 Main St.'
+    });
+    const studio2 = new Studio({
+      id: 'studio-2', 
+      ownerId: 'owner-2', 
+      name: 'YA Dance Studio', 
+      address: '456 Dreary Ln.'
+    });
     // Create sample classes
     const class1 = new Class({
       id: 'class-1', 
@@ -90,7 +100,12 @@ describe('Studio Service', () => {
   it('should return a studio by id', async () => {
     // Arrange
     // Create sample studio
-    const expectedStudio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
+    const expectedStudio = new Studio({
+      id: 'studio-1', 
+      ownerId: 'owner-1', 
+      name: 'VG Dance Studio', 
+      address: '123 Main St.'
+    });
     // Create sample classes
     const class1 = new Class({
       id: 'class-1', 
@@ -135,7 +150,12 @@ describe('Studio Service', () => {
   it('should create and add a class to a studio', async () => {
     // Arrange 
     // Create sample studio
-    const studio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
+    const studio = new Studio({
+      id: 'studio-1', 
+      ownerId: 'owner-1', 
+      name: 'VG Dance Studio', 
+      address: '123 Main St.'
+    });
     // Mock StudioRepository to return sample studio
     studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
       if (studioId === 'studio-1') return studio;
@@ -172,7 +192,12 @@ describe('Studio Service', () => {
       name: 'VG Dance Studio',
       address: '123 Main St.'
     };
-    const expectedStudio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
+    const expectedStudio = new Studio({
+      id: 'studio-1',
+      ownerId: 'owner-1', 
+      name: 'VG Dance Studio', 
+      address: '123 Main St.'
+    });
     // Create mock idGen
     const idGen: jest.Mocked<IdGenerator> = {
       generate: jest.fn()
