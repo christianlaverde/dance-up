@@ -28,30 +28,17 @@ import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
 import { InMemoryIdGenerator } from './utils/InMemoryIdGenerator.js';
+import { setupInMemoryDb } from './utils/setupInMemoryDb.js';
 
 // -------------------------
 // Dependency Initialization
 // -------------------------
-//const studioRepository = new PgStudioRepository();
-//const classRepository = new PgClassRepository();
-//const studioService = new StudioService(studioRepository, classRepository);
 const studioRepository = new InMemoryStudioRepository();
 const idGen = new InMemoryIdGenerator();
 const studioService = new StudioService(studioRepository, idGen);
 const studioController = new StudioController(studioService);
 
-studioService.createStudio({
-  ownerId: '23',
-  name: 'VG Dance Studio',
-  address: '123 Main St.'
-});
-studioService.createStudio({
-  ownerId: '23',
-  name: 'YA Dance Studio',
-  address: '456 Dreary Ln.'
-});
-
-
+setupInMemoryDb(studioService);
 
 // -------------------------
 // Passport Configuration
