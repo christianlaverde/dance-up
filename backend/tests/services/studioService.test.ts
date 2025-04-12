@@ -1,6 +1,6 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Studio } from '../../src/domain/studio.js';
-import { Class } from '../../src/domain/class';
+import { Class, ClassOptions } from '../../src/domain/class';
 import { DAY_OF_WEEK } from '../../src/domain/class';
 import { CreateClassDto } from "../../src/dto/CreateClassDto.js";
 import { IStudioRepository } from '../../src/repositories/iStudioRepository.js';
@@ -25,10 +25,50 @@ describe('Studio Service', () => {
     const studio1 = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
     const studio2 = new Studio('studio-2', 'owner-2', 'YA Dance Studio', '456 Dreary Ln.');
     // Create sample classes
-    const class1 = new Class('class-1', 'Beginner Salsa', 'A good time', DAY_OF_WEEK.MONDAY);
-    const class2 = new Class('class-2', 'Advanced Salsa', 'A long time', DAY_OF_WEEK.WEDNESDAY);
-    const class3 = new Class('class-3', 'Jazz Class', 'A fun time', DAY_OF_WEEK.TUESDAY);
-    const class4 = new Class('class-4', 'Ballet Class', 'A swell time', DAY_OF_WEEK.THURSDAY);
+    const class1 = new Class({
+      id: 'class-1', 
+      name: 'Beginner Salsa', 
+      description: 'A good time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.MONDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
+    const class2 = new Class({
+      id: 'class-2', 
+      name: 'Advanced Salsa', 
+      description: 'A long time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
+    const class3 = new Class({
+      id: 'class-3', 
+      name: 'Jazz Class', 
+      description: 'A fun time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.TUESDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
+    const class4 = new Class({
+      id: 'class-4', 
+      name: 'Ballet Class', 
+      description: 'A swell time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.THURSDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
     // Add classes
     studio1.addClass(class1);
     studio1.addClass(class2);
@@ -52,8 +92,28 @@ describe('Studio Service', () => {
     // Create sample studio
     const expectedStudio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
     // Create sample classes
-    const class1 = new Class('class-1', 'Beginner Salsa', 'A good time', DAY_OF_WEEK.MONDAY);
-    const class2 = new Class('class-2', 'Advanced Salsa', 'A long time', DAY_OF_WEEK.WEDNESDAY);
+    const class1 = new Class({
+      id: 'class-1', 
+      name: 'Beginner Salsa', 
+      description: 'A good time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.MONDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
+    const class2 = new Class({
+      id: 'class-2', 
+      name: 'Advanced Salsa', 
+      description: 'A long time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60
+      }
+    });
     // Set up expected studio
     expectedStudio.addClass(class1);
     expectedStudio.addClass(class2);
@@ -82,12 +142,22 @@ describe('Studio Service', () => {
       return null;
     });
     // Create new CreateClassDto
-    const classToAddDto: CreateClassDto = { id: 'class-1', name: 'Advanced Salsa', description: 'A long time', day: DAY_OF_WEEK.WEDNESDAY };
+    const classOptions: ClassOptions = { 
+      id: 'class-1', 
+      name: 'Advanced Salsa', 
+      description: 'A long time', 
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startHour: 10,
+        startMinute: 45,
+        durationMinutes: 45
+      }
+    }
     // Create StudioService
     const studioService = new StudioService(studioRepositoryMock);
 
     // Act
-    const createdClass = await studioService.createStudioClass(studio.getId(), classToAddDto);
+    const createdClass = await studioService.createStudioClass(studio.getId(), classOptions);
 
     // Assert
     const classes = studio.getClasses();
