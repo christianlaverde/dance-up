@@ -2,7 +2,7 @@ import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { StudioController } from '../../src/controllers/studioController.js';
 import { StudioService } from '../../src/services/studioService.js';
 import { Studio } from '../../src/domain/studio';
-import { Class } from '../../src/domain/class.js';
+import { Class, ClassOptions } from '../../src/domain/class.js';
 import { CreateStudioDto } from '../../src/dto/CreateStudioDto.js';
 import { CreateClassDto } from '../../src/dto/CreateClassDto.js';
 import { DAY_OF_WEEK } from '../../src/domain/class.js';
@@ -112,14 +112,24 @@ describe('Studio Controller', () => {
       const studio = new Studio('studio-1', 'owner-1', 'VG Dance Studio', '123 Main St.');
       studioServiceMock.getStudioById.mockResolvedValue(studio);
       // Create new CreateClassDto and expected Class obj
-      const classDto: CreateClassDto = { id: 'class-1', name: 'Beginner Salsa', description: 'A good time', day: DAY_OF_WEEK.WEDNESDAY };
-      const expectedClass = new Class(classDto.id, classDto.name, classDto.description, classDto.day);
+      const classOpts: ClassOptions = { 
+        id: 'class-1', 
+        name: 'Beginner Salsa', 
+        description: 'A good time', 
+        timeSlot: {
+          day: DAY_OF_WEEK.WEDNESDAY,
+          startHour: 18,
+          startMinute: 15,
+          durationMinutes: 30
+        }
+      };
+      const expectedClass = new Class(classOpts);
       // Mock StudioService.createStudioClass
       studioServiceMock.createStudioClass.mockResolvedValue(expectedClass);
       // Mock req/res objs
       const req = {
         params: { id: studio.getId() },
-        body: classDto
+        body: classOpts
       } as any;
       const res = {
         status: jest.fn().mockReturnThis(),
