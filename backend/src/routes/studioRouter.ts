@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { StudioController } from '../controllers/studioController.js';
 
 /**
@@ -11,7 +11,7 @@ import { StudioController } from '../controllers/studioController.js';
  * @returns {Router} - A configured Express router with studio routes.
  */
 export function createStudioRouter(studioController: StudioController): Router {
-  const router = express.Router();
+  const router = Router();
 
   // Route: GET /studios 
   // Purpose: Retrieve all studios.
@@ -23,7 +23,10 @@ export function createStudioRouter(studioController: StudioController): Router {
   // Route: POST /studios
   // Purpose: Create a new studio
   router.post('/', studioController.createStudio);
+  // Route: POST /studios/:id/classes
+  // Purpose: Create a new class and assign it to studio given by id
   router.post('/:id/classes', studioController.createStudioClass);
+  
   
 
   // Route: GET /:id/members
