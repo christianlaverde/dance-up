@@ -8,20 +8,21 @@ import { CreateClassDto } from '../../src/dto/CreateClassDto.js';
 import { DAY_OF_WEEK } from '../../src/domain/class.js';
 
 describe('Studio Controller', () => {
-    let studioController: StudioController;
-    let studioServiceMock: jest.Mocked<StudioService>;
-  
-    beforeEach(() => {
-      studioServiceMock = {
-        getAllStudios: jest.fn(),
-        getStudioById: jest.fn(),
-        createStudio: jest.fn(),
-        createStudioClass: jest.fn()
-      } as unknown as jest.Mocked<StudioService>;
+  let studioController: StudioController;
+  let studioServiceMock: jest.Mocked<StudioService>;
 
-      studioController = new StudioController(studioServiceMock);
-    });
+  beforeEach(() => {
+    studioServiceMock = {
+      getAllStudios: jest.fn(),
+      getStudioById: jest.fn(),
+      createStudio: jest.fn(),
+      createStudioClass: jest.fn()
+    } as unknown as jest.Mocked<StudioService>;
 
+    studioController = new StudioController(studioServiceMock);
+  });
+
+  describe('Happy Paths', () => {
     it('should return all studios with a 200', async () => {
       // Arrange
       const studio1 = new Studio({
@@ -50,10 +51,10 @@ describe('Studio Controller', () => {
         totalCount: 2,
         status: 'success'
       };
-
+  
       // Act
       await studioController.getAllStudiosWithClasses(req, res);
-
+  
       // Assert
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(expectedJson);
@@ -83,15 +84,15 @@ describe('Studio Controller', () => {
         studio: studio,
         status: 'success'
       };
-
+  
       // Act
       await studioController.getStudioWithClassesById(req, res);
-
+  
       // Assert
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(expectedJson);
     });
-
+  
     it('should return newly created studio data with a 201', async () => {
       // Arrange
       // Create new CreateStudioDto
@@ -117,15 +118,15 @@ describe('Studio Controller', () => {
         status: 'success',
         studio: expectedStudio
       };
-
+  
       // Act
       await studioController.createStudio(req, res);
-
+  
       // Assert
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith(expectedJson);
     });
-
+  
     it('should return newly created class data with a 201', async () => {
       // Arrange
       // Set up studio and StudioService.getStudioById
@@ -168,12 +169,13 @@ describe('Studio Controller', () => {
           class: expectedClass,
         }
       };
-
+  
       // Act
       await studioController.createStudioClass(req, res);
-
+  
       // Assert
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith(expectedJson);
     });
+  });
 });
