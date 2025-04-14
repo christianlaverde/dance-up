@@ -1,7 +1,6 @@
 import { describe, beforeEach, jest, it, expect } from '@jest/globals';
 import { Class, ClassOptions, DAY_OF_WEEK, RECURRENCE_FREQUENCY} from '../../src/domain/class.js';
 import { DateTime } from 'luxon';
-import { startupSnapshot } from 'v8';
 
 describe('Class Entity', () => {
 
