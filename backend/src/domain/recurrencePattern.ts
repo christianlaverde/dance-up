@@ -7,6 +7,12 @@ export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO 
   return value instanceof RecurrencePatternVO;
 }
 
+export interface RecurrencePatternOptions {
+  startDate: string | DateTime;
+  endDate?: string | DateTime;
+  frequency: string | RECURRENCE_FREQUENCY;
+}
+
 /**
  * Value Object: RecurrencePattern
  * Self-validating immutable object for recurrence patterns
@@ -16,19 +22,22 @@ export class RecurrencePatternVO {
   readonly endDate?: DateTime;
   readonly frequency: RECURRENCE_FREQUENCY;
 
-  constructor(props: {
-    startDate: DateTime,
-    endDate?: DateTime,
-    frequency: RECURRENCE_FREQUENCY
-  }) {
+  constructor(props: RecurrencePatternOptions) {
     // Validation
+    if (typeof props.startDate === 'string') {
+      props.startDate = DateTime.fromISO(props.startDate);
+    }
     if (!(props.startDate instanceof DateTime) || !props.startDate.isValid) {
-      throw new Error('Invalid RecurrencePattern: startDate must be a valid DateTime');
+      throw new Error('Invalid RecurrencePattern: startDate must be a valid DateTime or ISO string');
     }
 
-    if (props.endDate !== undefined && 
-        (!(props.endDate instanceof DateTime) || !props.endDate.isValid)) {
-      throw new Error('Invalid RecurrencePattern: endDate must be a valid DateTime if provided');
+    if (props.endDate !== undefined) {
+      if (typeof props.endDate === 'string') {
+        props.endDate = DateTime.fromISO(props.endDate);
+      }
+      if (!(props.endDate instanceof DateTime) || !props.endDate.isValid) {
+        throw new Error('Invalid RecurrencePattern: endDate must be a valid DateTime or ISO string if provided');
+      }
     }
 
     if (props.endDate && props.startDate > props.endDate) {

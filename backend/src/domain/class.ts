@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { TimeSlotVO, isTimeSlotVO } from "./timeSlot.js";
-import { RecurrencePatternVO, isRecurrencePatternVO } from "./recurrencePattern.js";
+import { RecurrencePatternOptions, RecurrencePatternVO, isRecurrencePatternVO } from "./recurrencePattern.js";
 
 export enum DAY_OF_WEEK {
   // ISO8601 Standard
@@ -67,11 +67,7 @@ export interface ClassOptions {
     durationMinutes: number
   };
   description?: string;
-  recurrence?: RecurrencePatternVO | {
-    startDate: DateTime,
-    endDate?: DateTime,
-    frequency: RECURRENCE_FREQUENCY
-  };
+  recurrence?: RecurrencePatternOptions;
 }
 
 export class Class {
