@@ -13,9 +13,9 @@ describe('Studio Service', () => {
 
   beforeEach(() => {
     studioRepositoryMock = {
-      getAllStudios: jest.fn(),
-      getStudioById: jest.fn(),
-      saveStudio: jest.fn()
+      findAll: jest.fn(),
+      findById: jest.fn(),
+      save: jest.fn()
     }
   });
 
@@ -86,7 +86,7 @@ describe('Studio Service', () => {
     studio2.addClass(class4);
     // Mock StudioRepository to return sample studios
     const expectedStudios = [studio1, studio2];
-    studioRepositoryMock.getAllStudios.mockResolvedValue(expectedStudios);
+    studioRepositoryMock.findAll.mockResolvedValue(expectedStudios);
     // Create StudioService
     const studioService = new StudioService(studioRepositoryMock);
 
@@ -133,7 +133,7 @@ describe('Studio Service', () => {
     expectedStudio.addClass(class1);
     expectedStudio.addClass(class2);
     // Mock StudioRepository to return sample studio
-    studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
+    studioRepositoryMock.findById.mockImplementation(async (studioId: string) => {
       if (studioId === 'studio-1') return expectedStudio;
       return null;
     });
@@ -157,7 +157,7 @@ describe('Studio Service', () => {
       address: '123 Main St.'
     });
     // Mock StudioRepository to return sample studio
-    studioRepositoryMock.getStudioById.mockImplementation(async (studioId: string) => {
+    studioRepositoryMock.findById.mockImplementation(async (studioId: string) => {
       if (studioId === 'studio-1') return studio;
       return null;
     });

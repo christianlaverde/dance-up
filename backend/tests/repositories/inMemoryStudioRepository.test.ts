@@ -16,8 +16,8 @@ describe('In-Memory Studio Repository', () => {
     });
 
     // Act
-    await repo.saveStudio(newStudio);
-    const savedStudio = await repo.getStudioById('studio-1');
+    await repo.save(newStudio);
+    const savedStudio = await repo.findById('studio-1');
 
     // Assert
     expect(savedStudio).toEqual(newStudio);
@@ -38,11 +38,11 @@ describe('In-Memory Studio Repository', () => {
       name: 'YA Studio', 
       address: '456 Dreary Ln.'
     });
-    await repo.saveStudio(newStudio1);
-    await repo.saveStudio(newStudio2);
+    await repo.save(newStudio1);
+    await repo.save(newStudio2);
 
     // Act
-    const studios = await repo.getAllStudios();
+    const studios = await repo.findAll();
 
     // Assert
     expect(studios).toEqual([newStudio1, newStudio2]);
@@ -58,10 +58,10 @@ describe('In-Memory Studio Repository', () => {
       name: 'VG Studio', 
       address: '123 Main St.'
     });
-    await repo.saveStudio(expectedStudio);
+    await repo.save(expectedStudio);
 
     // Act
-    const studio = await repo.getStudioById(id);
+    const studio = await repo.findById(id);
 
     // Assert
     expect(studio).toEqual(expectedStudio)
