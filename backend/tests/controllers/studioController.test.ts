@@ -147,6 +147,11 @@ describe('Studio Controller', () => {
           startHour: 18,
           startMinute: 15,
           durationMinutes: 30
+        },
+        recurrence: {
+          startDate: '2025-04-01',
+          endDate: '2025-06-01',
+          frequency: 'weekly'
         }
       };
       const expectedClass = new Class(classOpts);
@@ -177,5 +182,9 @@ describe('Studio Controller', () => {
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith(expectedJson);
     });
+  });
+
+  describe('Sad Paths', () => {
+
   });
 });
