@@ -1,7 +1,7 @@
 import { User } from "../domain/user.js"
 
-export interface IStudioRepository {
+export interface IUserRepository {
   findAll(): Promise<User[]>;
-  findById(userId: string): Promise<User | null>;
+  findById(id: string): Promise<User | null>;
   save(user: User): Promise<void>;
 }
