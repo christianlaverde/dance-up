@@ -15,7 +15,6 @@ export interface UserOptions {
   id: string;
   email: string;
   passwordHash: string;
-  name: string;
   firstName: string;
   middleName?: string;
   lastName: string;
@@ -57,12 +56,8 @@ export class User {
       throw new Error('Invalid User lastName: must be a non-empty string');
     }
 
-    if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
-      throw new Error('Invalid Class id: must be a non-empty string');
-    }
-
     if (!isUserRole(options.role)) {
-      throw new Error('Invalid Class role: provided role must be a valid');
+      throw new Error('Invalid User role: provided role must be a valid USER_ROLE');
     }
 
     this.id = options.id;
