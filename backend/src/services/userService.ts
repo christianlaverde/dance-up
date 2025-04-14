@@ -9,7 +9,7 @@
  */
 
 import { UserModel } from "../models/userModel.js";
-import { User } from "../entities/user.js";
+import { User } from "../domain/user.js";
 import logger from '../utils/logger.js';
 
 export class UserService {

@@ -1,7 +1,7 @@
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 import type { Request, Response, NextFunction } from 'express';
-import { User } from '../entities/user.js';
+import { User } from '../domain/user.js';
 import { UserService } from '../services/userService.js';
 
 export class AuthController {

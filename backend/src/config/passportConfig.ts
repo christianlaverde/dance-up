@@ -1,6 +1,6 @@
 import passport, { PassportStatic } from "passport";
 import logger from '../utils/logger.js';
-import { User } from "../entities/user.js";
+import { User } from "../domain/user.js";
 import { UserService } from "../services/userService.js";
 
 /**
