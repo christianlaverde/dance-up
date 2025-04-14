@@ -20,7 +20,7 @@ export class StudioService {
    * @returns Promise that resolves to an array of Studio entities.
    */
   async getAllStudios(): Promise<Studio[]> {
-   const studios = await this.studioRepository.getAllStudios();
+   const studios = await this.studioRepository.findAll();
    return studios;
   }
 
@@ -29,17 +29,17 @@ export class StudioService {
    * @returns Promise that resolves to a Studio entity with classes array initialized
    */
   async getStudioById(studioId: string): Promise<Studio | null> {
-   const studio = await this.studioRepository.getStudioById(studioId);
+   const studio = await this.studioRepository.findById(studioId);
    return studio ?? null;
   }
 
   async createStudioClass(studioId: string, classOptions: ClassOptions): Promise<Class | null> {
     if (!studioId) throw new Error('Cannot add class to unsaved studio.');
-    const studio = await this.studioRepository.getStudioById(studioId);
+    const studio = await this.studioRepository.findById(studioId);
     if (studio) {
       const newClass = new Class(classOptions);
       studio.addClass(newClass);
-      await this.studioRepository.saveStudio(studio);
+      await this.studioRepository.save(studio);
       return newClass;
     }
     return null;
@@ -49,7 +49,7 @@ export class StudioService {
     const id = this.idGen?.generate() ?? null;
     const studioOpts = {id: id, ...createStudioDto}
     const studio = new Studio(studioOpts);
-    await this.studioRepository.saveStudio(studio);
+    await this.studioRepository.save(studio);
     return studio;
   }
 }
