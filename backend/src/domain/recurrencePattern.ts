@@ -1,6 +1,5 @@
 import { DateTime } from "luxon";
-import { RECURRENCE_FREQUENCY } from "./class.js";
-import { isRecurrenceFrequency } from "./class.js";
+import { RECURRENCE_FREQUENCY, isRecurrenceFrequency} from "./class.js";
 
 // Type Guard
 export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO {
