@@ -1,4 +1,4 @@
-import { CreateClassDto } from "../dto/CreateClassDto.js";
+import { CreateClassDto } from "../dto/createClassDto.js";
 import { Class } from "../domain/class.js"
 
 export interface IClassRepository {

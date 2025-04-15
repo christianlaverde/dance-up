@@ -15,8 +15,8 @@
 import type { Request, Response } from 'express';
 import { StudioService } from '../services/studioService.js';
 import logger from "../utils/logger.js";
-import { CreateStudioDto } from '../dto/CreateStudioDto.js';
-import { CreateClassDto } from '../dto/CreateClassDto.js';
+import { CreateStudioDto } from '../dto/createStudioDto.js';
+import { CreateClassDto } from '../dto/createClassDto.js';
 import { ClassOptions } from '../domain/class.js';
 
 export class StudioController {

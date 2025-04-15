@@ -5,7 +5,7 @@
 import { Studio } from "../domain/studio.js";
 import { Class, ClassOptions } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/iStudioRepository.js";
-import { CreateStudioDto } from "../dto/CreateStudioDto.js";
+import { CreateStudioDto } from "../dto/createStudioDto.js";
 import { IdGenerator } from "../repositories/idGenerator.js";
 
 
