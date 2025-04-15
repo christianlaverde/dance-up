@@ -27,14 +27,14 @@ import { createLocalStrategy } from './strategies/localStrategy.js';
 import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
-import { InMemoryIdGenerator } from './utils/InMemoryIdGenerator.js';
+import { InMemoryStudioIdGenerator } from './utils/InMemoryStudioIdGenerator.js';
 import { setupInMemoryDb } from './utils/setupInMemoryDb.js';
 
 // -------------------------
 // Dependency Initialization
 // -------------------------
 const studioRepository = new InMemoryStudioRepository();
-const idGen = new InMemoryIdGenerator();
+const idGen = new InMemoryStudioIdGenerator();
 const studioService = new StudioService(studioRepository, idGen);
 const studioController = new StudioController(studioService);
 

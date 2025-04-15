@@ -1,6 +1,6 @@
 import { IdGenerator } from "../repositories/idGenerator.js";
 
-export class InMemoryIdGenerator implements IdGenerator {
+export class InMemoryStudioIdGenerator implements IdGenerator {
   private count: number;
 
   constructor() {

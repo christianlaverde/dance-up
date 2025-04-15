@@ -12,7 +12,7 @@ import { IdGenerator } from "../repositories/idGenerator.js";
 export class StudioService {
   constructor(
     private readonly studioRepository: IStudioRepository,
-    private readonly idGen?: IdGenerator
+    private readonly studioIdGen?: IdGenerator
   ) { }
 
   /**
@@ -33,6 +33,14 @@ export class StudioService {
    return studio ?? null;
   }
 
+  async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
+    const id = this.studioIdGen?.generate() ?? null;
+    const studioOpts = {id: id, ...createStudioDto}
+    const studio = new Studio(studioOpts);
+    await this.studioRepository.save(studio);
+    return studio;
+  }
+
   async createStudioClass(studioId: string, classOptions: ClassOptions): Promise<Class | null> {
     if (!studioId) throw new Error('Cannot add class to unsaved studio.');
     const studio = await this.studioRepository.findById(studioId);
@@ -43,13 +51,5 @@ export class StudioService {
       return newClass;
     }
     return null;
-  }
-
-  async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
-    const id = this.idGen?.generate() ?? null;
-    const studioOpts = {id: id, ...createStudioDto}
-    const studio = new Studio(studioOpts);
-    await this.studioRepository.save(studio);
-    return studio;
   }
 }
