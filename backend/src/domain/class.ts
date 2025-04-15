@@ -14,6 +14,7 @@ export enum DAY_OF_WEEK {
 }
 
 export enum RECURRENCE_FREQUENCY {
+  NONE = 'none',
   WEEKLY = 'weekly',
   BIWEEKLY = 'biweekly',
   MONTHLY = 'monthly'
