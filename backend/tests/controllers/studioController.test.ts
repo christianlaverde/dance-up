@@ -3,8 +3,8 @@ import { StudioController } from '../../src/controllers/studioController.js';
 import { StudioService } from '../../src/services/studioService.js';
 import { Studio } from '../../src/domain/studio';
 import { Class, ClassOptions } from '../../src/domain/class.js';
-import { CreateStudioDto } from '../../src/dto/CreateStudioDto.js';
-import { CreateClassDto } from '../../src/dto/CreateClassDto.js';
+import { CreateStudioDto } from '../../src/dto/createStudioDto.js';
+import { CreateClassDto } from '../../src/dto/createClassDto.js';
 import { DAY_OF_WEEK } from '../../src/domain/class.js';
 
 describe('Studio Controller', () => {
@@ -71,23 +71,56 @@ describe('Studio Controller', () => {
       // Mock StudioService.getStudioById
       studioServiceMock.getStudioById.mockResolvedValue(studio);
       // Mock req/res objs
-      const req = {
-        params: {
-          id: studio.getId()
-        }
-      } as any;
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
-      } as any;
-      const expectedJson = {
-        studio: studio,
-        status: 'success'
-      };
+      const req = { params: { id: studio.getId() } } as any;
+      const res = { 
+        status: jest.fn().mockReturnThis(), 
+        json: jest.fn() } as any;
+      const expectedJson = { studio: studio, status: 'success' };
   
       // Act
       await studioController.getStudioWithClassesById(req, res);
   
+      // Assert
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(expectedJson);
+    });
+
+    it("should return a studio's class data with a 200", async () => {
+      // Arrange
+      const studio = new Studio({
+        id: 'studio-1', 
+        ownerId: 'owner-1', 
+        name: 'VG Dance Studio', 
+        address: '123 Main St.'
+      });
+      const cls = new Class({
+        id: 'class-1', 
+        name: 'Beginner Salsa', 
+        description: 'A good time', 
+        timeSlot: {
+          day: DAY_OF_WEEK.MONDAY,
+          startHour: 18,
+          startMinute: 0,
+          durationMinutes: 60
+        }
+      });
+      studio.addClass(cls);
+      // Mock StudioService.getStudioById
+      studioServiceMock.getStudioById.mockResolvedValue(studio);
+      // Mock req/res objs
+      const req = { params: { id: studio.getId() } } as any;
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn() 
+      } as any;
+      const expectedJson = {
+        data: studio.getClasses(),
+        status: 'success'
+      };
+
+      // Act
+      await studioController.getStudioClassesById(req, res);
+
       // Assert
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(expectedJson);

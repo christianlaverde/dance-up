@@ -79,6 +79,24 @@ export class StudioController {
     }
   }
 
+  getStudioClassesById = async (req: Request, res: Response): Promise<void> => {
+    const studioId = req.params.id;
+    try {
+      const studio = await this.studioService.getStudioById(studioId);
+      if (!studio) {
+        const resp = { status: 'failure', message: 'Studio not found' };
+        res.status(404).json(resp);
+        return;
+      }
+      const classes = studio.getClasses();
+      const resp = { status: 'success', data: classes };
+      res.status(200).json(resp);
+    } catch (err) {
+      const resp = { status: 'failure', message: 'Server Error' };
+      res.status(500).json(resp);
+    }
+  }
+
   createStudio = async (req: Request, res: Response): Promise<void> => {
     // TODO: validate DTO
     const newStudioDto: CreateStudioDto = req.body;

@@ -14,11 +14,14 @@ export function createStudioRouter(studioController: StudioController): Router {
   const router = Router();
 
   // Route: GET /studios 
-  // Purpose: Retrieve all studios.
+  // Purpose: Retrieve all studio data
   router.get('/', studioController.getAllStudiosWithClasses);
   // Route: GET /studios/:id
-  // Purpose: Retrieve studio by id
+  // Purpose: Retrieve studio data by id
   router.get('/:id', studioController.getStudioWithClassesById);
+  // Route GET /studios/:id/classes
+  // Purpose: Retrieve studio classes only by id
+  router.get('/:id/classes', studioController.getStudioClassesById);
 
   // Route: POST /studios
   // Purpose: Create a new studio
