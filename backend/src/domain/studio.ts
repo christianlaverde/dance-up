@@ -1,4 +1,5 @@
 import { Class } from "./class.js";
+import { AddressOptions, AddressVO, isAddressVO } from "./address.js";
 
 /**
  * Value Object: StudioName
@@ -29,19 +30,20 @@ export interface StudioOptions {
   id: string | null;
   ownerId: string;
   name: string | StudioName;
-  address: string;
+  address: AddressVO | AddressOptions;
 }
 
 export class Studio {
   private readonly id: string;
   private ownerId: string;
   private name: StudioName;
-  private address: string;
+  private address: AddressVO;
   private classes: Class[];
 
   constructor(options: StudioOptions) {
     // Convert primitive types to Value Objects if needed
     this.name = isStudioName(options.name) ? options.name : new StudioName(options.name);
+    this.address = isAddressVO(options.address) ? options.address : new AddressVO(options.address);
 
     // Validate primitives
     if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
@@ -50,13 +52,9 @@ export class Studio {
     if (!options.ownerId || typeof options.ownerId !== 'string' || options.ownerId.trim() === '') {
       throw new Error('Invalid Studio ownerId: must be a non-empty string');
     }
-    if (!options.address || typeof options.address !== 'string' || options.address.trim() === '') {
-      throw new Error('Invalid Studio ownerId: must be a non-empty string');
-    }
 
     this.id = options.id;
     this.ownerId = options.ownerId;
-    this.address = options.address;
     this.classes = [];
   };
 
