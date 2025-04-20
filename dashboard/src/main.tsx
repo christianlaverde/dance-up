@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import App from './App';
 import Layout from './layouts/dashboard';
-import SchedulePage from './pages/schedule/schedule';
+import SchedulePage from './pages/schedule/schedule/schedule';
 import HomePage from './pages';
 import StudentsPage from './pages/students/students';
 import StudentDetails from './pages/students/details/studentDetails';
