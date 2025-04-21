@@ -32,16 +32,20 @@ const NAVIGATION: Navigation = [
     ]
   },
   {
-    segment: 'Schedule',
-    title: 'schedule',
+    segment: 'schedule',
+    title: 'Schedule',
     icon: <CalendarMonthIcon />,
     children: [
+      {
+        segment: '',
+        title: 'Schedule',
+      },
       {
         segment: 'addclass',
         title: 'Add Class',
       },
       {
-        segment: 'editClass',
+        segment: 'editClass/',
         title: 'Edit Class',
       },
     ]
