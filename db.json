@@ -221,26 +221,418 @@
       "danceGenres": [
         "Hip-Hop"
       ]
+    },
+    {
+      "id": "5c02",
+      "title": "test",
+      "time": "20:00",
+      "email": "t@t.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "777777",
+      "gender": "male",
+      "danceGenres": [
+        "ballet"
+      ]
+    },
+    {
+      "id": "897c",
+      "title": "test",
+      "time": "20:00",
+      "email": "t@t.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "77777",
+      "gender": "male",
+      "danceGenres": [
+        "ballet"
+      ]
+    },
+    {
+      "id": "1796",
+      "title": "test",
+      "time": "20:00",
+      "email": "t@t.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "77777",
+      "gender": "male",
+      "danceGenres": [
+        "ballet"
+      ]
+    },
+    {
+      "id": "699b",
+      "title": "test",
+      "time": "20:00",
+      "email": "t@t.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "77777",
+      "gender": "male",
+      "danceGenres": [
+        "ballet"
+      ]
+    },
+    {
+      "id": "bf79",
+      "title": "test",
+      "time": "20:00",
+      "email": "test@test.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "77777",
+      "gender": "male",
+      "danceGenres": [
+        "jazz",
+        "hiphop"
+      ]
+    },
+    {
+      "id": "7ac8",
+      "title": "test",
+      "time": "20:00",
+      "email": "test@test.com",
+      "city": "okc",
+      "state": "ok",
+      "zipCode": "77777",
+      "gender": "male",
+      "danceGenres": [
+        "jazz",
+        "hiphop"
+      ]
     }
   ],
   "classes": [
     {
-      "id": "cc7d",
-      "firstName": "mike",
-      "middleName": "test",
-      "lastName": "james",
-      "paymentInfo": "broke boy",
+      "name": "test 99999",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "time": "21:00",
+      "day": "Monday",
+      "cost": "2000",
+      "danceGenres": "ballet",
       "studioId": "1",
-      "classId": "4821"
+      "id": "f213"
     },
     {
-      "id": "c737",
-      "firstName": "mike",
-      "middleName": "test",
-      "lastName": "james",
-      "paymentInfo": "broke boy",
+      "name": "Salrica Shines",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "time": "21:00",
+      "day": "Tuesday",
+      "cost": "100",
+      "danceGenres": "ballet",
       "studioId": "1",
-      "classId": "4821"
+      "id": "b094"
+    },
+    {
+      "id": "0ddl",
+      "studioId": "1",
+      "name": "test 2",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "25",
+      "day": "Sunday",
+      "danceGenres": "ballet"
+    },
+    {
+      "id": "3j7s",
+      "name": "test 2",
+      "studioId": "1",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "20",
+      "day": "Monday",
+      "danceGenres": "jazz"
+    },
+    {
+      "name": "test 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "time": "21:00",
+      "day": "Friday",
+      "cost": "30",
+      "danceGenres": "jazz",
+      "studioId": "1",
+      "id": "9fke"
+    },
+    {
+      "id": "6895",
+      "name": "test 3",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "35",
+      "day": "Tuesday",
+      "studioId": "1",
+      "danceGenres": "jazz"
+    },
+    {
+      "id": "6b4a",
+      "name": "test 4",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "40",
+      "day": "Thursday",
+      "studioId": "1",
+      "danceGenres": "tap"
+    },
+    {
+      "id": "2c3f",
+      "name": "test 5",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "50",
+      "day": "Saturday",
+      "studioId": "1",
+      "danceGenres": "tap"
+    },
+    {
+      "id": "4d5e",
+      "name": "test 6",
+      "time": "21:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "60",
+      "studioId": "1",
+      "day": "Sunday",
+      "danceGenres": "tap"
+    },
+    {
+      "id": "291d",
+      "name": "Another test to try",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "30",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "1"
+    },
+    {
+      "id": "292e",
+      "name": "Test Class 1",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "35",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "2"
+    },
+    {
+      "id": "293f",
+      "name": "Test Class 2",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "40",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "3"
+    },
+    {
+      "id": "294g",
+      "name": "Test Class 3",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "45",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "4"
+    },
+    {
+      "id": "295h",
+      "name": "Test Class 4",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "50",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "5"
+    },
+    {
+      "id": "296i",
+      "name": "Test Class 5",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "55",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "1"
+    },
+    {
+      "id": "297j",
+      "name": "Test Class 6",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "60",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "2"
+    },
+    {
+      "id": "298k",
+      "name": "Test Class 7",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "65",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "3"
+    },
+    {
+      "id": "299l",
+      "name": "Test Class 8",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "70",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "4"
+    },
+    {
+      "id": "300m",
+      "name": "Test Class 9",
+      "time": "19:00",
+      "description": "This is just another description",
+      "cost": "75",
+      "day": "Tuesday",
+      "danceGenres": "salsa",
+      "studioId": "5"
+    },
+    {
+      "name": "Mambo shines by micah",
+      "description": "Micah's classes",
+      "time": "20:00",
+      "day": "Monday",
+      "cost": "20",
+      "danceGenres": "salsa",
+      "studioId": "1",
+      "id": "186a"
+    },
+    {
+      "id": "9c8d",
+      "name": "Another test to try",
+      "time": "12:00",
+      "description": "Logged user account",
+      "cost": "9999",
+      "day": "Thursday",
+      "danceGenres": "salsa",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "24ab",
+      "name": "Restore",
+      "time": "07:00",
+      "description": "First class",
+      "cost": "7996",
+      "day": "Friday",
+      "danceGenres": "salsa",
+      "studioId": "HUMqUDzhRzT1q5gujjJCFH39Ntr1"
+    },
+    {
+      "id": "60d8",
+      "name": "Day of week test",
+      "time": "21:00",
+      "description": "day of week",
+      "cost": "40",
+      "day": "Wednesday",
+      "danceGenres": "jazz",
+      "studioId": "cBCUMplUide1yYPuF69R1AN0mxN2"
+    },
+    {
+      "id": "c694",
+      "name": "test 2",
+      "time": "13:00",
+      "description": "another one",
+      "cost": "30",
+      "day": "Friday",
+      "danceGenres": "hiphop",
+      "studioId": "cBCUMplUide1yYPuF69R1AN0mxN2"
+    },
+    {
+      "id": "edb2",
+      "name": "Dance Genre test",
+      "time": "14:00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "20",
+      "day": "Sunday",
+      "danceGenres": "salsa",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "986b",
+      "name": "Navigation test",
+      "time": "21:01",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "cost": "99",
+      "day": "Monday",
+      "danceGenres": "Jazz",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "8f1c",
+      "name": "post class test",
+      "time": "20:00",
+      "description": "lispon",
+      "cost": "30",
+      "day": "Sunday",
+      "danceGenres": "Hip Hop",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "574d",
+      "name": "post navigate test",
+      "time": "14:00",
+      "description": "test",
+      "cost": "999",
+      "day": "Tuesday",
+      "danceGenres": "Lyrical",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "4a97",
+      "name": "check post req",
+      "time": "16:30",
+      "description": "hahahaha",
+      "cost": "23",
+      "day": "Monday",
+      "danceGenres": "Jazz",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    },
+    {
+      "id": "597e",
+      "name": "API FINALLY WORKING",
+      "time": "17:00",
+      "description": "FINALLY?",
+      "cost": "45",
+      "day": "Thursday",
+      "danceGenres": "Tap",
+      "studioId": "JPHy5sUMV8UV9p1NKLAcodhV1e83"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": {
+        "firstName": "Micah",
+        "lastName": "Johnson"
+      },
+      "username": "MJohnson",
+      "email": "test@test.biz",
+      "gender": "male",
+      "birthdate": "1990-01-01",
+      "address": {
+        "street": "123 main st",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "91210",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
     }
   ]
 }
