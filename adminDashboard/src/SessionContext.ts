@@ -6,7 +6,7 @@ export interface Session {
     email?: string;
     image?: string;
     phoneNumber?: string;
-    uid?: string;
+    id?: string;
   };
 }
 

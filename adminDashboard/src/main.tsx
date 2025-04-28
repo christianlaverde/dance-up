@@ -47,7 +47,12 @@ const router = createBrowserRouter([
           {
             path: 'schedule/editClass',
             Component: React.lazy(() => import('./pages/schedule/editClass/editClass')),
-            errorElement: <div>Failed to load add class page</div>,
+            errorElement: <div>Failed to load edit class page</div>,
+          },
+          {
+            path: 'account',
+            Component: React.lazy(() => import('./pages/account/accountPage')),
+            errorElement: <div>Failed to load account page</div>,
           }
         ],
       },
