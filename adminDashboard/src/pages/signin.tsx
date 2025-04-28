@@ -45,16 +45,41 @@ export default function SignIn() {
           }
 
           if (result?.success && result?.user) {
+            console.log(result)
             const userSession: Session = {
               user: {
                 name: result.user.displayName || '',
                 email: result.user.email || '',
                 image: result.user.photoURL || '',
                 phoneNumber: result.user.phoneNumber || '',
-                uid: result.user.uid || '',
+                id: result.user.uid || '',
               },
             };
+            
             setSession(userSession);
+            // Check if the email is already associated with an account
+            const response = await fetch('http://localhost:3000/danceStudios?email=' + encodeURIComponent(userSession.user.email));
+            const existingAccount = await response.json();
+
+            if (!existingAccount || existingAccount.length === 0) {
+              // Post the user data to the danceStudios route
+              await fetch('http://localhost:3000/danceStudios', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  name: userSession.user.name,
+                  email: userSession.user.email,
+                  image: userSession.user.image,
+                  phoneNumber: userSession.user.phoneNumber,
+                  id: userSession.user.id,
+                }),
+              });
+            }
+            // Store the session in local storage
+            localStorage.setItem('session', JSON.stringify(userSession));
+            // Redirect to the callback URL or home page
             navigate(callbackUrl || '/', { replace: true });
             return {};
           }

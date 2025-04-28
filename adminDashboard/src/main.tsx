@@ -8,6 +8,7 @@ import EmployeesCrudPage from './pages/instructors';
 import SignInPage from './pages/signin';
 import SchedulePage from './pages/schedule/schedule/schedule';
 import InstructorsPage from './pages/instructors';
+import TestApp from './pages/test/test';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
           {
             path: '',
             Component: DashboardPage,
+          },
+          {
+            path: 'test',
+            Component: TestApp,
           },
           {
             path: '/instructors',
@@ -47,7 +52,12 @@ const router = createBrowserRouter([
           {
             path: 'schedule/editClass',
             Component: React.lazy(() => import('./pages/schedule/editClass/editClass')),
-            errorElement: <div>Failed to load add class page</div>,
+            errorElement: <div>Failed to load edit class page</div>,
+          },
+          {
+            path: 'account',
+            Component: React.lazy(() => import('./pages/account/accountPage')),
+            errorElement: <div>Failed to load account page</div>,
           }
         ],
       },

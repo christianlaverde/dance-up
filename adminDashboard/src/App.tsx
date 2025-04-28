@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SchoolIcon from '@mui/icons-material/School';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
@@ -44,6 +45,11 @@ const NAVIGATION: Navigation = [
       },
     ]
   },
+  {
+    segment: 'account',
+    title: 'Account',
+    icon: <AccountCircleIcon />
+  }
 ];
 
 const BRANDING = {
@@ -75,7 +81,7 @@ export default function App() {
           user: {
             name: user.name || '',
             email: user.email || '',
-            image: user.image || '',
+            image: user.photoURL || '',
             phoneNumber: user.phoneNumber || '',
             uid: user.uid || '',
           },
