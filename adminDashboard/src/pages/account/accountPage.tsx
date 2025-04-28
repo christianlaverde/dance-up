@@ -17,8 +17,8 @@ const AccountPage: React.FC = () => {
     const storage = getStorage();
     const session = useSession();
 
-    const userID = session.session?.user.uid
-    console.log(session.session?.user.uid)
+    const userID = session.session?.user.id
+    console.log(session.session?.user.id)
     // const userUid = user?.uid || '';
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
