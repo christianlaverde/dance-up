@@ -1,0 +1,14 @@
+### GET /
+GET http://localhost:3000/
+
+### GET /studios 
+GET http://localhost:3000/studios
+
+### GET /studios/<studio-id>
+GET http://localhost:3000/studios/studio-1
+
+
+### GET /studios/<studio-id>/classes
+get http://localhost:3000/studios/studio-1/classes
+
+### POST /studios
