@@ -4,14 +4,14 @@ import { DateTime } from "luxon";
 
 export async function setupInMemoryDb(service: StudioService): Promise<void> {
   const s1 = await service.createStudio({
-    ownerId: '23',
+    ownerId: 'owner-0',
     name: 'VG Dance Studio',
-    address: '123 Main St.'
+    address: { addr1: '123 Main St.' }
   });
   const s2 = await service.createStudio({
-    ownerId: '23',
+    ownerId: 'owner-2',
     name: 'YA Dance Studio',
-    address: '456 Dreary Ln.'
+    address: { addr1: '456 Dreary Ln.' }
   });
   
   service.createStudioClass(s1.getId(), {
