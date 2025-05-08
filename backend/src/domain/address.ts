@@ -32,10 +32,10 @@ export class AddressVO {
 
   constructor(props: AddressOptions) {
     this.addr1 = this.validateField(props.addr1, 'addr1');
-    this.addr2 = this.validateField(props.addr1, 'addr2');
-    this.city = this.validateField(props.addr1, 'city');
-    this.state = this.validateField(props.addr1, 'state');
-    this.zip = this.validateField(props.addr1, 'zip');
+    this.addr2 = this.validateField(props.addr2, 'addr2');
+    this.city = this.validateField(props.city, 'city');
+    this.state = this.validateField(props.state, 'state');
+    this.zip = this.validateField(props.zip, 'zip');
   }
 
   getAddr1() {
