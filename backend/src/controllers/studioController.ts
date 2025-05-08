@@ -127,7 +127,7 @@ export class StudioController {
         res.status(404).json(resp);
         return;
       }
-      const newClass = await this.studioService.createStudioClass(studio.getId(), classOptions);
+      const newClass = await this.studioService.createStudioClass(studioId, classOptions);
       if (!newClass) {
         const resp = { status: 'failure', message: 'Class could not be created' };
         res.status(500).json(resp);

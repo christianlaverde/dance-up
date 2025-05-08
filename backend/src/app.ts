@@ -34,8 +34,7 @@ import { setupInMemoryDb } from './utils/setupInMemoryDb.js';
 // Dependency Initialization
 // -------------------------
 const studioRepository = new InMemoryStudioRepository();
-const studioIdGen = new InMemoryStudioIdGenerator();
-const studioService = new StudioService(studioRepository, studioIdGen);
+const studioService = new StudioService(studioRepository);
 const studioController = new StudioController(studioService);
 
 setupInMemoryDb(studioService);

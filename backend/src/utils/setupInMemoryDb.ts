@@ -14,72 +14,77 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     address: { addr1: '456 Dreary Ln.' }
   });
   
-  service.createStudioClass(s1.getId(), {
-    id: 'class-1',
-    name: 'Beginner Salsa',
-    description: 'A good time',
-    timeSlot: {
-      day: DAY_OF_WEEK.MONDAY,
-      startHour: 18,
-      startMinute: 0,
-      durationMinutes: 60,
-    },
-    recurrence: {
-      startDate: DateTime.utc(2025, 3, 1),
-      endDate: DateTime.utc(2025, 4, 1),
-      frequency: RECURRENCE_FREQUENCY.WEEKLY
-    }
-  });
+  const studio1Id = s1.getId();
+  if (studio1Id !== undefined) {
+    service.createStudioClass(studio1Id, {
+      id: 'class-1',
+      name: 'Beginner Salsa',
+      description: 'A good time',
+      timeSlot: {
+        day: DAY_OF_WEEK.MONDAY,
+        startHour: 18,
+        startMinute: 0,
+        durationMinutes: 60,
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
+      service.createStudioClass(studio1Id, {
+      id: 'class-2',
+      name: 'Advanced Salsa',
+      description: 'A long time',
+      timeSlot: {
+        day: DAY_OF_WEEK.MONDAY,
+        startHour: 19,
+        startMinute: 0,
+        durationMinutes: 60,
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
+  }
   
-  service.createStudioClass(s1.getId(), {
-    id: 'class-2',
-    name: 'Advanced Salsa',
-    description: 'A long time',
-    timeSlot: {
-      day: DAY_OF_WEEK.MONDAY,
-      startHour: 19,
-      startMinute: 0,
-      durationMinutes: 60,
-    },
-    recurrence: {
-      startDate: DateTime.utc(2025, 3, 1),
-      endDate: DateTime.utc(2025, 4, 1),
-      frequency: RECURRENCE_FREQUENCY.WEEKLY
-    }
-  });
-  
-  service.createStudioClass(s2.getId(), {
-    id: 'class-3',
-    name: 'Jazz Class',
-    description: 'A jazzy time',
-    timeSlot: {
-      day: DAY_OF_WEEK.WEDNESDAY,
-      startHour: 19,
-      startMinute: 30,
-      durationMinutes: 60,
-    },
-    recurrence: {
-      startDate: DateTime.utc(2025, 3, 1),
-      endDate: DateTime.utc(2025, 4, 1),
-      frequency: RECURRENCE_FREQUENCY.WEEKLY
-    }
-  });
-  
-  service.createStudioClass(s2.getId(), {
-    id: 'class-4',
-    name: 'Intermediate Ballet',
-    description: 'A ballet-y time',
-    timeSlot: {
-      day: DAY_OF_WEEK.WEDNESDAY,
-      startHour: 20,
-      startMinute: 30,
-      durationMinutes: 60,
-    },
-    recurrence: {
-      startDate: DateTime.utc(2025, 3, 1),
-      endDate: DateTime.utc(2025, 4, 1),
-      frequency: RECURRENCE_FREQUENCY.WEEKLY
-    }
-  });  
-}
 
+  const studio2Id = s2.getId();
+  if (studio2Id !== undefined) {
+    service.createStudioClass(studio2Id, {
+      id: 'class-3',
+      name: 'Jazz Class',
+      description: 'A jazzy time',
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startHour: 19,
+        startMinute: 30,
+        durationMinutes: 60,
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
+    
+    service.createStudioClass(studio2Id, {
+      id: 'class-4',
+      name: 'Intermediate Ballet',
+      description: 'A ballet-y time',
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startHour: 20,
+        startMinute: 30,
+        durationMinutes: 60,
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
+  }
+}

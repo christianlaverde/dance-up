@@ -6,13 +6,11 @@ import { Studio } from "../domain/studio.js";
 import { Class, ClassOptions } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/iStudioRepository.js";
 import { CreateStudioDto } from "../dto/createStudioDto.js";
-import { IdGenerator } from "../repositories/idGenerator.js";
 
 
 export class StudioService {
   constructor(
     private readonly studioRepository: IStudioRepository,
-    private readonly studioIdGen?: IdGenerator
   ) { }
 
   /**
@@ -34,8 +32,7 @@ export class StudioService {
   }
 
   async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
-    const id = this.studioIdGen?.generate() ?? null;
-    const studioOpts = {id: id, ...createStudioDto}
+    const studioOpts = {id: undefined, ...createStudioDto}
     const studio = new Studio(studioOpts);
     await this.studioRepository.save(studio);
     return studio;

@@ -27,14 +27,14 @@ export function isStudioName(value: any): value is StudioName {
 }
 
 export interface StudioOptions {
-  id: string | null;
+  id: string | undefined;
   ownerId: string;
   name: string | StudioName;
   address: AddressVO | AddressOptions;
 }
 
 export class Studio {
-  private readonly id: string;
+  private id: string | undefined;
   private ownerId: string;
   private name: StudioName;
   private address: AddressVO;
@@ -46,8 +46,8 @@ export class Studio {
     this.address = isAddressVO(options.address) ? options.address : new AddressVO(options.address);
 
     // Validate primitives
-    if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
-      throw new Error('Invalid Studio id: must be a non-empty string');
+    if (options.id !== undefined && (typeof options.id !== 'string' || options.id.trim() === '')) {
+      throw new Error('Invalid Studio id: must be a non-empty string or undefined');
     }
     if (!options.ownerId || typeof options.ownerId !== 'string' || options.ownerId.trim() === '') {
       throw new Error('Invalid Studio ownerId: must be a non-empty string');
@@ -70,9 +70,12 @@ export class Studio {
     this.classes = classes;
   }
 
-  getId() {
-    if (!this.id) throw new Error('Studio ID not set.');
+  getId(): string | undefined {
     return this.id;
+  }
+
+  setId(id: string) {
+    this.id = id;
   }
 
   getOwnerId() {
