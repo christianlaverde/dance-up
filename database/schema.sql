@@ -19,6 +19,11 @@ CREATE TABLE users (
   first_name VARCHAR(255) NOT NULL,
   middle_name VARCHAR(255),
   last_name VARCHAR(255) NOT NULL,
+  addr1 VARCHAR(100),
+  addr2 VARCHAR(100),
+  city VARCHAR(50),
+  state CHAR(2),
+  zip VARCHAR(10),
   role user_role NOT NULL DEFAULT 'member',
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -29,8 +34,12 @@ CREATE TABLE users (
 CREATE TABLE studios (
   id SERIAL PRIMARY KEY,
   owner_id INTEGER NOT NULL,
-  studio_name VARCHAR(255) NOT NULL,
-  address VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  addr1 VARCHAR(100),
+  addr2 VARCHAR(100),
+  city VARCHAR(50),
+  state CHAR(2),
+  zip VARCHAR(10),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_owner
@@ -63,8 +72,13 @@ CREATE TABLE studio_members (
 CREATE TABLE classes (
   id SERIAL PRIMARY KEY,
   studio_id INTEGER NOT NULL,
-  class_name VARCHAR(255) NOT NULL,
-  class_description TEXT,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  day_of_week INTEGER NOT NULL CHECK,
+  start_hour INTEGER NOT NULL CHECK (start_hour BETWEEN 0 AND 23),
+  start_minute INTEGER NOT NULL CHECK (start_minute BETWEEN 0 AND 59),
+  duration_minutes INTEGER NOT NULL CHECK (duration_minutes > 0),
+  
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_studio
