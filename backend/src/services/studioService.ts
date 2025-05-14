@@ -32,7 +32,7 @@ export class StudioService {
   }
 
   async createStudio(createStudioDto: CreateStudioDto): Promise<Studio> {
-    const studioOpts = {id: undefined, ...createStudioDto}
+    const studioOpts = {id: undefined, ...createStudioDto};
     const studio = new Studio(studioOpts);
     await this.studioRepository.save(studio);
     return studio;
