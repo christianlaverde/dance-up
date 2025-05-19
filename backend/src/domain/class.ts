@@ -68,6 +68,7 @@ export interface ClassOptions {
     durationMinutes: number
   };
   description?: string;
+  genre?: string;
   recurrence?: RecurrencePatternOptions;
 }
 
@@ -75,6 +76,7 @@ export class Class {
   private readonly id: string;
   private name: ClassName;
   private description: string;
+  private genre: string;
   private timeSlot: TimeSlotVO;
   private recurrence?: RecurrencePatternVO;
 
@@ -94,6 +96,13 @@ export class Class {
     }
     // Set description (optional) with default empty string
     this.description = options.description !== undefined ? options.description : '';
+
+    // Valdiate genre if it's provided
+    if (options.genre !== undefined && typeof options.genre !== 'string') {
+      throw new Error('Invalid Class genre: must be a string');
+    }
+    // Set genre (optional) with default empty string
+    this.genre = options.genre !== undefined ? options.genre : '';
 
     // Convert TimeSlot to TimeSlotVO if needed
     this.timeSlot = isTimeSlotVO(options.timeSlot) ? options.timeSlot : new TimeSlotVO(options.timeSlot);
@@ -120,6 +129,10 @@ export class Class {
 
   getDescription(): string {
     return this.description;
+  }
+
+  getGenre(): string {
+    return this.genre;
   }
 
   getTimeSlot(): TimeSlotVO {

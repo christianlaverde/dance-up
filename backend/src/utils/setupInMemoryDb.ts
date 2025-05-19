@@ -6,12 +6,12 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
   const s1 = await service.createStudio({
     ownerId: 'owner-0',
     name: 'VG Dance Studio',
-    address: { addr1: '123 Main St.' }
+    address: { addr1: '123 Main St.', city: 'Houston', state: 'TX', zip: '12345' }
   });
   const s2 = await service.createStudio({
-    ownerId: 'owner-2',
+    ownerId: 'owner-1',
     name: 'YA Dance Studio',
-    address: { addr1: '456 Dreary Ln.' }
+    address: { addr1: '456 Dreary Ln.', city: 'Manhattan', state: 'NY', zip: '54321' }
   });
   
   const studio1Id = s1.getId();
@@ -19,6 +19,7 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     service.createStudioClass(studio1Id, {
       id: 'class-1',
       name: 'Beginner Salsa',
+      genre: 'Salsa',
       description: 'A good time',
       timeSlot: {
         day: DAY_OF_WEEK.MONDAY,
@@ -36,6 +37,7 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       id: 'class-2',
       name: 'Advanced Salsa',
       description: 'A long time',
+      genre: 'Salsa',
       timeSlot: {
         day: DAY_OF_WEEK.MONDAY,
         startHour: 19,
