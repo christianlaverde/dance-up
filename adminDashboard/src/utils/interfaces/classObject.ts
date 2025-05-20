@@ -1,10 +1,12 @@
-export interface ClassStruture {
-  id?: string
-  studioId?: string
+import { TimeSlotVO } from "../../../../backend/src/domain/timeSlot.ts"
+import { RecurrencePatternOptions } from "../../../../backend/src/domain/recurrencePattern.ts"
+
+export interface ClassStructure {
+  id: string
   name: string
-  time: string
+  timeSlot: TimeSlotVO;
   description?: string
-  cost: string
-  day: string
-  danceGenres?: string
+  genre?: string
+  recurrence?: RecurrencePatternOptions
 }
+

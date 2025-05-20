@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { ClassStruture } from '../../../utils/interfaces/classObject';
+import { ClassStructure } from '../../../utils/interfaces/classObject';
 
 
 
@@ -18,8 +18,8 @@ import { ClassStruture } from '../../../utils/interfaces/classObject';
 
 
   export default function SchedulePage() {
-    const [classes, setClasses] = useState<ClassStruture[]>([]);
-    const [filteredClasses, setFilteredClasses] = useState<ClassStruture[]>([]);
+    const [classes, setClasses] = useState<ClassStructure[]>([]);
+    const [filteredClasses, setFilteredClasses] = useState<ClassStructure[]>([]);
     const [genreFilter, setGenreFilter] = useState('');
     const [dayFilter, setDayFilter] = useState('');
     const [sortOption, setSortOption] = useState('');
@@ -112,7 +112,7 @@ import { ClassStruture } from '../../../utils/interfaces/classObject';
           </Button>
         </FilterContainer>
         <Grid container spacing={2}>
-          {filteredClasses.map((cls: ClassStruture) => (
+          {filteredClasses.map((cls: ClassStructure) => (
             <Grid item xs={12} sm={6} md={4} key={cls.id}>
               <Link to={`/Schedule/editClass`} state={{ classId: cls.id }}>
                 <Card>

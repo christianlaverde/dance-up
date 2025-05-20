@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, TextareaAutosize } from "@mui/material";
-import { ClassStruture } from "../../../utils/interfaces/classObject";
+import { ClassStructure } from "../../../utils/interfaces/classObject";
 
 export default function AddClass() {
     
-    const [formData, setFormData] = useState<ClassStruture>({
+    const [formData, setFormData] = useState<ClassStructure>({
         name: '',
         time: '',
         description: '',

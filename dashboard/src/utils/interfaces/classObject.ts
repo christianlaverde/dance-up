@@ -1,4 +1,4 @@
-export interface ClassStruture {
+export interface ClassStructure {
   id?: string
   studioId?: string
   name: string
