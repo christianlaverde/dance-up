@@ -1,9 +1,10 @@
-import { DAY_OF_WEEK } from "../domain/class.js";
+import { RecurrencePatternOptions } from "../domain/recurrencePattern.js";
+import { TimeSlotOptions } from "../domain/timeSlot.js";
 
 export interface CreateClassDto {
-  id: string;
   name: string;
-  description: string;
-  genre: string;
-  day: DAY_OF_WEEK;
+  timeSlot: TimeSlotOptions,
+  description?: string;
+  genre?: string;
+  recurrence?: RecurrencePatternOptions;
 }

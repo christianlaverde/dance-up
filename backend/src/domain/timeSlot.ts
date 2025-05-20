@@ -6,6 +6,13 @@ export function isTimeSlotVO(value: any): value is TimeSlotVO {
   return value instanceof TimeSlotVO;
 }
 
+export interface TimeSlotOptions {
+  day: DAY_OF_WEEK;
+  startHour: number;
+  startMinute: number;
+  durationMinutes: number;
+}
+
 /**
  * Value Object: TimeSlot
  * Self-validating immutable object for time slot representation

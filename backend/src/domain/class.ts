@@ -59,7 +59,7 @@ export function isClassName(value: any): value is ClassName {
  * Class Entity and related interfaces
  */
 export interface ClassOptions {
-  id: string;
+  id: string | undefined;
   name: string | ClassName;
   timeSlot: TimeSlotVO | {
     day: DAY_OF_WEEK,
@@ -73,7 +73,7 @@ export interface ClassOptions {
 }
 
 export class Class {
-  private readonly id: string;
+  private id: string | undefined;
   private name: ClassName;
   private description: string;
   private genre: string;
@@ -85,8 +85,8 @@ export class Class {
     this.name = isClassName(options.name) ? options.name : new ClassName(options.name);
 
     // Validate primitives
-    if (!options.id || typeof options.id !== 'string' || options.id.trim() === '') {
-      throw new Error('Invalid Class id: must be a non-empty string');
+    if (options.id !== undefined && (typeof options.id !== 'string' || options.id.trim() === '')) {
+      throw new Error('Invalid Class id: must be a non-empty string or undefined');
     }
     this.id = options.id;
 
@@ -115,8 +115,12 @@ export class Class {
   }
 
   // Getters
-  getId(): string {
+  getId(): string | undefined {
     return this.id;
+  }
+
+  setId(id: string) {
+    this.id = id;
   }
 
   getName(): string {

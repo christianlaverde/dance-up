@@ -17,7 +17,6 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
   const studio1Id = s1.getId();
   if (studio1Id !== undefined) {
     service.createStudioClass(studio1Id, {
-      id: 'class-1',
       name: 'Beginner Salsa',
       genre: 'Salsa',
       description: 'A good time',
@@ -34,7 +33,6 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       }
     });
       service.createStudioClass(studio1Id, {
-      id: 'class-2',
       name: 'Advanced Salsa',
       description: 'A long time',
       genre: 'Salsa',
@@ -56,7 +54,6 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
   const studio2Id = s2.getId();
   if (studio2Id !== undefined) {
     service.createStudioClass(studio2Id, {
-      id: 'class-3',
       name: 'Jazz Class',
       description: 'A jazzy time',
       timeSlot: {
@@ -73,7 +70,6 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     });
     
     service.createStudioClass(studio2Id, {
-      id: 'class-4',
       name: 'Intermediate Ballet',
       description: 'A ballet-y time',
       timeSlot: {

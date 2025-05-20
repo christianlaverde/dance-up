@@ -6,11 +6,14 @@ import { Studio } from "../domain/studio.js";
 import { Class, ClassOptions } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/iStudioRepository.js";
 import { CreateStudioDto } from "../dto/createStudioDto.js";
+import { IClassRepository } from "../repositories/iClassRepository.js";
+import { CreateClassDto } from "../dto/createClassDto.js";
 
 
 export class StudioService {
   constructor(
     private readonly studioRepository: IStudioRepository,
+    private readonly classRepository: IClassRepository,
   ) { }
 
   /**
@@ -38,11 +41,12 @@ export class StudioService {
     return studio;
   }
 
-  async createStudioClass(studioId: string, classOptions: ClassOptions): Promise<Class | null> {
+  async createStudioClass(studioId: string, createClassDto: CreateClassDto): Promise<Class | null> {
     if (!studioId) throw new Error('Cannot add class to unsaved studio.');
     const studio = await this.studioRepository.findById(studioId);
     if (studio) {
-      const newClass = new Class(classOptions);
+      const newClassOpts = { id: undefined, ...createClassDto};
+      const newClass = new Class(newClassOpts);
       studio.addClass(newClass);
       await this.studioRepository.save(studio);
       return newClass;
