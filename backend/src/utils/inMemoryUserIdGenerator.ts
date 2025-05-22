@@ -1,4 +1,4 @@
-import { IdGenerator } from '../repositories/idGenerator.ts';
+import { IdGenerator } from '../repositories/idGenerator.js';
 
 export class InMemoryUserIdGenerator implements IdGenerator {
   private count: number;
