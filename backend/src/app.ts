@@ -14,6 +14,7 @@ import session from 'express-session';
 // Internal Module Imports
 // -------------------------
 import { InMemoryStudioRepository } from './repositories/inMemoryStudioRepository.js';
+import { InMemoryClassRepository } from './repositories/inMemoryClassRepository.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
 import { AuthController } from './controllers/authController.js';
@@ -28,7 +29,6 @@ import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
 import { createAuthRouter } from './routes/authRouter.js';
 import { setupInMemoryDb } from './utils/setupInMemoryDb.js';
-import { InMemoryClassRepository } from './repositories/inMemoryClassRepository.js';
 
 // -------------------------
 // Dependency Initialization
