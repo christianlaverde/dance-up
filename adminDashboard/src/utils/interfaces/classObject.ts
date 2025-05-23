@@ -1,12 +1,12 @@
-import { TimeSlotVO } from "../../../../backend/src/domain/timeSlot.ts"
-import { RecurrencePatternOptions } from "../../../../backend/src/domain/recurrencePattern.ts"
+import { TimeSlot } from "../../../../backend/src/domain/timeSlot.js"
+import { RecurrencePattern } from "../../../../backend/src/domain/recurrencePattern.js"
 
 export interface ClassStructure {
   id: string
   name: string
-  timeSlot: TimeSlotVO;
+  timeSlot: TimeSlot;
   description?: string
   genre?: string
-  recurrence?: RecurrencePatternOptions
+  recurrence?: RecurrencePattern
 }
 
