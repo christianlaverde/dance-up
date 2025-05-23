@@ -22,3 +22,19 @@ Content-Type: application/json
     "addr1": "58 Delancey St."
   }
 }
+
+
+### POST /studios/<studio-id>/classes
+POST http://localhost:3000/studios/studio-0/classes
+Content-Type: application/json
+
+{ 
+  "name": "ClassName!",
+  "description": "ClassDescription!!! Wowie",
+  "genre": "Salsa",
+  "timeSlot": { 
+    "day": 1, 
+    "startTime": {"hour": 13, "minute": 30}, 
+    "duration": {"minutes": 60}
+  }
+}
