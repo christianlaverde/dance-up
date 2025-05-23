@@ -78,7 +78,7 @@ export default function SchedulePage() {
             <Card> 
             <CardActionArea>
             <Typography variant="h6" component="div" gutterBottom sx={{textAlign: 'center'}}>
-            {cls.name.value}
+            {cls.name}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{paddingLeft: '10px'}}>
             Genre: {cls.genre}
