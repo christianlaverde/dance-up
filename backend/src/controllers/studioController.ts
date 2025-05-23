@@ -1,20 +1,7 @@
-/**
- * StudioController
- *
- * This controller handles HTTP requests related to studios.
- * It leverages a StudioService instance to perform business logic,
- * and it returns appropriate HTTP responses.
- *
- * We use arrow functions for controller methods to preserve the correct
- * `this` context when they are passed as callbacks to Express routes.
- * Without arrow functions, the context of `this` might be lost, leading to
- * errors when accessing instance properties (like `this.studioService`).
- * 
- */
-
 import type { Request, Response } from 'express';
+import { DateTime, Duration } from 'luxon';
 import { StudioService } from '../services/studioService.js';
-import logger from "../utils/logger.js";
+import logger from '../utils/logger.js';
 import { CreateStudioDto } from '../dto/createStudioDto.js';
 import { CreateClassDto } from '../dto/createClassDto.js';
 
@@ -117,8 +104,8 @@ export class StudioController {
 
   createStudioClass = async (req: Request, res: Response): Promise<void> => {
     const studioId = req.params.id;
-    const createClassDto: CreateClassDto = req.body;
-    console.log('class form data: ', createClassDto);
+    const formData = req.body;
+    console.log('formData: ', formData);
     try {
       const studio = await this.studioService.getStudioById(studioId);
       if (!studio) {
@@ -126,6 +113,22 @@ export class StudioController {
         res.status(404).json(resp);
         return;
       }
+
+      const startTime = DateTime.fromISO(formData.startTime);
+      const endTime = DateTime.fromISO(formData.endTime);
+      const duration = endTime.diff(startTime, 'minutes');
+
+      const createClassDto = {
+        name: formData.name,
+        description: formData.description,
+        genre: formData.genre,
+        timeSlot: {
+          day: formData.day,
+          startTime: startTime,
+          duration: duration
+        }
+      };
+
       const newClass = await this.studioService.createStudioClass(studioId, createClassDto);
       if (!newClass) {
         const resp = { status: 'failure', message: 'Class could not be created' };

@@ -34,7 +34,7 @@ export class RecurrencePattern {
     if (options.endDate !== undefined && !options.endDate.isValid) {
       throw new Error('Invalid RecurrencePattern: endDate must be a valid luxon.DateTime');
     }
-    if (options.endDate !== undefined && (options.endDate > options.startDate)) {
+    if (options.endDate !== undefined && (options.endDate < options.startDate)) {
       throw new Error('Invalid RecurrencePattern: endDate must be after startDate');
     }
     if (!isRecurrenceFrequency(options.frequency)) {
