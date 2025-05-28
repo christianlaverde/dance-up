@@ -14,7 +14,7 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     name: 'YA Dance Studio',
     address: { addr1: '456 Dreary Ln.', city: 'Manhattan', state: 'NY', zip: '54321' }
   });
-  
+
   const studio1Id = s1.getId();
   if (studio1Id !== undefined) {
     service.createStudioClass(studio1Id, {
@@ -32,10 +32,10 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
         frequency: RECURRENCE_FREQUENCY.WEEKLY
       }
     });
-      service.createStudioClass(studio1Id, {
-      name: 'Advanced Salsa',
-      description: 'A long time',
+    service.createStudioClass(studio1Id, {
+      name: 'Intermediate Salsa',
       genre: 'Salsa',
+      description: 'A better time',
       timeSlot: {
         day: DAY_OF_WEEK.MONDAY,
         startTime: DateTime.fromObject({hour: 19, minute: 0}).toUTC(),
@@ -47,8 +47,38 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
         frequency: RECURRENCE_FREQUENCY.WEEKLY
       }
     });
+    service.createStudioClass(studio1Id, {
+      name: 'Advanced Salsa',
+      description: 'A long time',
+      genre: 'Salsa',
+      timeSlot: {
+        day: DAY_OF_WEEK.MONDAY,
+        startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
+        duration: Duration.fromObject({minutes: 60}),
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
+    service.createStudioClass(studio1Id, {
+      name: 'Spinning',
+      description: 'Don\'t get dizzy!',
+      genre: 'Salsa',
+      timeSlot: {
+        day: DAY_OF_WEEK.WEDNESDAY,
+        startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
+        duration: Duration.fromObject({minutes: 60}),
+      },
+      recurrence: {
+        startDate: DateTime.utc(2025, 3, 1),
+        endDate: DateTime.utc(2025, 4, 1),
+        frequency: RECURRENCE_FREQUENCY.WEEKLY
+      }
+    });
   }
-  
+
 
   const studio2Id = s2.getId();
   if (studio2Id !== undefined) {
@@ -66,7 +96,7 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
         frequency: RECURRENCE_FREQUENCY.WEEKLY
       }
     });
-    
+
     service.createStudioClass(studio2Id, {
       name: 'Intermediate Ballet',
       description: 'A ballet-y time',
