@@ -47,6 +47,7 @@ export class StudioService {
     if (studio) {
       const newClassOpts = { id: undefined, ...createClassDto};
       const newClass = new Class(newClassOpts);
+      await this.classRepository.save(newClass);
       studio.addClass(newClass);
       await this.studioRepository.save(studio);
       return newClass;

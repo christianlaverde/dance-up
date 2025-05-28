@@ -38,7 +38,8 @@ export class Studio {
   private ownerId: string;
   private name: StudioName;
   private address: AddressVO;
-  private classes: Class[];
+  // private classes: Class[];
+  private classes: Map<string, Class>;
 
   constructor(options: StudioOptions) {
     // Convert primitive types to Value Objects if needed
@@ -55,19 +56,18 @@ export class Studio {
 
     this.id = options.id;
     this.ownerId = options.ownerId;
-    this.classes = [];
+    this.classes = new Map();
   };
 
   addClass(cls: Class) {
-    this.classes.push(cls);
+    const clsId = cls.getId();
+    if (clsId !== undefined) {
+      this.classes.set(clsId, cls);
+    }
   }
 
   getClasses() {
-    return this.classes;
-  }
-
-  setClasses(classes: Class[]) {
-    this.classes = classes;
+    return Array.from(this.classes.values());
   }
 
   getId(): string | undefined {
