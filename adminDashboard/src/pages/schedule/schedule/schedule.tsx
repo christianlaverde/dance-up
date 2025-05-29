@@ -14,7 +14,7 @@ import { ClassStructure } from '../../../utils/interfaces/classObject';
 import { useSession } from '../../../SessionContext';
 // import { DAY_OF_THE_WEEK } from "../../../utils/enums/dayOfTheWeek";
 // import { DANCE_GENRES } from "../../../utils/enums/danceGenres";
-import { Info } from "luxon";
+import { DateTime, Info } from "luxon";
 
 const WEEKDAYS = Info.weekdays();
 
@@ -126,21 +126,24 @@ export default function SchedulePage() {
           <Grid xs={12} sm={6} md={4} sx={{padding: '5px' }} key={cls.id}>
             <Link to={`/schedule/editClass`} state={{ classId: cls.id }}>
             <Card> 
-              <CardActionArea sx={{paddingLeft: '10px'}}>
-                <Typography variant="h6" component="div" gutterBottom sx={{textAlign: 'center'}}>
-                  {cls.name}
-                </Typography>
-                <Typography variant="body2" component="div">
-                  {cls.description}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" >
-                  Genre: {cls.genre}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" >
-                  Day: {WEEKDAYS[cls.day - 1]}
-                </Typography>
-              </CardActionArea>
-            </Card>
+                <CardActionArea sx={{paddingLeft: '10px'}}>
+                  <Typography variant="h6" component="div" gutterBottom align="center">
+                    {cls.name}
+                  </Typography>
+                  <Typography align="center">
+                    {DateTime.fromISO(cls.startTime).toFormat('hh:mm a')} - {DateTime.fromISO(cls.endTime).toFormat('hh:mm a')}
+                  </Typography>
+                  <Typography variant="body2" component="div">
+                    {cls.description}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" >
+                    Genre: {cls.genre}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" >
+                    Day: {WEEKDAYS[cls.day - 1]}
+                  </Typography>
+                </CardActionArea>
+              </Card>
             </Link>
           </Grid>
         ))}
