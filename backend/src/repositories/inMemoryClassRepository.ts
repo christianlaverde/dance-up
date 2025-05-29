@@ -19,7 +19,7 @@ export class InMemoryClassRepository implements IClassRepository {
     return this.classes.get(id) ?? null;
   }
 
-  async save(cls :Class): Promise<void> {
+  async save(cls: Class): Promise<void> {
     const classId = cls.getId();
     if (classId === undefined) {
       const id = this.classIdGen.generate();

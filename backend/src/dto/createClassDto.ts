@@ -1,9 +1,12 @@
+import { DateTime } from "luxon";
 import { RecurrencePatternOptions } from "../domain/recurrencePattern.js";
-import { TimeSlotOptions } from "../domain/timeSlot.js";
+import { DAY_OF_WEEK } from "../domain/timeSlot.js";
 
 export interface CreateClassDto {
   name: string;
-  timeSlot: TimeSlotOptions,
+  startTime: DateTime;
+  endTime: DateTime;
+  day: DAY_OF_WEEK;
   description?: string;
   genre?: string;
   recurrence?: RecurrencePatternOptions;

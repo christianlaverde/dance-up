@@ -48,9 +48,18 @@ export class StudioService {
       const newClassOpts = { id: undefined, ...createClassDto};
       const newClass = new Class(newClassOpts);
       await this.classRepository.save(newClass);
-      studio.addClass(newClass);
+      studio.setClass(newClass);
       await this.studioRepository.save(studio);
       return newClass;
+    }
+    return null;
+  }
+
+  async updateStudioClass(studioId: string, cls: Class): Promise<Class | null> {
+    const studio = await this.studioRepository.findById(studioId);
+    if (studio) {
+      studio.setClass(cls);
+      await this.studioRepository.save(studio);
     }
     return null;
   }

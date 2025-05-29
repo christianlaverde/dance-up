@@ -21,11 +21,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       name: 'Beginner Salsa',
       genre: 'Salsa',
       description: 'A good time',
-      timeSlot: {
-        day: DAY_OF_WEEK.MONDAY,
-        startTime: DateTime.fromObject({hour: 18, minute: 0}).toUTC(),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.MONDAY,
+      startTime: DateTime.fromObject({hour: 18, minute: 0}).toUTC(),
+      endTime: DateTime.fromObject({hour: 19, minute: 0}).toUTC(),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),
@@ -36,11 +34,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       name: 'Intermediate Salsa',
       genre: 'Salsa',
       description: 'A better time',
-      timeSlot: {
-        day: DAY_OF_WEEK.MONDAY,
-        startTime: DateTime.fromObject({hour: 19, minute: 0}).toUTC(),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.MONDAY,
+      startTime: DateTime.fromObject({hour: 19, minute: 0}).toUTC(),
+      endTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),
@@ -51,11 +47,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       name: 'Advanced Salsa',
       description: 'A long time',
       genre: 'Salsa',
-      timeSlot: {
-        day: DAY_OF_WEEK.MONDAY,
-        startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.MONDAY,
+      startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
+      endTime: DateTime.fromObject({hour: 21, minute: 0}).toUTC(),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),
@@ -66,11 +60,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
       name: 'Spinning',
       description: 'Don\'t get dizzy!',
       genre: 'Salsa',
-      timeSlot: {
-        day: DAY_OF_WEEK.WEDNESDAY,
-        startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.WEDNESDAY,
+      startTime: DateTime.fromObject({hour: 20, minute: 0}).toUTC(),
+      endTime: DateTime.fromObject({hour: 21, minute: 0}).toUTC(),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),
@@ -85,11 +77,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     service.createStudioClass(studio2Id, {
       name: 'Jazz Class',
       description: 'A jazzy time',
-      timeSlot: {
-        day: DAY_OF_WEEK.WEDNESDAY,
-        startTime: DateTime.fromObject({hour: 19, minute: 30}),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.WEDNESDAY,
+      startTime: DateTime.fromObject({hour: 19, minute: 30}),
+      endTime: DateTime.fromObject({hour: 20, minute: 30}),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),
@@ -100,11 +90,9 @@ export async function setupInMemoryDb(service: StudioService): Promise<void> {
     service.createStudioClass(studio2Id, {
       name: 'Intermediate Ballet',
       description: 'A ballet-y time',
-      timeSlot: {
-        day: DAY_OF_WEEK.WEDNESDAY,
-        startTime: DateTime.fromObject({hour: 20, minute: 30}),
-        duration: Duration.fromObject({minutes: 60}),
-      },
+      day: DAY_OF_WEEK.WEDNESDAY,
+      startTime: DateTime.fromObject({hour: 20, minute: 30}),
+      endTime: DateTime.fromObject({hour: 21, minute: 30}),
       recurrence: {
         startDate: DateTime.utc(2025, 3, 1),
         endDate: DateTime.utc(2025, 4, 1),

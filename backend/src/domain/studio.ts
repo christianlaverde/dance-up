@@ -38,7 +38,6 @@ export class Studio {
   private ownerId: string;
   private name: StudioName;
   private address: AddressVO;
-  // private classes: Class[];
   private classes: Map<string, Class>;
 
   constructor(options: StudioOptions) {
@@ -59,7 +58,7 @@ export class Studio {
     this.classes = new Map();
   };
 
-  addClass(cls: Class) {
+  setClass(cls: Class) {
     const clsId = cls.getId();
     if (clsId !== undefined) {
       this.classes.set(clsId, cls);
@@ -68,6 +67,10 @@ export class Studio {
 
   getClasses() {
     return Array.from(this.classes.values());
+  }
+
+  getClassById(id: string) {
+    return this.classes.get(id);
   }
 
   getId(): string | undefined {
