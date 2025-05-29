@@ -1,79 +1,49 @@
 import { DateTime } from "luxon";
-import { RECURRENCE_FREQUENCY, isRecurrenceFrequency} from "./class.js";
 
-// Type Guard
-export function isRecurrencePatternVO(value: any): value is RecurrencePatternVO {
-  return value instanceof RecurrencePatternVO;
+export enum RECURRENCE_FREQUENCY {
+  NONE = 'none',
+  WEEKLY = 'weekly',
+  BIWEEKLY = 'biweekly',
+  MONTHLY = 'monthly'
+}
+
+export function isRecurrenceFrequency(value: any): value is RECURRENCE_FREQUENCY {
+  return Object.values(RECURRENCE_FREQUENCY).includes(value);
+}
+
+export function isRecurrencePattern(value: any): value is RecurrencePattern {
+  return value instanceof RecurrencePattern;
 }
 
 export interface RecurrencePatternOptions {
-  startDate: string | DateTime;
-  endDate?: string | DateTime;
-  frequency: string | RECURRENCE_FREQUENCY;
+  startDate: DateTime;
+  endDate?: DateTime;
+  frequency: RECURRENCE_FREQUENCY;
 }
 
-/**
- * Value Object: RecurrencePattern
- * Self-validating immutable object for recurrence patterns
- */
-export class RecurrencePatternVO {
+export class RecurrencePattern {
   readonly startDate: DateTime;
   readonly endDate?: DateTime;
   readonly frequency: RECURRENCE_FREQUENCY;
 
-  constructor(props: RecurrencePatternOptions) {
+  constructor(options: RecurrencePatternOptions) {
     // Validation
-    if (typeof props.startDate === 'string') {
-      props.startDate = DateTime.fromISO(props.startDate);
+    if (!options.startDate.isValid) {
+      throw new Error('Invalid RecurrencePattern: startDate must be a valid luxon.DateTime');
     }
-    if (!(props.startDate instanceof DateTime) || !props.startDate.isValid) {
-      throw new Error('Invalid RecurrencePattern: startDate must be a valid DateTime or ISO string');
+    if (options.endDate !== undefined && !options.endDate.isValid) {
+      throw new Error('Invalid RecurrencePattern: endDate must be a valid luxon.DateTime');
     }
-
-    if (props.endDate !== undefined) {
-      if (typeof props.endDate === 'string') {
-        props.endDate = DateTime.fromISO(props.endDate);
-      }
-      if (!(props.endDate instanceof DateTime) || !props.endDate.isValid) {
-        throw new Error('Invalid RecurrencePattern: endDate must be a valid DateTime or ISO string if provided');
-      }
-    }
-
-    if (props.endDate && props.startDate > props.endDate) {
+    if (options.endDate !== undefined && (options.endDate < options.startDate)) {
       throw new Error('Invalid RecurrencePattern: endDate must be after startDate');
     }
-
-    if (!isRecurrenceFrequency(props.frequency)) {
+    if (!isRecurrenceFrequency(options.frequency)) {
       throw new Error('Invalid RecurrencePattern: frequency must be a valid RECURRENCE_FREQUENCY');
     }
 
-    this.startDate = props.startDate;
-    this.endDate = props.endDate;
-    this.frequency = props.frequency;
-
-    // Make object immutable
-    Object.freeze(this);
-  }
-
-  // Method to create a new instance with updated properties
-  withChanges(changes: Partial<{
-    startDate: DateTime,
-    endDate?: DateTime,
-    frequency: RECURRENCE_FREQUENCY
-  }>): RecurrencePatternVO {
-    return new RecurrencePatternVO({
-      startDate: changes.startDate ?? this.startDate,
-      endDate: changes.endDate ?? this.endDate,
-      frequency: changes.frequency ?? this.frequency
-    });
-  }
-
-  // Method to remove end date
-  withoutEndDate(): RecurrencePatternVO {
-    return new RecurrencePatternVO({
-      startDate: this.startDate,
-      frequency: this.frequency
-      // endDate intentionally omitted
-    });
+    this.startDate = options.startDate;
+    this.endDate = options.endDate;
+    this.frequency = options.frequency;
   }
 }
+

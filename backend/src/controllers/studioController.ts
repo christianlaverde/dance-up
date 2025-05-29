@@ -1,23 +1,10 @@
-/**
- * StudioController
- *
- * This controller handles HTTP requests related to studios.
- * It leverages a StudioService instance to perform business logic,
- * and it returns appropriate HTTP responses.
- *
- * We use arrow functions for controller methods to preserve the correct
- * `this` context when they are passed as callbacks to Express routes.
- * Without arrow functions, the context of `this` might be lost, leading to
- * errors when accessing instance properties (like `this.studioService`).
- * 
- */
-
 import type { Request, Response } from 'express';
+import { DateTime, Duration } from 'luxon';
 import { StudioService } from '../services/studioService.js';
-import logger from "../utils/logger.js";
+import logger from '../utils/logger.js';
 import { CreateStudioDto } from '../dto/createStudioDto.js';
 import { CreateClassDto } from '../dto/createClassDto.js';
-import { ClassOptions } from '../domain/class.js';
+import { Class } from '../domain/class.js';
 
 export class StudioController {
   // Instance of StudioService injected via the constructor.
@@ -97,8 +84,60 @@ export class StudioController {
     }
   }
 
+  getStudioClassById = async (req: Request, res: Response): Promise<void> => {
+    const studioId = req.params.studioId;
+    const classId = req.params.classId;
+    try {
+      const studio = await this.studioService.getStudioById(studioId);
+      if (!studio) {
+        const resp = { status: 'failure', message: 'Studio not found' };
+        res.status(404).json(resp);
+        return;
+      }
+
+      const cls = studio.getClassById(classId);
+      const resp = { status: 'success', data: cls };
+      res.status(200).json(resp);
+    } catch (err) {
+      const resp = { status: 'failure', message: 'Server Error' };
+      res.status(500).json(resp);
+    }
+  }
+
+  updateStudioClassById = async (req: Request, res: Response): Promise<void> => {
+    const studioId = req.params.studioId;
+    const classId = req.params.classId;
+    const formData = req.body;
+
+    try {
+      const studio = await this.studioService.getStudioById(studioId);
+      if (!studio) {
+        const resp = { status: 'failure', message: 'Studio not found' };
+        res.status(404).json(resp);
+        return;
+      }
+
+      const updatedClassOpts = {
+        ...formData,
+        startTime: DateTime.fromISO(formData.startTime),
+        endTime: DateTime.fromISO(formData.endTime),
+        recurrence: {
+          ...formData.recurrence,
+          startDate: DateTime.fromISO(formData.recurrence.startDate),
+          endDate: DateTime.fromISO(formData.recurrence.endDate),
+        },
+      };
+      const updatedClass = new Class(updatedClassOpts);
+      studio.setClass(updatedClass);
+
+      res.status(200).json({ 'status': 'success' });
+    } catch (err) {
+      const resp = { status: 'failure', message: 'Server Error' };
+      res.status(500).json(resp);
+    }
+  }
+
   createStudio = async (req: Request, res: Response): Promise<void> => {
-    // TODO: validate DTO
     const newStudioDto: CreateStudioDto = req.body;
     try {
       const newStudio = await this.studioService.createStudio(newStudioDto);
@@ -117,9 +156,8 @@ export class StudioController {
   }
 
   createStudioClass = async (req: Request, res: Response): Promise<void> => {
-    // TODO: validate studioId
     const studioId = req.params.id;
-    const classOptions: ClassOptions = req.body;
+    const formData = req.body;
     try {
       const studio = await this.studioService.getStudioById(studioId);
       if (!studio) {
@@ -127,7 +165,20 @@ export class StudioController {
         res.status(404).json(resp);
         return;
       }
-      const newClass = await this.studioService.createStudioClass(studioId, classOptions);
+
+      const startTime = DateTime.fromISO(formData.startTime);
+      const endTime = DateTime.fromISO(formData.endTime);
+
+      const createClassDto = {
+        name: formData.name,
+        description: formData.description,
+        genre: formData.genre,
+        startTime: startTime,
+        endTime: endTime,
+        day: formData.day,
+      };
+
+      const newClass = await this.studioService.createStudioClass(studioId, createClassDto);
       if (!newClass) {
         const resp = { status: 'failure', message: 'Class could not be created' };
         res.status(500).json(resp);

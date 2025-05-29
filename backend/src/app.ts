@@ -14,27 +14,28 @@ import session from 'express-session';
 // Internal Module Imports
 // -------------------------
 import { InMemoryStudioRepository } from './repositories/inMemoryStudioRepository.js';
+import { InMemoryClassRepository } from './repositories/inMemoryClassRepository.js';
 import { StudioService } from './services/studioService.js';
 import { StudioController } from './controllers/studioController.js';
-import { AuthController } from './controllers/authController.js';
+// import { AuthController } from './controllers/authController.js';
 
 import logger from './utils/logger.js';
 import { httpLogger } from './utils/logger.js';
 
-import { configurePassport } from './config/passportConfig.js';
-import { createLocalStrategy } from './strategies/localStrategy.js';
+// import { configurePassport } from './config/passportConfig.js';
+// import { createLocalStrategy } from './strategies/localStrategy.js';
 
-import { createUserRouter } from './routes/userRouter.js';
+// import { createUserRouter } from './routes/userRouter.js';
 import { createStudioRouter } from './routes/studioRouter.js';
-import { createAuthRouter } from './routes/authRouter.js';
-import { InMemoryStudioIdGenerator } from './utils/inMemoryStudioIdGenerator.js';
+// import { createAuthRouter } from './routes/authRouter.js';
 import { setupInMemoryDb } from './utils/setupInMemoryDb.js';
 
 // -------------------------
 // Dependency Initialization
 // -------------------------
 const studioRepository = new InMemoryStudioRepository();
-const studioService = new StudioService(studioRepository);
+const classRepository = new InMemoryClassRepository();
+const studioService = new StudioService(studioRepository, classRepository);
 const studioController = new StudioController(studioService);
 
 setupInMemoryDb(studioService);

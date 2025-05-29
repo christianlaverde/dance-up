@@ -1,22 +1,22 @@
 export default async function APIRequest( req, url, formData ) {
-    try {
-        const response = await fetch(`http://localhost:3000/${url}`, {
-            method: req,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
+  const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+  try {
+    const response = await fetch(`${API_ENDPOINT}${url}`, {
+      method: req,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+    });
 
-        console.log(formData)
-
-        if (!response.ok) {
-            throw new Error("Failed to add class");
-        }
-
-        alert("Class added successfully!");
-    } catch (error) {
-        console.error(error);
-        alert("An error occurred while adding the class.");
+    if (!response.ok) {
+      throw new Error("Failed to add class");
     }
+
+    console.log(response);
+    alert("Class added successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred while adding the class.");
+  }
 }

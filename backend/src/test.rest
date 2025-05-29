@@ -5,10 +5,36 @@ GET http://localhost:3000/
 GET http://localhost:3000/studios
 
 ### GET /studios/<studio-id>
-GET http://localhost:3000/studios/studio-1
+GET http://localhost:3000/studios/studio-0
 
 
 ### GET /studios/<studio-id>/classes
-get http://localhost:3000/studios/studio-1/classes
+GET http://localhost:3000/studios/studio-1/classes
 
 ### POST /studios
+POST http://localhost:3000/studios
+Content-Type: application/json
+
+{
+  "ownerId": "owner-0",
+  "name": "Another Dance Co.",
+  "address": {
+    "addr1": "58 Delancey St."
+  }
+}
+
+
+### POST /studios/<studio-id>/classes
+POST http://localhost:3000/studios/studio-0/classes
+Content-Type: application/json
+
+{ 
+  "name": "ClassName!",
+  "description": "ClassDescription!!! Wowie",
+  "genre": "Salsa",
+  "timeSlot": { 
+    "day": 1, 
+    "startTime": {"hour": 13, "minute": 30}, 
+    "duration": {"minutes": 60}
+  }
+}

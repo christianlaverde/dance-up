@@ -6,7 +6,7 @@ export interface Session {
     email?: string;
     image?: string;
     phoneNumber?: string;
-    id?: string;
+    uid?: string;
   };
 }
 
@@ -25,3 +25,4 @@ const SessionContext = React.createContext<SessionContextType>({
 export default SessionContext;
 
 export const useSession = () => React.useContext(SessionContext);
+
