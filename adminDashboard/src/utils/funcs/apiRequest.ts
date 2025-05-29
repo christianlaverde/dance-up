@@ -9,12 +9,11 @@ export default async function APIRequest( req, url, formData ) {
     body: JSON.stringify(formData),
     });
 
-    console.log(formData)
-
     if (!response.ok) {
       throw new Error("Failed to add class");
     }
 
+    console.log(response);
     alert("Class added successfully!");
   } catch (error) {
     console.error(error);

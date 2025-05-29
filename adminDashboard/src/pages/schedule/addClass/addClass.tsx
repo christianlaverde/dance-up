@@ -13,8 +13,8 @@ interface AddClassFormData {
   description: string;
   genre: string;
   day: string;
-  startTime: DateTime | null; 
-  endTime: DateTime | null;
+  startTime: DateTime; 
+  endTime: DateTime;
 }
 
 const WEEKDAYS = Info.weekdays('long');
@@ -22,13 +22,14 @@ const WEEKDAYS = Info.weekdays('long');
 export default function AddClass() {
   const navigate = useNavigate();
 
+  const defaultTime = DateTime.fromObject({hour: 12, minute: 0});
   const [formData, setFormData] = useState<AddClassFormData>({
     name: '',
     description: '',
     genre: '',
     day: '',
-    startTime: DateTime.now(),
-    endTime: DateTime.now(),
+    startTime: defaultTime,
+    endTime: defaultTime,
   })
 
   return (
