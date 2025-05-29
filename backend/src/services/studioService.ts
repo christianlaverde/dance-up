@@ -3,7 +3,7 @@
  */
 
 import { Studio } from "../domain/studio.js";
-import { Class, ClassOptions } from "../domain/class.js";
+import { Class } from "../domain/class.js";
 import { IStudioRepository } from "../repositories/iStudioRepository.js";
 import { CreateStudioDto } from "../dto/createStudioDto.js";
 import { IClassRepository } from "../repositories/iClassRepository.js";
@@ -16,19 +16,11 @@ export class StudioService {
     private readonly classRepository: IClassRepository,
   ) { }
 
-  /**
-   * Retrieve all studios from StudioRepository with classes array initialized
-   * @returns Promise that resolves to an array of Studio entities.
-   */
   async getAllStudios(): Promise<Studio[]> {
    const studios = await this.studioRepository.findAll();
    return studios;
   }
 
-  /**
-   * Retrieve a studio from StudioRepository by id with classes array initialized
-   * @returns Promise that resolves to a Studio entity with classes array initialized
-   */
   async getStudioById(studioId: string): Promise<Studio | null> {
    const studio = await this.studioRepository.findById(studioId);
    return studio ?? null;
@@ -62,5 +54,14 @@ export class StudioService {
       await this.studioRepository.save(studio);
     }
     return null;
+  }
+
+  async deleteStudioClass(studioId: string, clsId: string): Promise<boolean> {
+    const studio = await this.studioRepository.findById(studioId);
+    let deleted = false;
+    if (studio) {
+      deleted = studio.deleteClass(clsId);
+    }
+    return deleted;
   }
 }

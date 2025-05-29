@@ -1,7 +1,7 @@
 import { StudioService } from "../services/studioService.js";
 import { RECURRENCE_FREQUENCY } from "../domain/recurrencePattern.js";
-import { DAY_OF_WEEK } from "../domain/timeSlot.js";
-import { DateTime, Duration } from "luxon";
+import { DAY_OF_WEEK } from "../domain/class.js";
+import { DateTime } from "luxon";
 
 export async function setupInMemoryDb(service: StudioService): Promise<void> {
   const s1 = await service.createStudio({

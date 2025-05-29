@@ -39,6 +39,10 @@ export function createStudioRouter(studioController: StudioController): Router {
   // Purpose: Update class data from a studio by id
   router.put('/:studioId/classes/:classId', studioController.updateStudioClassById);
 
+  // Route: DELETE /studios/:studioId/classes/:classId
+  // Purpose: Delete class from a studio by id
+  router.delete('/:studioId/classes/:classId', studioController.deleteStudioClassById);
+
   // Route: GET /:id/members
   // Purpose: Retrieve all studio members of a studio given a studio id
   //router.get('/:id/members', studioController.getStudioMembers);

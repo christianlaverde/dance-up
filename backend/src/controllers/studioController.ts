@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { DateTime, Duration } from 'luxon';
+import { DateTime } from 'luxon';
 import { StudioService } from '../services/studioService.js';
 import logger from '../utils/logger.js';
 import { CreateStudioDto } from '../dto/createStudioDto.js';
@@ -186,6 +186,35 @@ export class StudioController {
       }
       const resp = { status: 'success', data: { studioId: studio.getId(), class: newClass } };
       res.status(201).json(resp);
+    } catch (err) {
+      logger.error(err);
+      const resp = { status: 'failure', message: 'Server Error' };
+      res.status(500).json(resp);
+    }
+  }
+
+  deleteStudioClassById = async (req: Request, res: Response): Promise<void> => {
+    const studioId = req.params.studioId;
+    const classId = req.params.classId
+
+    try {
+      const studio = await this.studioService.getStudioById(studioId);
+      if (!studio) {
+        const resp = { status: 'failure', message: 'Studio not found' };
+        res.status(404).json(resp);
+        return;
+      }
+
+      const deleted = await this.studioService.deleteStudioClass(studioId, classId);
+      
+      if (deleted) {
+        const resp = { status: 'success', message: 'Class Deletion completed' };
+        res.status(204).json(resp);
+      } else {
+        const resp = { status: 'failure', message: 'Class not found' };
+        res.status(404).json(resp);
+      }
+
     } catch (err) {
       logger.error(err);
       const resp = { status: 'failure', message: 'Server Error' };

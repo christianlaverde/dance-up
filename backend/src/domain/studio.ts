@@ -65,6 +65,11 @@ export class Studio {
     }
   }
 
+  deleteClass(clsId: string): boolean {
+    const deleted = this.classes.delete(clsId);
+    return deleted;
+  }
+
   getClasses() {
     return Array.from(this.classes.values());
   }
