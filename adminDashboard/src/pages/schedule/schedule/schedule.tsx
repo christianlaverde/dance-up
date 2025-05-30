@@ -10,19 +10,21 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
 import { ClassStructure } from '../../../utils/interfaces/classObject';
 import { useSession } from '../../../SessionContext';
 // import { DAY_OF_THE_WEEK } from "../../../utils/enums/dayOfTheWeek";
 // import { DANCE_GENRES } from "../../../utils/enums/danceGenres";
 import { DateTime, Info } from "luxon";
+import { FormControl, Select } from '@mui/material';
 
 const WEEKDAYS = Info.weekdays();
 
 export default function SchedulePage() {
   const [classes, setClasses] = useState<ClassStructure[]>([]);
   const [filteredClasses, setFilteredClasses] = useState<ClassStructure[]>([]);
-  const [genreFilter, setGenreFilter] = useState('');
-  const [dayFilter, setDayFilter] = useState<number>(null);
+  const [genreFilter, setGenreFilter] = useState<string>();
+  const [dayFilter, setDayFilter] = useState<string>();
   const [sortOption, setSortOption] = useState('');
 
   const FilterContainer = styled('div')(({ theme }) => ({
@@ -44,7 +46,7 @@ export default function SchedulePage() {
         console.log('class data: ', data);
         const classData = data.data;
         setClasses(classData);
-        setFilteredClasses(data);
+        setFilteredClasses(classData)
       })
       .catch((error) => console.error('Error fetching classes:', error));
   }, []);
@@ -57,52 +59,59 @@ export default function SchedulePage() {
     }
 
     if (dayFilter) {
-      updatedClasses = updatedClasses.filter((cls) => cls.day === dayFilter);
+      updatedClasses = updatedClasses.filter((cls) => WEEKDAYS[cls.day! - 1] === dayFilter);
     }
 
     if (sortOption === 'alphabetical') {
       updatedClasses.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortOption === 'day') {
-      updatedClasses.sort((a, b) => DAY_OF_THE_WEEK.indexOf(a.day) - DAY_OF_THE_WEEK.indexOf(b.day));
+      // TODO: Using `!` here, make sure there is no better way.
+      updatedClasses.sort((a, b) => a.day! - b.day!); 
     }
 
     setFilteredClasses(updatedClasses);
+    console.log('filteredClasses: ', filteredClasses);
   }, [genreFilter, dayFilter, sortOption, classes]);
 
   return (
     <div>
       <FilterContainer>
-        <TextField
-          label="Filter by Genre"
-          value={genreFilter}
-          onChange={(e) => setGenreFilter(e.target.value)}
-          select
-          fullWidth
-        >
-          {Array.from(new Set(classes.map((cls) => cls.genre))).map((genre) => (
-            <MenuItem key={genre} value={genre}>
-              {genre}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Filter by Day"
-          value={dayFilter}
-          onChange={(e) => setDayFilter(e.target.value)}
-          select
-          fullWidth
-        >
-          {WEEKDAYS.map((day, index) => (
-            <MenuItem key={day} value={index+1}>
-              {day}
-            </MenuItem>
-          ))}
-          {/* {DAY_OF_THE_WEEK.map((day) => ( */}
-          {/*   <MenuItem key={day} value={day}> */}
-          {/*     {day} */}
-          {/*   </MenuItem> */}
-          {/* ))} */}
-        </TextField>
+        <FormControl fullWidth>
+          <InputLabel id="genre-filter-select-label">Filter by Genre</InputLabel>
+          <Select
+            id="genre-filter-select"
+            label="Filter by Genre"
+            defaultValue={''}
+            value={genreFilter}
+            onChange={(e) => setGenreFilter(e.target.value)}
+          >
+            {Array.from(new Set(classes.map((cls) => cls.genre))).map((genre) => (
+              <MenuItem key={genre} value={genre}>
+                {genre}
+              </MenuItem>
+            ))}
+          </Select>
+          </FormControl>
+          <FormControl fullWidth>
+          <InputLabel id="day-filter-select-label">Filter by Day</InputLabel>
+          <Select
+            labelId="day-filter-select-label"
+            id="day-filter-select"
+            // For some reason if this label field isn't provided,
+            // the select box outline goes right through the label when
+            // the select is active.
+            label="Filter by Day"
+            defaultValue={''}
+            value={dayFilter}
+            onChange={(e) => { setDayFilter(e.target.value) }}
+          >
+            {WEEKDAYS.map((day) => (
+              <MenuItem key={day} value={day}>
+                {day}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           label="Sort By"
           value={sortOption}
@@ -113,20 +122,20 @@ export default function SchedulePage() {
           <MenuItem value="alphabetical">Alphabetical</MenuItem>
           <MenuItem value="day">Day of the Week</MenuItem>
         </TextField>
-        <Button variant="outlined" onClick={() => {
+        <Button variant="contained" onClick={() => {
           setGenreFilter('');
-          setDayFilter('');
+          setDayFilter(undefined);
           setSortOption('');
         }}>
           Clear Filters
         </Button>
       </FilterContainer>
       <Grid container spacing={0}>
-        {classes.map((cls: any) => (
-          <Grid xs={12} sm={6} md={4} sx={{padding: '5px' }} key={cls.id}>
+        {filteredClasses.map((cls: any) => (
+          <Grid xs={12} sm={6} md={4} padding={"5px"} key={cls.id}>
             <Link to={`/schedule/editClass`} state={{ classId: cls.id }}>
-            <Card> 
-                <CardActionArea sx={{paddingLeft: '10px'}}>
+              <Card> 
+                <CardActionArea sx={{paddingLeft: "10px"}}>
                   <Typography variant="h6" component="div" gutterBottom align="center">
                     {cls.name}
                   </Typography>
