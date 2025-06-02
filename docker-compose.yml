@@ -3,14 +3,16 @@ services:
     image: postgres:16
     container_name: pg_db
     restart: always
+    env_file:
+      - ./database/.env
     environment:
       POSTGRES_USER: ${PGUSER}
       POSTGRES_PASSWORD: ${PGPASSWORD}
       POSTGRES_DB: ${PGDATABASE}
     ports:
-      - "${PGPORT}:${PGPORT}"
+      - "${PGPORT}:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
       - ./database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     healthcheck:
       # Command to check if PG is running and responsive
