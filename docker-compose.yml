@@ -3,8 +3,6 @@ services:
     image: postgres:16
     container_name: pg_db
     restart: always
-    env_file:
-      - ./database/.env
     environment:
       POSTGRES_USER: ${PGUSER}
       POSTGRES_PASSWORD: ${PGPASSWORD}
@@ -12,7 +10,6 @@ services:
     ports:
       - "${PGPORT}:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
       - ./database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     healthcheck:
       # Command to check if PG is running and responsive
@@ -25,6 +22,3 @@ services:
       start_period: 10s
       # Max time to wait for a response before marking check as failed
       timeout: 5s
-
-volumes:
-  db_data:

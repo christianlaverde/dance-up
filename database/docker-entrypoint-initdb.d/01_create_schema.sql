@@ -2,9 +2,9 @@
 -- Master Database Schema
 -- =====================================================
 
--- CREATE DATABASE dance_up;
+CREATE DATABASE dance_up;
 
-CREATE TYPE user_role AS ENUM ('owner', 'member');
+CREATE TYPE user_role AS ENUM ('owner', 'member', 'instructor');
 
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -34,46 +34,44 @@ CREATE TABLE studios (
   zip VARCHAR(20),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES users(id)
+  CONSTRAINT fk_studios_owner FOREIGN KEY(owner_id) REFERENCES users(id)
+);
+
+CREATE TABLE studio_members (
+  studio_id UUID NOT NULL,
+  user_id UUID NOT NULL,
+  joined_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (studio_id, user_id),
+  CONSTRAINT fk_studio_members_studio
+    FOREIGN KEY (studio_id)
+      REFERENCES studios(id)
+      ON DELETE CASCADE,
+  CONSTRAINT fk_studio_members_user
+    FOREIGN KEY (user_id)
+      REFERENCES users(id)
+      ON DELETE CASCADE
 );
 
 CREATE TABLE classes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   studio_id UUID NOT NULL,
+  instructor_id UUID NOT NULL,
   name VARCHAR(100) NOT NULL,
   description TEXT,
   genre VARCHAR(35),
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL,
-  days INTEGER[] CHECK (
-    array_length(days, 1) >= 1
-    AND days <@ ARRAY[1,2,3,4,5,6,7]
-  ),
+  day INTEGER NOT NULL CHECK (day >= 1 and day <= 7),
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  capacity INTEGER CHECK (capacity > 0),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_studio FOREIGN KEY(studio_id) REFERENCES studios(id),
-  CONSTRAINT valid_time_range CHECK (end_time > start_time)
+  CONSTRAINT fk_classes_studio FOREIGN KEY(studio_id) REFERENCES studios(id),
+  CONSTRAINT fk_classes_instructor FOREIGN key(instructor_id) REFERENCES users(id),
+  CONSTRAINT valid_time_range CHECK (end_time > start_time),
+  CONSTRAINT instructor_is_studio_member
+    FOREIGN KEY (studio_id, instructor_id)
+    REFERENCES studio_members(studio_id, user_id)
 );
-
-
--- 4. Create Studio Members Join Table
--- Many-To-Many
--- One User may be a member of many Studios
--- One Studio may have many members
--- CREATE TABLE studio_members (
---   studio_id INTEGER NOT NULL,
---   user_id INTEGER NOT NULL,
---   joined_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
---   PRIMARY KEY (studio_id, user_id),
---   CONSTRAINT fk_studio
---     FOREIGN KEY (studio_id)
---       REFERENCES studios(id)
---       ON DELETE CASCADE,
---   CONSTRAINT fk_user
---     FOREIGN KEY (user_id)
---       REFERENCES users(id)
---       ON DELETE CASCADE
--- );
 
 CREATE FUNCTION trigger_update_timestamp()
 RETURNS TRIGGER AS $$
@@ -93,8 +91,8 @@ BEFORE UPDATE ON studios
 FOR EACH ROW
 EXECUTE FUNCTION trigger_update_timestamp();
 
-CREATE TRIGGER update_users_timestamp
-BEFORE UPDATE ON users
+CREATE TRIGGER update_classes_timestamp
+BEFORE UPDATE ON classes
 FOR EACH ROW
 EXECUTE FUNCTION trigger_update_timestamp();
 

@@ -1,6 +1,0 @@
-.env
-node_modules/
-logs/
-coverage/
-dist/
-api.rest

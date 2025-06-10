@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "BMZqOubxsKc2J+HL43wyXkY+80XCZieVbiN3qhIM/UI=",
+  "Source": "DanceUp.Api",
+  "BasePath": "_content/DanceUp.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
