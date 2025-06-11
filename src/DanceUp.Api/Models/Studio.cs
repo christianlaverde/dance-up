@@ -4,6 +4,7 @@ namespace DanceUp.Api.Models
 {
    public class Studio
    {
+       [Column("id")]
        public int Id { get; set; }
 
        [Column("owner_id")]

@@ -4,10 +4,11 @@ namespace DanceUp.Api.Models
 {
     public class User
     {
-        public Guid Id { get; set; }
+        [Column("id")]
+        public int Id { get; set; }
 
         [Column("role")]
-        public string role { get; set; } = "member";
+        public string Role { get; set; } = "member";
 
         [Column("email")]
         public string Email { get; set; } = string.Empty;

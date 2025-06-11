@@ -4,13 +4,14 @@ namespace DanceUp.Api.Models
 {
     public class Class
     {
+        [Column("id")]
         public int Id { get; set; }
 
         [Column("studio_id")]
-        public Guid StudioId { get; set; }
+        public int StudioId { get; set; }
 
         [Column("instructor_id")]
-        public Guid InstructorId {get; set; }
+        public int InstructorId {get; set; }
 
         [Column("name")]
         public string Name { get; set; } = string.Empty;

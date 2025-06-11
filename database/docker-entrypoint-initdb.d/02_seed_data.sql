@@ -47,15 +47,14 @@ INSERT INTO studio_members (studio_id, user_id) VALUES
 ((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'ryan.rhythm@email.com')),
 ((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'kevin.groove@email.com'));
 
--- Insert sample classes
 INSERT INTO classes (studio_id, instructor_id, name, description, genre, day, start_time, end_time, capacity) VALUES
 -- Sunset Dance Academy Classes (LA) - Emma teaching
-((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Beginner Ballet', 'Perfect for those new to ballet. Learn basic positions and movements.', 'Ballet', 1, '18:00:00', '19:00:00', 15),
-((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Intermediate Ballet', 'Build on your ballet foundation with more complex combinations.', 'Ballet', 3, '19:30:00', '20:30:00', 12),
-((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Ballet Technique', 'Focus on perfecting your technique and artistry.', 'Ballet', 6, '10:00:00', '11:30:00', 10),
+((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Beginner Ballet', 'Perfect for those new to ballet. Learn basic positions and movements.', 'Ballet', 1, '2025-01-06 18:00:00-08:00', '2025-01-06 19:00:00-08:00', 15),
+((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Intermediate Ballet', 'Build on your ballet foundation with more complex combinations.', 'Ballet', 3, '2025-01-08 19:30:00-08:00', '2025-01-08 20:30:00-08:00', 12),
+((SELECT id FROM studios WHERE name = 'Sunset Dance Academy'), (SELECT id FROM users WHERE email = 'emma.ballet@email.com'), 'Ballet Technique', 'Focus on perfecting your technique and artistry.', 'Ballet', 6, '2025-01-11 10:00:00-08:00', '2025-01-11 11:30:00-08:00', 10),
 
 -- Broadway Movement Studio Classes (NY) - Carlos teaching
-((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Hip Hop Fundamentals', 'Learn the basics of hip hop dance and culture.', 'Hip Hop', 2, '19:00:00', '20:00:00', 20),
-((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Advanced Hip Hop', 'High-energy class for experienced hip hop dancers.', 'Hip Hop', 4, '20:30:00', '21:30:00', 15),
-((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Freestyle Friday', 'Open freestyle session with battles and cyphers.', 'Hip Hop', 5, '21:00:00', '22:30:00', 25);
+((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Hip Hop Fundamentals', 'Learn the basics of hip hop dance and culture.', 'Hip Hop', 2, '2025-01-07 19:00:00-05:00', '2025-01-07 20:00:00-05:00', 20),
+((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Advanced Hip Hop', 'High-energy class for experienced hip hop dancers.', 'Hip Hop', 4, '2025-01-09 20:30:00-05:00', '2025-01-09 21:30:00-05:00', 15),
+((SELECT id FROM studios WHERE name = 'Broadway Movement Studio'), (SELECT id FROM users WHERE email = 'carlos.hip@email.com'), 'Freestyle Friday', 'Open freestyle session with battles and cyphers.', 'Hip Hop', 5, '2025-01-10 21:00:00-05:00', '2025-01-10 22:30:00-05:00', 25);
 

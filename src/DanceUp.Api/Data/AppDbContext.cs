@@ -19,6 +19,10 @@ namespace DanceUp.Api.Data
             modelBuilder.Entity<Studio>().ToTable("studios");
             modelBuilder.Entity<Class>().ToTable("classes");
 
+            modelBuilder.Entity<User>()
+                .Property(u => u.Role)
+                .HasConversion<string>();
+
             // Studio -> Owner (many-to-one)
             modelBuilder.Entity<Studio>()
                 .HasOne(s => s.Owner)

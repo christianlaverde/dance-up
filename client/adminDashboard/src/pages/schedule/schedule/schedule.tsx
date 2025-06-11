@@ -34,19 +34,19 @@ export default function SchedulePage() {
     alignItems: 'center',
   }));
 
-  const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+  // const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+  const API_ENDPOINT = "http://localhost:5180/api";
   const session = useSession().session;
   const userId = session?.user.id || '';
   console.log('session: ', session);
 
   useEffect(() => {
-    fetch(`${API_ENDPOINT}/studios/studio-0/classes`)
+    fetch(`${API_ENDPOINT}/studios/1/classes`)
       .then((response) => response.json())
       .then((data) => {
         console.log('class data: ', data);
-        const classData = data.data;
-        setClasses(classData);
-        setFilteredClasses(classData)
+        setClasses(data);
+        setFilteredClasses(data)
       })
       .catch((error) => console.error('Error fetching classes:', error));
   }, []);

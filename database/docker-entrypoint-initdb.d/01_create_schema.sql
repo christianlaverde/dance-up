@@ -2,12 +2,12 @@
 -- Master Database Schema
 -- =====================================================
 
-CREATE DATABASE dance_up;
+-- CREATE DATABASE danceup;
 
 CREATE TYPE user_role AS ENUM ('owner', 'member', 'instructor');
 
 CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id SERIAL PRIMARY KEY,
   email VARCHAR(255) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   first_name VARCHAR(100) NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE studios (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  owner_id UUID NOT NULL,
+  id SERIAL PRIMARY KEY,
+  owner_id INTEGER NOT NULL,
   name VARCHAR(100) NOT NULL,
   addr1 VARCHAR(200),
   addr2 VARCHAR(200),
@@ -38,8 +38,8 @@ CREATE TABLE studios (
 );
 
 CREATE TABLE studio_members (
-  studio_id UUID NOT NULL,
-  user_id UUID NOT NULL,
+  studio_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
   joined_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (studio_id, user_id),
   CONSTRAINT fk_studio_members_studio
@@ -53,9 +53,9 @@ CREATE TABLE studio_members (
 );
 
 CREATE TABLE classes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  studio_id UUID NOT NULL,
-  instructor_id UUID NOT NULL,
+  id SERIAL PRIMARY KEY,
+  studio_id INTEGER NOT NULL,
+  instructor_id INTEGER NOT NULL,
   name VARCHAR(100) NOT NULL,
   description TEXT,
   genre VARCHAR(35),
